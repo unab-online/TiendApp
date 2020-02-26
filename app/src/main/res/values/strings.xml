@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TiendApp</string>
+    <string name="txtListado">Lista de Productos</string>
 </resources>
