@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">silviApp</string>
+    <string name="titulo">Listado De Productos</string>
 </resources>
