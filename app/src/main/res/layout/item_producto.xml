@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_blue_dark"
+    android:drawableLeft="@mipmap/ic_launcher"
+    android:drawableRight="@mipmap/ic_launcher_round"
+    android:gravity="center"
+    android:text="TextView"
+    android:textColor="#010303"
+    android:textStyle="bold|italic" />
