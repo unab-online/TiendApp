@@ -1,15 +1,17 @@
 package co.edu.unab.martinez.andrea.tiendapp;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
 
     private String nombre;
     private String descripcion;
     private double precio;
 
-    public Producto(String nombre,double precio) {
+    public Producto(String nombre,double precio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
-        this.descripcion ="";
+        this.descripcion =descripcion;
     }
 
     @Override
