@@ -2,9 +2,13 @@ package co.edu.unab.toloza.cesar.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,8 +35,20 @@ public class MainActivity extends AppCompatActivity {
         productos.add("Teclado");*/
 
         lvProductos = findViewById(R.id.lv_productos);
-        ArrayAdapter adapter = new ArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, productos);
+        ArrayAdapter adapter = new ArrayAdapter(getBaseContext(), R.layout.item_producto, productos);
         lvProductos.setAdapter(adapter);
         setTitle(R.string.txt_listado);
+
+        lvProductos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Producto producto = productos.get(position);
+                Producto producto =(Producto) parent.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(), "Hice tap " + producto.getNombre(), Toast.LENGTH_SHORT).show();
+                Intent intentDetalle = new Intent(MainActivity.this, DetalleActivity.class);
+                intentDetalle.putExtra("producto", producto);
+                startActivity(intentDetalle);
+            }
+        });
     }
 }
