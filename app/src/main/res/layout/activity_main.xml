@@ -8,12 +8,14 @@
     tools:context=".MainActivity">
 
     <ListView
-        android:id="@+id/lvProductos"
+        android:id="@+id/listaProductos"
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:layout_marginTop="130dp"
+        android:foregroundGravity="right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

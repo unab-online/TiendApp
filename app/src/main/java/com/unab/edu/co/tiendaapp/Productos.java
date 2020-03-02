@@ -1,14 +1,17 @@
 package com.unab.edu.co.tiendaapp;
 
-public class Productos {
+import java.io.Serializable;
+
+public class Productos implements Serializable {
 
     private String Nombre;
     private String Descripcion;
     private int Precio;
 
-    public Productos(String nombre, int precio) {
+    public Productos(String nombre, String descripcion, int precio) {
         this.Nombre = nombre;
         this.Precio = precio;
+        this.Descripcion = descripcion;
     }
 
     public String getNombre() {
@@ -30,6 +33,7 @@ public class Productos {
     @Override
     public String toString() {
         return  Nombre + "  " +
-                 Precio;
+                 Descripcion + "  " +
+                    Precio;
     }
 }
