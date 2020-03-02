@@ -1,13 +1,16 @@
 package co.edu.unab.rey.carlos.crackapp;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
     private String nombre;
     private String descripcion;
     private Double precio;
 
-    public Producto(String nombre, Double precio) {
+    public Producto(String nombre, double precio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
+        this.descripcion = descripcion;
     }
 
     @Override

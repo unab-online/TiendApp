@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TextView
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textView"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:ellipsize="marquee"
+    android:gravity="center"
+    android:text="TextView"
+    android:textColor="@color/colorAccent"
+    android:textSize="34dp" />
