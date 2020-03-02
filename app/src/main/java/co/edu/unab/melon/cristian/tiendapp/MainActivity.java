@@ -2,9 +2,14 @@ package co.edu.unab.melon.cristian.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,11 +39,31 @@ public class MainActivity extends AppCompatActivity {
 
         lvProductos = findViewById(R.id.lv_productos);
 
-        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getBaseContext(),android.R.layout.simple_list_item_1, productos);
+        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getBaseContext(),R.layout.item_producto, productos);
 
         lvProductos.setAdapter(miAdaptador);
 
         setTitle(R.string.txt_listado);
+
+        lvProductos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // atrapar texto de lista
+
+                Producto miproducto = productos.get(position);
+                Toast.makeText(getApplicationContext(), "tap "+ miproducto.getNombre(),Toast.LENGTH_SHORT).show();
+
+               Intent intent = new Intent(getApplicationContext(), Tap.class);
+               intent.putExtra("producto", miproducto);
+               startActivity(intent);
+
+            }
+        });
+
+
+
+
+
 
     }
 }

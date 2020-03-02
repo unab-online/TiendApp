@@ -1,12 +1,14 @@
 package co.edu.unab.melon.cristian.tiendapp;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
 
     private String nombre;
 
     public Producto(String nombre, Double precio) {
         this.nombre = nombre;
-        this.descripción= "";
+        this.descripción= "Descripción XD";
         this.precio = precio;
     }
 
