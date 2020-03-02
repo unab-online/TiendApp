@@ -1,6 +1,8 @@
 package co.edu.unab.diaz.brayan.tiendapp;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
 
     private String nombre,descripcion;
     private double precio;
