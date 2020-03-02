@@ -2,10 +2,15 @@ package co.edu.unab.casadiegos.andres.tiendaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.security.ProtectionDomain;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,10 +35,27 @@ public class MainActivity extends AppCompatActivity {
 
         lvProductos = findViewById(R.id.lv_productos);
 
-        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getApplicationContext(),android.R.layout.simple_list_item_1,productos);
+        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getApplicationContext(),R.layout.item_producto,productos);
 
         lvProductos.setAdapter(miAdaptador);
 
         setTitle(R.string.txt_listado);
+
+
+        lvProductos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+ //               Producto miProducto = productos.get(position);
+                Producto miProducto = (Producto) parent.getItemAtPosition(position);
+ //               Toast.makeText(getApplicationContext(), "Hice Tap " + miProducto.getNombre(), Toast.LENGTH_LONG).show();
+
+                Intent miIntencion = new Intent(getApplication(), informacion_producto.class);
+
+                miIntencion.putExtra("objeto",miProducto);
+                startActivity(miIntencion);
+            }
+        });
     }
 }
