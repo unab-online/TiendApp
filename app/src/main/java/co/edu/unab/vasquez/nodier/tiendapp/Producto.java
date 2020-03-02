@@ -1,8 +1,8 @@
 package co.edu.unab.vasquez.nodier.tiendapp;
 
-import androidx.annotation.NonNull;
+import java.io.Serializable;
 
-public class Producto {
+public class Producto implements Serializable {
 
     private String nombre;
     private String descripcion;
@@ -35,6 +35,6 @@ public class Producto {
 
     @Override
     public String toString() {
-        return nombre +"("+precio+")";
-    }
+        return nombre +" ("+precio+")";
+    } // Se modifica el método toString para mostrar de la manera que queremos nuestra lista
 }

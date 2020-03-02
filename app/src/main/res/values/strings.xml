@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TiendApp</string>
     <string name="txt_listado">Listado de productos</string>
+    <string name="nombre_producto">Nombre del producto</string>
+    <string name="descripcion">Descripción</string>
+    <string name="precio">Precio</string>
 </resources>

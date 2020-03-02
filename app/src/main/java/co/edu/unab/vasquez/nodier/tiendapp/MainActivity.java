@@ -2,9 +2,13 @@ package co.edu.unab.vasquez.nodier.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,14 +37,37 @@ public class MainActivity extends AppCompatActivity {
         productos.add (new Producto("Mouse", 15000.0));
         productos.add (new Producto("teclado", 25000.0));
 
+        for (int i = 0;i< productos.size(); i++){
+            productos.get(i).setDescripcion("Descripción "+(i+1));
+        }
+
 
         lvProductos = findViewById(R.id.lv_productos); // Lo identificamos
-
-        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(this, android.R.layout.simple_list_item_1,productos); //Normalmente es el mismo tipo de dato del arraylist, recibe 3 parámetros
-
+        //El listView siempre necesita (recibe un adaptador)
+        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(this, R.layout.item_producto,productos); //Normalmente es el mismo tipo de dato del arraylist, recibe 3 parámetros
         lvProductos.setAdapter(miAdaptador);
-
         setTitle(R.string.txt_listado);
+
+        lvProductos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /*parent = Adaptador
+            lista = textView
+            Position = posicion del item
+            id = indentificador*/
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Producto miProducto = (Producto) parent.getItemAtPosition(position);//Mostrar en nombre del item seleccionado, MANERA 1
+//                Producto miProducto = productos.get(position);//Mostrar en nombre del item seleccionado, MANERA 2
+                Toast.makeText(getApplicationContext(),"Hice tap en: "+ miProducto.getNombre(),Toast.LENGTH_SHORT).show();
+
+                //mostrar información en otra actividad
+                Intent intencion = new Intent(MainActivity.this,DetalleActivity.class);
+                intencion.putExtra("producto",miProducto);
+                startActivity(intencion);
+
+            }
+        });
+
     }
 
 
