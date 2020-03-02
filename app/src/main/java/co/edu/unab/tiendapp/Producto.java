@@ -1,6 +1,8 @@
 package co.edu.unab.tiendapp;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
     private String nombre;
     private String descripcion;
     private double precio;
@@ -8,7 +10,7 @@ public class Producto {
 
     public Producto(String nombre , double precio) {
         this.nombre = nombre;
-        this.descripcion = "";
+        this.descripcion = "Sin descripción";
         this.precio = precio;
     }
 
@@ -30,10 +32,11 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
-                '}';
+        return  nombre +
+                 precio ;
+
     }
+
+
+
 }
