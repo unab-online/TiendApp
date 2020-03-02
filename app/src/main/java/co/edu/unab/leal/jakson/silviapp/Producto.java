@@ -8,13 +8,18 @@ public class Producto implements Serializable {
     private String descripcion;
     private double precio;
 
-    public Producto(String nombre, double precio) {
+    public Producto(String nombre, double precio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
+        this.descripcion = descripcion;
     }
 
     public String getNombre() {
         return nombre;
+    }
+
+    public double getPrecio(){
+       return precio;
     }
 
     public void setNombre(String nombre) {

@@ -17,13 +17,14 @@ public class DetalleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalle);
 
         Bundle datosB = getIntent().getExtras();
-        Producto prodObj = (Producto) datosB.getSerializable("productos");
+        Producto prodObj = (Producto) datosB.getSerializable("objeto");
 
-        asociarProductos();
-        //textViewPrecio.setText(prodObj.);
-        
+        this.asociarProductos();
+        textViewNombre.setText(prodObj.getNombre());
+        textViewPrecio.setText("$"+prodObj.getPrecio()+"USD");
+        textViewDescripcion.setText(prodObj.getDescripcion());
 
-    }
+}
 
     private void asociarProductos(){
 
