@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textView"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_constraint"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
+    android:layout_height="50dp"
     android:gravity="center"
-    android:text="TextView"
-    android:textAlignment="viewEnd"
-    android:textColor="@color/colorAccent"
-    android:textSize="18sp" />
+    android:orientation="horizontal"
+    android:textAlignment="viewEnd">
+
+    <TextView
+        android:id="@+id/txv_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/txv_precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+</LinearLayout>
+
+
