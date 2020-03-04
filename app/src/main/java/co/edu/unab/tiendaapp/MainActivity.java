@@ -25,15 +25,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        productos = new ArrayList<Productos>();
+        productos = new ArrayList<>();
 
         productos.add(new Productos( "Llaves Locke & Key", "Llaves reales que te otorgan habilidades especiales",  29000));
-        productos.add(new Productos( "Plutonio", "Pequeñas cantidades de plutonio para sus experientos caseros ",64500));
+        productos.add(new Productos( "Plutonio", "Pequeñas cantidades de plutonio para sus experimentos caseros ",64500));
         productos.add(new Productos( "Ak 47", "El vendedor no se hace responsable por el mal uso del producto",27999));
         productos.add(new Productos( "Pierna de Cerdo", "Deliciosa pierna de cerdo de 25 Kg ", 18000));
-        productos.add(new Productos( "Obsidiana", "Cuarzo oscuro para sumentar la energia positiva del aura corporal y espiritual", 17000));
-        productos.add(new Productos( "Souls", "Espiritus esclavos par uso personal",0000));
+        productos.add(new Productos( "Obsidiana", "Cuarzo oscuro para aumentar la energia positiva del aura corporal y espiritual", 17000));
+        productos.add(new Productos( "Souls", "Espiritus chocarreros esclavos para uso personal",0000));
         productos.add(new Productos( "Cerdo sin una pierna", "Delicioso cerdo que antes tenia 4 piernas",195000));
+
 
         lvProductos = findViewById(R.id.lvProductos); // identificamos el listview
 

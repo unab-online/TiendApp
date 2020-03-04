@@ -8,14 +8,15 @@
 
     <TextView
         android:id="@+id/txtTitulo"
-        android:layout_width="70dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="119dp"
-        android:layout_marginEnd="171dp"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="131dp"
+        android:gravity="center|top"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +27,9 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="149dp"
         android:layout_marginEnd="6dp"
+        android:gravity="center|top"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
@@ -35,14 +38,15 @@
         android:id="@+id/txtPrec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="71dp"
-        android:layout_marginEnd="176dp"
+        android:layout_marginEnd="157dp"
         android:layout_marginBottom="123dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDes" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDes"
+        app:layout_constraintVertical_bias="0.628" />
 </androidx.constraintlayout.widget.ConstraintLayout>
