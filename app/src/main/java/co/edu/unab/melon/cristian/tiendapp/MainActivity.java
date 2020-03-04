@@ -29,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
         Producto lista3 = new Producto("Memoria USB",20.0);
         Producto lista4 = new Producto("Mouse",10.0);
         Producto lista5 = new Producto("Teclado",12.0);
+        Producto lista6 = new Producto("Pc Asus",2000d);
+        Producto lista7 = new Producto("Disco Duro",100.0);
+        Producto lista8 = new Producto("Memoria USB",20.0);
+        Producto lista9 = new Producto("Mouse",10.0);
+        Producto lista10 = new Producto("Teclado",12.0);
+        Producto lista11 = new Producto("Pc Asus",2000d);
+        Producto lista12 = new Producto("Disco Duro",100.0);
+        Producto lista13 = new Producto("Memoria USB",20.0);
+        Producto lista14 = new Producto("Mouse",10.0);
+        Producto lista15 = new Producto("Teclado",12.0);
 
         productos = new ArrayList<>();
         productos.add(lista);
@@ -36,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         productos.add(lista3);
         productos.add(lista4);
         productos.add(lista5);
+        productos.add(lista6);
+        productos.add(lista7);
+        productos.add(lista8);
+        productos.add(lista9);
+        productos.add(lista10);
+        productos.add(lista11);
+        productos.add(lista12);
+        productos.add(lista13);
+        productos.add(lista14);
+        productos.add(lista15);
 
         lvProductos = findViewById(R.id.lv_productos);
 

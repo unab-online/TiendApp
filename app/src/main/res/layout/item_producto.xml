@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fontFamily="@font/aguafina_script"
-    android:text="TextView"
-    android:textColor="#0F7A13"
-    android:textSize="36sp" />
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/txv_nombre"
+        android:layout_width="197dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aguafina_script"
+        android:text="TextView"
+        android:textColor="#0F7A13"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/txv_precio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/alex_brush"
+        android:text="TextView"
+        android:textColor="@color/colorAccent"
+        android:textSize="36sp" />
+</LinearLayout>
+
+
