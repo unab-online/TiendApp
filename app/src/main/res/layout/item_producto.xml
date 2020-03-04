@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:gravity="center_vertical"
-    android:text="TextView"
-    android:textAlignment="gravity"
-    android:textColor="#009688"
-    android:textSize="18sp" />
+    android:textAlignment="gravity">
+
+    <TextView
+        android:id="@+id/tvNombre"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvPrecio"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textColor="#009688"
+        android:textSize="18sp" />
+</LinearLayout>
