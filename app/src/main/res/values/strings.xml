@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TiendApp</string>
+    <string name="titulolistaprod">Listado de Productos</string>
+    <string name="volver">VOLVER</string>
+</resources>
