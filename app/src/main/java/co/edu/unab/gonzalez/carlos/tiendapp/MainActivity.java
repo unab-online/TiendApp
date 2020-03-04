@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ListView lvproductos;
     //private String productos[];
-    private ArrayList<Producto> productos;
+     ArrayList<Producto> productos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

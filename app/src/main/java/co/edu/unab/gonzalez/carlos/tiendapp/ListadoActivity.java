@@ -1,6 +1,7 @@
 package co.edu.unab.gonzalez.carlos.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +23,12 @@ public class ListadoActivity extends AppCompatActivity {
         this.AsociarElementos();
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
+        //RecyclerView.LayoutManager manager = new GridLayoutManager(getApplication(),2);
 
         ProductoAdapter miAdaptador = new ProductoAdapter(productos);
+
+        rvProductos.setLayoutManager(manager);
+        rvProductos.setAdapter(miAdaptador);
 
         Toast.makeText(getApplicationContext(),"hice tap ", Toast.LENGTH_LONG).show();
     }
