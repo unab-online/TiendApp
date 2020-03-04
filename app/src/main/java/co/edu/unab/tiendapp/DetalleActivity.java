@@ -25,7 +25,7 @@ public class DetalleActivity extends AppCompatActivity {
     }
 
     private void asociarElementos(){
-        tv1=findViewById(R.id.txv_nombre);
+        tv1=findViewById(R.id.layoutItem);
         tv2=findViewById(R.id.txv_desc);
         tv3=findViewById(R.id.txv_precio);
     }

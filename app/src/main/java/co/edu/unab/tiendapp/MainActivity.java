@@ -29,9 +29,7 @@ private ArrayList<Producto>productos;
        productos.add(p3);
        productos.add(p4);
 
-       for(int i=0; i<productos.size(); i++){
 
-       }
 
 
        lvProductos= findViewById(R.id.lv_productos);
