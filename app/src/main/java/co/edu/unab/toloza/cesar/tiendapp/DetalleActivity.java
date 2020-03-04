@@ -1,7 +1,6 @@
 package co.edu.unab.toloza.cesar.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -26,8 +25,8 @@ public class DetalleActivity extends AppCompatActivity {
     }
 
     private void asociarElementos(){
-        textNombre = findViewById(R.id.textNombre);
-        textPrecio = findViewById(R.id.textPrecio);
+        textNombre = findViewById(R.id.tv_nombre);
+        textPrecio = findViewById(R.id.tv_precio);
         textDescripcion = findViewById(R.id.textDescripcion);
     }
 }

@@ -7,7 +7,7 @@
     tools:context=".DetalleActivity">
 
     <TextView
-        android:id="@+id/textNombre"
+        android:id="@+id/tv_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -17,14 +17,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textPrecio"
+        android:id="@+id/tv_precio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_nombre" />
 
     <TextView
         android:id="@+id/textDescripcion"
@@ -34,5 +34,5 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPrecio" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_precio" />
 </androidx.constraintlayout.widget.ConstraintLayout>

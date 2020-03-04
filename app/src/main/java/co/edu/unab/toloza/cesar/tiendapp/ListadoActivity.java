@@ -1,0 +1,48 @@
+package co.edu.unab.toloza.cesar.tiendapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
+
+public class ListadoActivity extends AppCompatActivity {
+
+    RecyclerView rvProductos;
+    ArrayList<Producto> productos;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_listado);
+
+        this.getFakeData();
+        this.AsociarElementos();
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
+        ProductoAdapter miProductoAdapter = new ProductoAdapter(productos);
+        rvProductos.setLayoutManager(manager);
+        rvProductos.setAdapter(miProductoAdapter);
+    }
+
+    private void getFakeData(){
+
+        if(productos == null){
+            productos = new ArrayList<>();
+        }
+        productos.add(new Producto("PC Asus", 2000.0));
+        productos.add(new Producto("Disco Duro", 500.0));
+        productos.add(new Producto("Memoria USB", 100.0));
+        productos.add(new Producto("Mouse", 50.0));
+        productos.add(new Producto("Teclado", 80.0));
+        for (int i = 0; i < productos.size(); i++){
+            productos.get(i).setDescripcion("Descripcion " + (i+1));
+        }
+    }
+    private void AsociarElementos(){
+        rvProductos = findViewById(R.id.rv_productos);
+    }
+}
