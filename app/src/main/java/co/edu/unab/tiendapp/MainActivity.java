@@ -29,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
         productos.add(new Producto("Memoria USB", 100));
         productos.add(new Producto("Mouse", 50));
         productos.add(new Producto("Teclado", 80));
+        productos.add(new Producto("PC Asus", 2000));
+        productos.add(new Producto("Disco Duro", 500));
+        productos.add(new Producto("Memoria USB", 100));
+        productos.add(new Producto("Mouse", 50));
+        productos.add(new Producto("Teclado", 80));
+        productos.add(new Producto("PC Asus", 2000));
+        productos.add(new Producto("Disco Duro", 500));
+        productos.add(new Producto("Memoria USB", 100));
+        productos.add(new Producto("Mouse", 50));
+        productos.add(new Producto("Teclado", 80));
 
         for (int i=0;i<productos.size(); i++){
             productos.get(i).setDescripcion("Desc "+(i+1));
