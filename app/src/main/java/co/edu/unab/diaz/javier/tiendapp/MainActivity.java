@@ -1,10 +1,14 @@
 package co.edu.unab.diaz.javier.tiendapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -32,5 +36,17 @@ public class MainActivity extends AppCompatActivity {
         lvProductos.setAdapter(miAdaptador);
 
         setTitle(R.string.txtListado);
+
+        lvProductos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Producto producto = productos.get(position);
+                Producto producto =(Producto) parent.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(), "Hice tap " + producto.getNombre(), Toast.LENGTH_SHORT).show();
+                Intent intentDetalle = new Intent(MainActivity.this, DetalleActivity.class);
+                intentDetalle.putExtra("producto", producto);
+                startActivity(intentDetalle);
+            }
+        });
     }
 }
