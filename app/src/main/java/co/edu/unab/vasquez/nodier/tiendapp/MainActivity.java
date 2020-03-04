@@ -31,15 +31,16 @@ public class MainActivity extends AppCompatActivity {
         productos.add("Mouse");
         productos.add("Teclado");*/
 
-        productos.add(new Producto("Pc Asus",50000.0));
+        /*productos.add(new Producto("Pc Asus",50000.0));
         productos.add (new Producto("Disco Suro",200000.0));
         productos.add (new Producto("Memoria USB", 20000.0));
         productos.add (new Producto("Mouse", 15000.0));
         productos.add (new Producto("teclado", 25000.0));
+        */
 
-        for (int i = 0;i< productos.size(); i++){
+        /*for (int i = 0;i< productos.size(); i++){
             productos.get(i).setDescripcion("Descripción "+(i+1));
-        }
+        }*/
 
 
         lvProductos = findViewById(R.id.lv_productos); // Lo identificamos
