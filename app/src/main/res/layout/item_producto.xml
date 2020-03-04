@@ -1,13 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textView"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/holo_blue_dark"
-    android:drawableLeft="@mipmap/ic_launcher"
-    android:drawableRight="@mipmap/ic_launcher_round"
-    android:gravity="center"
-    android:text="TextView"
-    android:textColor="#010303"
-    android:textStyle="bold|italic" />
+    android:layout_height="400dp">
+
+
+    <TextView
+        android:id="@+id/text_nombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#010303"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005" />
+
+    <TextView
+        android:id="@+id/text_precio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#010303"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.574" />
+
+    <TextView
+        android:id="@+id/text_detalle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#010303"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

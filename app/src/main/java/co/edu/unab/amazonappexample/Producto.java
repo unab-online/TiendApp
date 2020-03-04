@@ -2,7 +2,7 @@ package co.edu.unab.amazonappexample;
 
 import java.io.Serializable;
 
-class Producto implements Serializable {
+public class Producto implements Serializable {
     private String nombre;
     private String descripcion;
     private double precio;
