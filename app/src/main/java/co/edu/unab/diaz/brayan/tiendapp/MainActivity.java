@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         productos.add(new Producto("Memoria USB", 5));
         productos.add(new Producto("Mouse", 10));
         productos.add(new Producto("Teclado", 500));
+        productos.add(new Producto("Pc Asus", 2000));
+        productos.add(new Producto("Disco duro", 2000));
+        productos.add(new Producto("Memoria USB", 5));
+        productos.add(new Producto("Mouse", 10));
+        productos.add(new Producto("Teclado", 500));
 
         lvProductos = findViewById(R.id.lv_productos);
 
