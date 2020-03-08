@@ -1,25 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListadoActivity">
-
-    <ScrollView
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_productos"
+            android:layout_width="409dp"
+            android:layout_height="729dp" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_productos"
-                android:layout_width="409dp"
-                android:layout_height="729dp" />
-        </LinearLayout>
-    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:fabAlignmentMode="end"
+        app:fabCradleMargin="8dp"
+        app:fabCradleRoundedCornerRadius="30dp"
+        app:hideOnScroll="true"
+        android:backgroundTint="@color/colorPrimary"
+        app:menu="@menu/app_bar_menu"
+        app:navigationIcon="@drawable/ic_menu" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:layout_anchor="@id/bottomAppBar"
+        app:maxImageSize="35dp"
+        app:tint="@color/ColorWithe"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
