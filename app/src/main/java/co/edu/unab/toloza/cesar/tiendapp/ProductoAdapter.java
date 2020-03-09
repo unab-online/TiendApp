@@ -2,10 +2,12 @@ package co.edu.unab.toloza.cesar.tiendapp;
 
 import android.content.ClipData;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuView;
@@ -16,9 +18,11 @@ import java.util.ArrayList;
 public class ProductoAdapter extends RecyclerView.Adapter {
 
     ArrayList<Producto> productos;
+    OnItemClickListener onItemClickListener;
 
-    public ProductoAdapter(ArrayList<Producto> productos) {
+    public ProductoAdapter(ArrayList<Producto> productos, OnItemClickListener onItemClickListener) {
         this.productos = productos;
+        this.onItemClickListener = onItemClickListener;
     }
 
     class ProductoViewHolder extends RecyclerView.ViewHolder{
@@ -38,15 +42,42 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ProductoViewHolder miHolder = (ProductoViewHolder) holder;
-        Producto miProducto = productos.get(position);
+        final Producto miProducto = productos.get(position);
         miHolder.txvNombre.setText(miProducto.getNombre());
         miHolder.txvPrecio.setText("$"+miProducto.getPrecio());
+
+        miHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(miProducto, position);
+            }
+        });
+
+
+        /*miHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Prueba-Click", "Hice click "+ miProducto);
+            }
+        });
+        miHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.d("Prueba-Click", "Hice click-sostenido "+ miProducto);
+                return false;
+            }
+        });*/
     }
 
     @Override
     public int getItemCount() {
         return productos.size();
+    }
+
+    interface OnItemClickListener{
+        void onItemClick(Producto producto, int position);
+
     }
 }
