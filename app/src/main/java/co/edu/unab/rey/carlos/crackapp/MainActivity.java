@@ -28,12 +28,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        productos = new ArrayList<Producto>();
-        productos.add(new Producto("caldo",3000.0, "de la region, bien santanderiano, con huevo de gallina puesto hoy"));
-        productos.add(new Producto("arepa",2000.0, "arepa de maiz pelao, de la ultima cosecha"));
-        productos.add(new Producto("chocolate",1500.0, "hecho con el cacao de san vicente "));
-        productos.add(new Producto("pan", 1000.0, "de la esquina, no alcanzó para mas"));
-        productos.add(new Producto("chorizo",1500.0, "saludable 100%"));
         /*productos.add("arepa");
         productos.add("chocolate");
         productos.add("pan");
