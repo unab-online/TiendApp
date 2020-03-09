@@ -25,7 +25,12 @@ public class ListadoActivity extends AppCompatActivity {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
         //RecyclerView.LayoutManager manager = new GridLayoutManager(getApplication(),2);
 
-        ProductoAdapter miAdaptador = new ProductoAdapter(productos);
+        ProductoAdapter miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.interfaceescucghadorclick() {
+            @Override
+            public void metodoclickear(Producto miproducto, int posicion) {
+                Toast.makeText(getApplicationContext(), "Hice clic en "+miproducto, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdaptador);
@@ -38,7 +43,7 @@ public class ListadoActivity extends AppCompatActivity {
         }
         Producto PC = new Producto("PC asus", "computador gamer", 1800000);
         Producto PC1 = new Producto("PC asus", "computador gamer", 1800000);
-        Producto PC2 = new Producto("PC asus", "computador gamer", 1800000);
+        Producto PC2 = new Producto("memoria USB ", "memoria usb 4GB", 50000);
         Producto PC3 = new Producto("PC asus", "computador gamer", 1800000);
         Producto PC4 = new Producto("PC asus", "computador gamer", 1800000);
         Producto PC5 = new Producto("PC asus", "computador gamer", 1800000);
