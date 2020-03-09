@@ -1,10 +1,12 @@
 package co.edu.unab.tiendapp.forero.jesus;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,13 @@ private ArrayList<Producto>productos;
         this.AsociarElementos();
         this.getFakeData();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
-        ProductoAdapter miAdaptador = new ProductoAdapter((productos));
+        ProductoAdapter miAdaptador = new ProductoAdapter((productos), new ProductoAdapter.onItemClickListener() {
+            @Override
+            public void OnItemClick(Producto miProducto, int position) {
+                Toast.makeText(getApplicationContext(),"Hice click "+miProducto,Toast.LENGTH_SHORT).show();
+
+            }
+        });
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdaptador);
     }

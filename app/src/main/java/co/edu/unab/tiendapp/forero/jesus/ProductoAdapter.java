@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ProductoAdapter extends RecyclerView.Adapter {
+
     class ProductoViewHolder extends RecyclerView.ViewHolder{
         TextView txvNombre;
         TextView txvPrecio;
@@ -24,9 +25,12 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     @NonNull
 
     ArrayList<Producto> productos;
+    onItemClickListener miEscuchador;
 
-    public ProductoAdapter(@NonNull ArrayList<Producto> productos) {
+
+    public ProductoAdapter(@NonNull ArrayList<Producto> productos, onItemClickListener miEscuchador) {
         this.productos = productos;
+        this.miEscuchador = miEscuchador;
     }
 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,17 +39,30 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ProductoViewHolder miHolder= (ProductoViewHolder) holder;
-        Producto miProducto = productos.get(position);
+        final Producto miProducto = productos.get(position);
         miHolder.txvNombre.setText(miProducto.getNombre());
         miHolder.txvPrecio.setText(miProducto.getPrecio().toString());
+
+        miHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miEscuchador.OnItemClick(miProducto,position);
+            }
+        });
 
 
     }
 
     @Override
     public int getItemCount() {
+
         return productos.size();
+
+    }
+
+    interface  onItemClickListener{
+        void OnItemClick(Producto miProducto, int position);
     }
 }
