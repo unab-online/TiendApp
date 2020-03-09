@@ -1,10 +1,12 @@
 package co.edu.unab.vasquez.nodier.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,13 +24,20 @@ public class ListadoActivity extends AppCompatActivity {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
 
         //creación del adaptador
-        ProductorAdapter miAdactador = new ProductorAdapter(productos); //cargar productos
+        ProductorAdapter miAdactador = new ProductorAdapter(productos, new ProductorAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Producto miProducto, int posicion) {
+                Toast.makeText(getApplicationContext(), "Hice Clic "+miProducto, Toast.LENGTH_LONG).show();
+            }
+        }); //cargar productos
 
         //siempre que
 
         //se una para recycler
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdactador);
+        //se me lanza a cualquier evento
+
     }
 
     private void getFakeData(){
@@ -38,7 +47,7 @@ public class ListadoActivity extends AppCompatActivity {
             productos = new ArrayList<>();
         }
         productos.add (new Producto("Disco Suro",200000.0));
-        productos.add (new Producto("Memoria USB", 20000.0));
+        productos.add (new Producto("Memoria USB", 25000.0));
         productos.add (new Producto("Mouse", 15000.0));
         productos.add (new Producto("teclado", 25000.0));
 
@@ -50,5 +59,6 @@ public class ListadoActivity extends AppCompatActivity {
     private void AsociarElementos(){
 
         rvProductos = findViewById(R.id.rv_productos);
+
     }
 }
