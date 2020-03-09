@@ -1,6 +1,7 @@
 package co.edu.unab.diaz.javier.tiendapp;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,10 +23,17 @@ public class ListadoActivity extends AppCompatActivity {
         this.AsociarElementos();
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
-        ProductoAdapter miAdaptador = new ProductoAdapter(productos);
+        ProductoAdapter miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(Producto miproducto, int posicion) {
+                Toast.makeText(getApplicationContext(), "Hice-click"+miproducto, Toast.LENGTH_LONG).show();
+            }
+        });
 
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdaptador);
+
+
     }
 
     public void getFakeData(){
