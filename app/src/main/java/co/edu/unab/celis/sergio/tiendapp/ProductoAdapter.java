@@ -1,9 +1,11 @@
 package co.edu.unab.celis.sergio.tiendapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +15,12 @@ import java.util.ArrayList;
 public class ProductoAdapter extends RecyclerView.Adapter {
 
     ArrayList<Producto> productos;
+    OnItemClickListener miEscuchador;
+
+    public ProductoAdapter(ArrayList<Producto> productos, OnItemClickListener miEscuchador) {
+        this.productos = productos;
+        this.miEscuchador = miEscuchador;
+    }
 
     public ProductoAdapter(ArrayList<Producto> productos) {
         this.productos = productos;
@@ -39,16 +47,27 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         ProductoViewHolder miHolder = (ProductoViewHolder) holder;
-        Producto miProducto = productos.get(position);
+        final Producto miProducto = productos.get(position);
         miHolder.tvNombre.setText(miProducto.getNombre());
         miHolder.tvPrecio.setText("$ "+miProducto.getPrecio());
+
+        miHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miEscuchador.onItemClick(miProducto, position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return productos.size();
+    }
+
+    interface OnItemClickListener{
+        void  onItemClick(Producto miProducto, int posicion);
     }
 }
