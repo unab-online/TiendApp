@@ -10,7 +10,7 @@ public class Producto implements Serializable {
 
     public Producto(String nombre, double precio) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
+        this.descripcion = "";
         this.precio = precio;
     }
 

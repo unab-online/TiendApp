@@ -1,15 +1,17 @@
 package co.edu.unab.diaz.javier.tiendapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class ListadoActivity extends AppCompatActivity {
 
-    private RecyclerView rvProductos;
+    RecyclerView rvProductos;
+    ArrayList<Producto> productos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class ListadoActivity extends AppCompatActivity {
         productos.add(new Producto("Mouse", 50));
         productos.add(new Producto("Teclado", 80));
         for (int i = 0; i < productos.size(); i++){
-            productos.get(i).setDescription("Descripcion" + (i+1));
+            productos.get(i).setDescripcion("Descripcion" + (i+1));
         }
     }
 

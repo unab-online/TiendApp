@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         lvProductos = findViewById(R.id.lvProductos);
 
-        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getBaseContext(), android.R.layout.simple_list_item_1, productos);
+        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getBaseContext(), R.layout.item_producto, productos);
 
         lvProductos.setAdapter(miAdaptador);
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         lvProductos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Producto producto = productos.get(position);
+
                 Producto producto =(Producto) parent.getItemAtPosition(position);
                 Toast.makeText(getApplicationContext(), "Hice tap " + producto.getNombre(), Toast.LENGTH_SHORT).show();
                 Intent intentDetalle = new Intent(MainActivity.this, DetalleActivity.class);
