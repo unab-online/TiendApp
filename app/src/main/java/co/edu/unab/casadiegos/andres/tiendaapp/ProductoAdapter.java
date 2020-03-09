@@ -1,5 +1,6 @@
 package co.edu.unab.casadiegos.andres.tiendaapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,12 @@ import java.util.ArrayList;
 public class ProductoAdapter extends RecyclerView.Adapter {
 
     ArrayList<Producto> productos;
+    OnItemClickListener miEscuchador;
+
+    public ProductoAdapter(ArrayList<Producto> productos, OnItemClickListener miEscuchador) {
+        this.productos = productos;
+        this.miEscuchador = miEscuchador;
+    }
 
     public ProductoAdapter(ArrayList<Producto> productos) {
         this.productos = productos;
@@ -43,16 +50,37 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         ProductoViewHolder miHolder = (ProductoViewHolder) holder;
-        Producto miProducto = productos.get(position);
+        final Producto miProducto = productos.get(position);
         miHolder.txvNombre.setText(miProducto.getNombre());
         miHolder.txvPrecio.setText("$" + miProducto.getPrecio());
+
+        miHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miEscuchador.onItemClick(miProducto, position);
+            }
+        });
+
+        miHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.d("Prueba-Click","Hice click sostenido");
+                return false;
+            }
+        });
+
+
     }
 
     @Override
     public int getItemCount() {
         return productos.size();
+    }
+
+    interface OnItemClickListener{
+        void onItemClick(Producto miProducto, int position);
     }
 }
