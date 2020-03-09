@@ -35,13 +35,6 @@ public class ProductoAdapater extends RecyclerView.Adapter {
         holderBind.textViewDescripcion.setText(prodBind.getDescripcion());
         holderBind.textViewPrecio.setText("$"+prodBind.getPrecio());
 
-        holderBind.btnFloating.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(getApplicationContext(), "tap ", Toast.LENGTH_SHORT).show();
-                Snackbar.make(view, "tap", Snackbar.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -54,7 +47,7 @@ public class ProductoAdapater extends RecyclerView.Adapter {
         private TextView textViewNombre;
         private TextView textViewDescripcion;
         private TextView textViewPrecio;
-        private FloatingActionButton btnFloating;
+
 
 
         public ProductoViewHolder (@NonNull View itemView){
@@ -63,7 +56,6 @@ public class ProductoAdapater extends RecyclerView.Adapter {
             textViewNombre = itemView.findViewById(R.id.textView_nombre);
             textViewDescripcion = itemView.findViewById(R.id.textView_descripcion);
             textViewPrecio = itemView.findViewById(R.id.textView_precio);
-            btnFloating = itemView.findViewById(R.id.btn_floating);
 
         }
 

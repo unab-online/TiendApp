@@ -10,7 +10,6 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity android:name=".DetalleActivity"/>
-        <activity android:name=".MainActivity"/>
         <activity android:name=".ListadoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,9 +1,14 @@
 package co.edu.unab.leal.jakson.silviapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -11,11 +16,16 @@ public class ListadoActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewProductos;
     private ArrayList<Producto> productos;
+    private Toolbar toolbar;
+    private FloatingActionButton btnFloating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
+
+        //toolbar = findViewById(R.id.my_toolbar);
+        //setSupportActionBar(toolbar);
 
         this.getFakeData();
         this.asociarProductos();
@@ -24,6 +34,14 @@ public class ListadoActivity extends AppCompatActivity {
         ProductoAdapater proAdpObj = new ProductoAdapater (productos);
         recyclerViewProductos.setLayoutManager(manager);
         recyclerViewProductos.setAdapter(proAdpObj);
+
+        btnFloating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getApplicationContext(), "tap ", Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, "tap", Snackbar.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -43,6 +61,7 @@ public class ListadoActivity extends AppCompatActivity {
     private void asociarProductos() {
 
         recyclerViewProductos = findViewById(R.id.recyclerView_productos);
+        btnFloating = findViewById(R.id.btn_floating);
 
     }
 

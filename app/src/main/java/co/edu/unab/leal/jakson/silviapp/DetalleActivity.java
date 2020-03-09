@@ -10,15 +10,11 @@ public class DetalleActivity extends AppCompatActivity {
     private TextView textViewPrecio;
     private TextView textViewNombre;
     private TextView textViewDescripcion;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle);
-
-        toolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
 
         Bundle datosB = getIntent().getExtras();
         Producto prodObj = (Producto) datosB.getSerializable("objeto");
