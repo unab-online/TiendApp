@@ -1,9 +1,11 @@
 package co.edu.unab.tiendapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,13 @@ import java.util.ArrayList;
 public class ProductoAdapter extends RecyclerView.Adapter {
 
     ArrayList<Producto> productos;
+
+    //Intancia de la interfaz y el  constructor del adapter, esto va casi al final
+    onItemClickListener miEscuchador;
+    public ProductoAdapter(ArrayList<Producto> productos, onItemClickListener miEscuchador) {
+        this.productos = productos;
+        this.miEscuchador = miEscuchador;
+    }
 
     public ProductoAdapter(ArrayList<Producto> productos) {
         this.productos = productos;
@@ -29,6 +38,8 @@ public class ProductoAdapter extends RecyclerView.Adapter {
             //Agragamos lo siguiente, el manejador de la vista del layout item_producto:
             txvNombre= itemView.findViewById(R.id.txv_nombre);
             txvPrecio= itemView.findViewById(R.id.txv_precio);
+
+
 
         }
     }
@@ -46,12 +57,21 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         //Vamos a indicar de los datos que le pasé, qué va en qué parte
-        ProductoViewHolder miHolder= (ProductoViewHolder) holder;
-        Producto miProducto= productos.get(position);
+       final ProductoViewHolder miHolder= (ProductoViewHolder) holder;
+        final Producto miProducto= productos.get(position);
         miHolder.txvNombre.setText(miProducto.getNombre());
         miHolder.txvPrecio.setText("$"+ miProducto.getPrecio());
+
+        //Para el itemclick que  es la mas profesional
+        miHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miEscuchador.onItemClick(miProducto, position);
+            }
+        });
+
     }
 
     @Override
@@ -60,4 +80,12 @@ public class ProductoAdapter extends RecyclerView.Adapter {
         //Cuantos elementos voy a tener en el Recyclerview
         return  this.productos.size();
     }
+
+    //crear interfaz onitemclick
+    interface onItemClickListener{//cualquier nombre
+        void onItemClick(Producto miProducto, int posicion); //cualquier nombre x2
+
+
+    }
+
 }

@@ -1,10 +1,12 @@
 package co.edu.unab.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,8 +25,15 @@ private ArrayList<Producto> productos;
         //Debemos crear un nuevo archivo, siempre que trabajamos con un Recyclerview
 
         //Agragamos el manejador, si creamos un LinearLayout o un Grid
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
-        ProductoAdapter miAdaptador= new ProductoAdapter(productos);
+        RecyclerView.LayoutManager manager = new GridLayoutManager(getApplication(),2);
+       // ProductoAdapter miAdaptador= new ProductoAdapter(productos);
+
+        ProductoAdapter miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(Producto miProducto, int posicion) {
+                Toast.makeText(getApplicationContext(), "Hice click "+miProducto,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdaptador);
