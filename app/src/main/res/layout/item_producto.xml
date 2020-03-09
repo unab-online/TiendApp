@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/textView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/txv_Nombre"
     android:layout_width="match_parent"
-    android:layout_height="80sp"
-    android:fontFamily="casual"
-    android:gravity="center|right"
+    android:layout_height="wrap_content"
+
+    android:gravity="right"
+    android:shadowColor="@color/colorAccent"
     android:text="TextView"
-    android:textColor="#E91E63"
-    android:textSize="24sp" />
+    android:textColor="#2242E0"
+    android:textColorHighlight="@color/colorAccent"
+    android:textColorHint="@color/colorAccent"
+    android:textSize="24sp"
+    android:theme="@style/AppTheme" />

@@ -32,8 +32,6 @@ public class Productos implements Serializable {
 
     @Override
     public String toString() {
-        return  Nombre + "  " +
-                 Descripcion + "  " +
-                    Precio;
+        return  Nombre + "  ";
     }
 }

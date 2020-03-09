@@ -4,41 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityDetalle">
+    tools:context=".DetalleActivity">
 
     <TextView
         android:id="@+id/textViewNombre"
-        android:layout_width="180sp"
-        android:layout_height="40sp"
-        android:gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="131dp"
+        android:gravity="center|top"
         android:text="TextView"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewDescri"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewDescri"
-        android:layout_width="339dp"
-        android:layout_height="153dp"
-        android:layout_marginTop="168dp"
+        android:layout_width="400dp"
+        android:layout_height="222dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="149dp"
+        android:layout_marginEnd="6dp"
+        android:gravity="center|top"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNombre" />
 
     <TextView
         android:id="@+id/textViewPrecio"
-        android:layout_width="171dp"
-        android:layout_height="17dp"
-        android:gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginBottom="123dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.775"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDescri"
-        app:layout_constraintVertical_bias="0.215" />
+        app:layout_constraintVertical_bias="0.628" />
 </androidx.constraintlayout.widget.ConstraintLayout>
