@@ -1,31 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#80D883"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp"
+    app:cardMaxElevation="10dp">
 
-    <TextView
-        android:id="@+id/txv_nombre"
-        android:layout_width="197dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/aguafina_script"
-        android:text="TextView"
-        android:textColor="#0F7A13"
-        android:textSize="36sp" />
 
-    <TextView
-        android:id="@+id/txv_precio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_weight="1"
-        android:fontFamily="@font/alex_brush"
-        android:text="TextView"
-        android:textColor="@color/colorAccent"
-        android:textSize="36sp" />
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:textAlignment="gravity">
 
+        <TextView
+            android:id="@+id/txv_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alex_brush"
+            android:text="@string/textview"
+            android:textAlignment="center"
+            android:textColor="#0F7A13"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/txv_precio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alex_brush"
+            android:text="@string/textview2"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="36sp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
 

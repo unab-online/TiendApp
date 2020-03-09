@@ -1,5 +1,6 @@
 package co.edu.unab.melon.cristian.tiendapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,14 @@ public class ProductoAdapter extends RecyclerView.Adapter {
 
 
     ArrayList<Producto> productos;
+    OnItemClickListener miEscuchador;
+
+    public ProductoAdapter(ArrayList<Producto> productos, OnItemClickListener miEscuchador) {
+        this.productos = productos;
+        this.miEscuchador = miEscuchador;
+    }
+
+
 
     public ProductoAdapter(ArrayList<Producto> productos) {
         this.productos = productos;
@@ -27,6 +36,8 @@ public class ProductoAdapter extends RecyclerView.Adapter {
             super(itemView);
             txvNombre = itemView.findViewById(R.id.txv_nombre);
             txtPrecio = itemView.findViewById(R.id.txv_precio);
+
+
         }
     }
 
@@ -38,16 +49,30 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         ProductoViewHolder miHolder = (ProductoViewHolder) holder;
-        Producto miProducto = productos.get(position);
+        final Producto miProducto = productos.get(position);
         miHolder.txvNombre.setText(miProducto.getNombre());
         miHolder.txtPrecio.setText("$"+miProducto.getPrecio().toString());
+
+        miHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miEscuchador.OnItemClick(miProducto, position);
+                Log.d("prueba click", "hice Click");
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return productos.size();
+    }
+
+    interface OnItemClickListener{
+
+        void OnItemClick(Producto miProducto, int position);
+
     }
 }
