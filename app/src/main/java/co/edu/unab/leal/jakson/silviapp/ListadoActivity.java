@@ -3,7 +3,6 @@ package co.edu.unab.leal.jakson.silviapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 
 import java.util.ArrayList;

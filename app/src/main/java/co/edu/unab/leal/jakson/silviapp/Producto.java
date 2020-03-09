@@ -36,6 +36,6 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return nombre + " = "+ precio + "usd";
+        return nombre +" "+descripcion+ " = "+ precio + "usd";
     }
 }

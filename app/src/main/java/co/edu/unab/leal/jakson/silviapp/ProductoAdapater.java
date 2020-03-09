@@ -6,12 +6,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 
 public class ProductoAdapater extends RecyclerView.Adapter {
 
-    ArrayList<Producto> productos;
-
+    private ArrayList<Producto> productos;
     public ProductoAdapater (ArrayList <Producto> productos){
         this.productos = productos;
     }
@@ -34,6 +35,13 @@ public class ProductoAdapater extends RecyclerView.Adapter {
         holderBind.textViewDescripcion.setText(prodBind.getDescripcion());
         holderBind.textViewPrecio.setText("$"+prodBind.getPrecio());
 
+        holderBind.btnFloating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getApplicationContext(), "tap ", Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, "tap", Snackbar.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -46,12 +54,17 @@ public class ProductoAdapater extends RecyclerView.Adapter {
         private TextView textViewNombre;
         private TextView textViewDescripcion;
         private TextView textViewPrecio;
+        private FloatingActionButton btnFloating;
+
 
         public ProductoViewHolder (@NonNull View itemView){
             super(itemView);
+
             textViewNombre = itemView.findViewById(R.id.textView_nombre);
             textViewDescripcion = itemView.findViewById(R.id.textView_descripcion);
             textViewPrecio = itemView.findViewById(R.id.textView_precio);
+            btnFloating = itemView.findViewById(R.id.btn_floating);
+
         }
 
     }
