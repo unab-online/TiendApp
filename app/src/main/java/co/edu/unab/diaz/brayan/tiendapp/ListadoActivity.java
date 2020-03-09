@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,10 +24,18 @@ public class ListadoActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
 
-        ProductoAdapter miAdaptador =  new ProductoAdapter(productos);
+        ProductoAdapter miAdaptador =  new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Producto producto, int position) {
+                Toast.makeText(getApplicationContext(),"Hice click" + producto, Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdaptador);
+
+        //rvProductos.setOn
     }
 
     private void getFakeData(){

@@ -1,5 +1,6 @@
 package co.edu.unab.diaz.brayan.tiendapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 public class ProductoAdapter extends RecyclerView.Adapter {
 
     ArrayList<Producto> productos;
+    OnItemClickListener miEscuchador;
 
-    public ProductoAdapter(ArrayList<Producto> productos) {
+    public ProductoAdapter(ArrayList<Producto> productos, OnItemClickListener miEscuchador) {
         this.productos = productos;
+        this.miEscuchador = miEscuchador;
     }
 
     class ProductoViewHolder extends RecyclerView.ViewHolder{
@@ -27,6 +30,8 @@ public class ProductoAdapter extends RecyclerView.Adapter {
             super(itemView);
             txvNombre = itemView.findViewById(R.id.txv_nombreP);
             txvPrecio = itemView.findViewById(R.id.txv_precioP);
+
+
         }
     }
 
@@ -39,12 +44,28 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         ProductoViewHolder miHolder = (ProductoViewHolder) holder;
-        Producto miProducto = productos.get(position);
+        final Producto miProducto = productos.get(position);
         miHolder.txvNombre.setText(miProducto.getNombre());
         miHolder.txvPrecio.setText("$" + miProducto.getPrecio());
+
+        miHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                miEscuchador.onItemClick(miProducto,position);
+
+            }
+        });
+
+        miHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.d("LongClick", "Long Click");
+                return false;
+            }
+        });
 
     }
 
@@ -52,4 +73,10 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return productos.size();
     }
+
+    interface OnItemClickListener{
+        void onItemClick(Producto producto, int position);
+    }
+
+
 }
