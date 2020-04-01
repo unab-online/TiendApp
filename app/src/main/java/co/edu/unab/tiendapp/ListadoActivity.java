@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -17,6 +18,15 @@ private ArrayList<Producto> productos;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
+
+
+        SharedPreferences misPreferencias= getSharedPreferences(getString(R.string.misDatos),MODE_PRIVATE );
+
+        // segundo parametro, que pasa si no he creado ese dato (por defecto devuelve falso)
+        Boolean logueado=misPreferencias.getBoolean("logueado", false );
+        String usuario=misPreferencias.getString("usuario", "");
+
+        Toast.makeText(getApplicationContext(), "usuario"+usuario, Toast.LENGTH_LONG).show();
 
         //el this no es necesario
         this.getFakeData();
