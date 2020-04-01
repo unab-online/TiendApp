@@ -1,16 +1,11 @@
 package co.edu.unab.toloza.cesar.tiendapp;
 
-import android.content.ClipData;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -78,6 +73,5 @@ public class ProductoAdapter extends RecyclerView.Adapter {
 
     interface OnItemClickListener{
         void onItemClick(Producto producto, int position);
-
     }
 }
