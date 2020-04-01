@@ -4,4 +4,10 @@
     <string name="nombre_producto">Nombre del producto</string>
     <string name="descripcion">Descripción</string>
     <string name="precio">Precio</string>
+    <string name="txt_caja_usuario">Nombre de usuario</string>
+    <string name="txt_caja_pass">Contraseña</string>
+    <string name="txt_btn_ingresar">Ingresar</string>
+    <string name="usuario">Nodier</string>
+    <string name="pass">123</string>
+    <string name="misDatos">Mis Datos</string>
 </resources>

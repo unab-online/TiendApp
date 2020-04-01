@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -23,6 +24,13 @@ public class ListadoActivity extends AppCompatActivity {
 
         this.getFakeData();
         this.asociarElementos();
+
+        //no volver a solicitar login --- 3
+        final SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
+        Boolean logueado = misPreferencias.getBoolean("logueado", false);
+        String usuario = misPreferencias.getString("usuario","");
+
+        Toast.makeText(this,"Bienvenido: "+ usuario,Toast.LENGTH_LONG).show();
 
         //RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication()); //Para mostrar con Linear
         RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla

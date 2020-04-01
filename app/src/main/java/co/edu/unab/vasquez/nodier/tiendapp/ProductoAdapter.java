@@ -23,8 +23,6 @@ public class ProductoAdapter extends RecyclerView.Adapter {
         this.miEscuchador = miEscuchador;
     }
 
-
-
    /* // Creamos un constructor del arraylist.
     public ProductoAdapter(ArrayList<Producto> productos, NombreDeInterface miEscuchador) {
         this.productos = productos;
@@ -39,9 +37,6 @@ public class ProductoAdapter extends RecyclerView.Adapter {
             super(itemView);
             txvNombre = itemView.findViewById(R.id.txv_nombre);
             txvPrecio = itemView.findViewById(R.id.txv_precio);
-
-
-
         }
     }
 
@@ -63,8 +58,8 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder,final int position) {
 
           final ProductoViewHolder miHolder = (ProductoViewHolder ) holder;
-
           final Producto miProducto = productos.get(position);
+
           miHolder.txvNombre.setText(miProducto.getNombre());
           miHolder.txvPrecio.setText("$ "+miProducto.getPrecio());
 
@@ -72,23 +67,10 @@ public class ProductoAdapter extends RecyclerView.Adapter {
              @Override
              public void onClick(View v) {
                  miEscuchador.metodoParaelItemClick(miProducto,position);
+                 Log.d("Prueba-click","Hice click en "+miProducto);
              }
          });
 
-        miHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Prueba-click","Hice click en "+miProducto);
-            }
-        });
-
-//         miHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//             @Override
-//             public boolean onLongClick(View v) {
-//                  Log.d("Prueba-click","Hice click en "+miProducto);
-//                  return false;
-//             }
-//         });
     }
 
     @Override
