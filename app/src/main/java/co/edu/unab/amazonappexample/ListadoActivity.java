@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,8 +22,16 @@ public class ListadoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
+        SharedPreferences LocalStorage= getSharedPreferences(getString(R.string.nameStorage),MODE_PRIVATE);
+        Boolean status= LocalStorage.getBoolean(getString(R.string.strStatus),false);
+        String user= LocalStorage.getString(getString(R.string.user),"");
 
-
+        if (status){
+            Toast.makeText(this, "Welcom,"+user, Toast.LENGTH_SHORT).show();
+        }else {
+            Intent in = new Intent(ListadoActivity.this,LoginActivity.class);
+            startActivity(in);
+        }
 
         this.AsociarElementos();
         this.getFakeData();

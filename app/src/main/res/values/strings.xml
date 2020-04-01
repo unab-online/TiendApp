@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">AmazonAppExample</string>
     <string name="txt_titulo">AmazonAppExample</string>
+    <string name="nameStorage">ConfigTiendaApp</string>
+    <string name="textLogin">Login</string>
+    <string name="textEmail">Email</string>
+    <string name="textPass">Password</string>
+    <string name="strStatus">Status</string>
+    <string name="user">DataUSer</string>
+    <string name="userName">Mr.robot</string>
+    <string name="passDefault">"lo mejor "</string>
 
 </resources>
