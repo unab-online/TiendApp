@@ -1,11 +1,9 @@
 package co.edu.unab.celis.sergio.tiendapp;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,10 +18,6 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     public ProductoAdapter(ArrayList<Producto> productos, OnItemClickListener miEscuchador) {
         this.productos = productos;
         this.miEscuchador = miEscuchador;
-    }
-
-    public ProductoAdapter(ArrayList<Producto> productos) {
-        this.productos = productos;
     }
 
     class ProductoViewHolder extends RecyclerView.ViewHolder{
@@ -52,7 +46,7 @@ public class ProductoAdapter extends RecyclerView.Adapter {
         ProductoViewHolder miHolder = (ProductoViewHolder) holder;
         final Producto miProducto = productos.get(position);
         miHolder.tvNombre.setText(miProducto.getNombre());
-        miHolder.tvPrecio.setText("$ "+miProducto.getPrecio());
+        miHolder.tvPrecio.setText("$ " + miProducto.getPrecio());
 
         miHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -23,6 +24,13 @@ public class ListadoActivity extends AppCompatActivity {
 
         this.getFakeData();
         this.asociarElementos();
+
+        SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
+
+        Boolean logueado = misPreferencias.getBoolean("logueado", false);
+        String usuario = misPreferencias.getString("usuario","Vacío");
+
+        Toast.makeText(this,"Bienvenido "+ usuario, Toast.LENGTH_LONG).show();
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
 

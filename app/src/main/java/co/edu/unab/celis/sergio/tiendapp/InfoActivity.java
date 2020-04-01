@@ -27,7 +27,7 @@ public class InfoActivity extends AppCompatActivity {
     }
 
     private void asociarElementos(){
-        tvNombre = findViewById(R.id.LinearLayout);
+        tvNombre = findViewById(R.id.tvNombre);
         tvPrecio = findViewById(R.id.tvPrecio);
         tvDescripcion = findViewById(R.id.tvDescripcion);
     }

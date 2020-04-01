@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">TiendApp</string>
     <string name="txtListado">Listado de Productos</string>
+    <string name="edtUsuario">Usuario</string>
+    <string name="edtPassw">Contraseña</string>
+    <string name="btnIngresar">Ingresar</string>
+    <string name="usuario">scelis390</string>
+    <string name="pass">123456</string>
+    <string name="misDatos">tiendapp</string>
 </resources>
