@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -22,11 +24,22 @@ public class ListadoActivity extends AppCompatActivity {
         this.getFakeData();
         this.AsociarElementos();
 
+        //Persistencia Local
+        SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), 0);
+        Boolean logueado = misPreferencias.getBoolean("logueado", false);
+        String usuario = misPreferencias.getString("usuario", "vacio");
+
+        Toast.makeText(this, "Bienvenido Usuario "+usuario, Toast.LENGTH_LONG).show();
+
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
 
         ProductoAdapter miAdaptador =  new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto producto, int position) {
+
+                Intent intentInfo = new Intent(getApplication(), info_product.class);
+                intentInfo.putExtra("producto", producto);
+                startActivity(intentInfo);
                 Toast.makeText(getApplicationContext(),"Hice click" + producto, Toast.LENGTH_LONG).show();
             }
         });

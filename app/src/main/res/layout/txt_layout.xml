@@ -20,6 +20,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="#E480A3"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,21 +33,24 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/txv_precioP"
-                android:layout_width="180dp"
+                android:id="@+id/txv_nombreP"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:text="TextView"
-                android:textColor="#2196F3"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="#0B0B0B"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txv_nombreP"
-                android:layout_width="289dp"
+                android:id="@+id/txv_precioP"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textAlignment="center"
+                android:textColor="#D80000"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </LinearLayout>
 
 
