@@ -3,4 +3,10 @@
     <string name="txt_listado">Listado de Productos</string>
     <string name="precio">Precio</string>
     <string name="descripcion">Descripción</string>
+    <string name="caja_usuario">Usuario</string>
+    <string name="caja_pass">Contraseña</string>
+    <string name="usuario">jsaavedra132</string>
+    <string name="pass">123</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="misDatos">tiendapp</string>
 </resources>
