@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         lvProductos = findViewById(R.id.lv_productos);
 
-        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getBaseContext(),R.layout.item_producto, productos);
+        ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getBaseContext(),android.R.layout.simple_list_item_1, productos);
 
         lvProductos.setAdapter(miAdaptador);
 
