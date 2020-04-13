@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,6 +29,12 @@ public class ListadoActivity extends AppCompatActivity {
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
 
         Boolean logueado = misPreferencias.getBoolean("logueado", false);
+
+        if(!logueado){
+            Intent intent = new Intent(ListadoActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
+
         String usuario = misPreferencias.getString("usuario","Vacío");
 
         Toast.makeText(this,"Bienvenido "+ usuario, Toast.LENGTH_LONG).show();
@@ -50,6 +57,13 @@ public class ListadoActivity extends AppCompatActivity {
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdaptador);
 
+    }
+
+    private void cerrarSesion (View vista){
+        /*SharedPreferences.Editor miEditor = getSharedPreferences().edit();
+        miEditor.putBoolean("logueado", false);
+        miEditor.putString("usuario","");
+        miEditor.apply();*/
     }
 
     private void getFakeData(){
