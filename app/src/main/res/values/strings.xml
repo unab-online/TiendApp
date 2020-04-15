@@ -9,4 +9,5 @@
     <string name="pass">123</string>
     <string name="ingresar">Ingresar</string>
     <string name="misDatos">tiendapp</string>
+    <string name="CerrarSesion">Cerrar Sesión</string>
 </resources>

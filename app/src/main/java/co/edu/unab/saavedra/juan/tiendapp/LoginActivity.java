@@ -16,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtPassword;
     Button btnIngresar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         if(logueado){
             Intent intentListado = new Intent(LoginActivity.this, ListadoActivity.class);
             startActivity(intentListado);
+            finish();
         }
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Datos correctos", Toast.LENGTH_LONG).show();
                     Intent miIntencion = new Intent(LoginActivity.this, ListadoActivity.class);
                     startActivity(miIntencion);
+                    finish();
                 }else{
                     Toast.makeText(LoginActivity.this, "Datos incorrectos", Toast.LENGTH_LONG).show();
                 }
