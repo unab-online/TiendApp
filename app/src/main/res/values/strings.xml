@@ -7,4 +7,5 @@
     <string name="usuario">bdiaz</string>
     <string name="pass">bdb</string>
     <string name="misDatos">tiendapp</string>
+    <string name="txt_btn_cerrar">Cerrar Sesión</string>
 </resources>
