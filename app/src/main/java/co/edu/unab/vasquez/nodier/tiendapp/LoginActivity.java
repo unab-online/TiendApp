@@ -1,7 +1,5 @@
 package co.edu.unab.vasquez.nodier.tiendapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         asociarElementos();
 
         //no volver a solicitar login --- 1
+        //Permite almacenar datos con variable de tipo primitivas
         final SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
 
         //no volver a solicitar login --- 4
@@ -48,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Datos correctos" ,Toast.LENGTH_LONG).show();
                     Intent in = new Intent (LoginActivity.this,ListadoActivity.class);
                     startActivity(in);
+                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(),"Datos incorrectos" ,Toast.LENGTH_LONG).show();
                 }

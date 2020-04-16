@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ListadoActivity">
 
+    <Button
+        android:id="@+id/btn_cerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="cerrarSesion"
+        android:text="@string/cerrarSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_productos"
         android:layout_width="0dp"
@@ -13,5 +24,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cerrarSesion" />
 </androidx.constraintlayout.widget.ConstraintLayout>

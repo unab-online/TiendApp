@@ -1,6 +1,7 @@
 package co.edu.unab.vasquez.nodier.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ListView lvProductos;
+    private RecyclerView rvProductos;
     //private String productos[] = new String[5]; // Así declaramos el arreglo, debríamos darle tamaño
     //private ArrayList <String> productos;// Declaramos un arrayList que reciba Strings; SIEMPRE LO DEBEMOS INICIALIZAR
     private ArrayList <Producto> productos;// Declaramos un arrayList que reciba Strings; SIEMPRE LO DEBEMOS INICIALIZAR
