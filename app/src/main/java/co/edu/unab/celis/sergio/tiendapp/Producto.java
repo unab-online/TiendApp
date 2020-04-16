@@ -26,6 +26,10 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return  nombre + " (" + precio + ')';

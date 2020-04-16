@@ -12,16 +12,21 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListadoActivity extends AppCompatActivity {
 
     private RecyclerView rvProductos;
-    private ArrayList<Producto> productos;
+    private List<Producto> productos;
+    private ProductoDAO productoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
+
+        BaseDatos bd = BaseDatos.obtenerInstancia(this);
+        productoDAO = bd.productoDAO();
 
         this.getFakeData();
         this.asociarElementos();
@@ -52,6 +57,7 @@ public class ListadoActivity extends AppCompatActivity {
                 startActivity(mostrarInformacion);
 
                 Toast.makeText(getApplicationContext(),"Hice click "+miroducto, Toast.LENGTH_SHORT).show();
+                productoDAO.eliminar(miProducto);
             }
         });
 
@@ -76,24 +82,15 @@ public class ListadoActivity extends AppCompatActivity {
 
     private void getFakeData(){
 
-        if(productos == null){
-            productos = new ArrayList<>();
-        }
+        productos = productoDAO.obtenerTodos();
+        if(productos.size()==0){
+            productoDAO.agregar(new Producto("PC Asus", 2000));
+            productoDAO.agregar(new Producto("Disco Duro", 500));
+            productoDAO.agregar(new Producto("Memoria USB", 100));
+            productoDAO.agregar(new Producto("Mouse", 50));
+            productoDAO.agregar(new Producto("Teclado", 80));
 
-        Producto pcAsus = new Producto("Pc Asus",15.3);
-        Producto discoDuro = new Producto("Disco Duro",17.2);
-        Producto memoriaUSB = new Producto("Memoria USB",7.8);
-        Producto mouse = new Producto("Mouse",10);
-
-        productos = new ArrayList<>();
-        productos.add(pcAsus);
-        productos.add(discoDuro);
-        productos.add(memoriaUSB);
-        productos.add(mouse);
-        productos.add(new Producto("Teclado",80));
-
-        for (int  i =0; i<productos.size(); i++){
-            productos.get(i).setDescripción("Desc " + (i+1));
+            productos = productoDAO.obtenerTodos();
         }
     }
 
