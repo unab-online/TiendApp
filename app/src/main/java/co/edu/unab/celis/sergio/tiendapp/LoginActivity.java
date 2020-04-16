@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         if(logueado){
             Intent intent = new Intent(LoginActivity.this,ListadoActivity.class);
             startActivity(intent);
+            finish();
         }
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +43,9 @@ public class LoginActivity extends AppCompatActivity {
                     miEditor.putString("usuario",edtUsuario.getText().toString());
                     miEditor.apply();
 
-                    Toast.makeText(LoginActivity.this,"Bienvenido",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this,ListadoActivity.class);
                     startActivity(intent);
+                    finish();
 
                 } else {
                     Toast.makeText(LoginActivity.this,"Datos Incorrectos",Toast.LENGTH_LONG).show();

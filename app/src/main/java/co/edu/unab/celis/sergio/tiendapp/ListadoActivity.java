@@ -33,6 +33,7 @@ public class ListadoActivity extends AppCompatActivity {
         if(!logueado){
             Intent intent = new Intent(ListadoActivity.this,LoginActivity.class);
             startActivity(intent);
+            finish();
         }
 
         String usuario = misPreferencias.getString("usuario","Vacío");
@@ -59,11 +60,18 @@ public class ListadoActivity extends AppCompatActivity {
 
     }
 
-    private void cerrarSesion (View vista){
-        /*SharedPreferences.Editor miEditor = getSharedPreferences().edit();
+    public void cerrarSesion (View vista){
+        SharedPreferences misPreferencias = getSharedPreferences("tiendapp", MODE_PRIVATE);
+        SharedPreferences.Editor miEditor = misPreferencias.edit();
         miEditor.putBoolean("logueado", false);
         miEditor.putString("usuario","");
-        miEditor.apply();*/
+        //miEditor.clear();
+        //miEditor.remove("logueado");
+        miEditor.apply();
+
+        Intent i = new Intent(ListadoActivity.this,LoginActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void getFakeData(){

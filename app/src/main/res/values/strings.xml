@@ -7,4 +7,5 @@
     <string name="usuario">scelis390</string>
     <string name="pass">123456</string>
     <string name="misDatos">tiendapp</string>
+    <string name="btnCerrarSesion">Cerrar Sesión</string>
 </resources>

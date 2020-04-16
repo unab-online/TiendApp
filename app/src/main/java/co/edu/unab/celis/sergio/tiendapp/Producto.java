@@ -2,8 +2,16 @@ package co.edu.unab.celis.sergio.tiendapp;
 
 import java.io.Serializable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "Productos")
 public class Producto implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @ColumnInfo(name = "nombre")
     private String nombre;
     private String descripción;
     private double precio;
@@ -12,6 +20,10 @@ public class Producto implements Serializable {
         this.nombre = nombre;
         this.descripción = "";
         this.precio = precio;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
