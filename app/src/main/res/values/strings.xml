@@ -7,4 +7,5 @@
     <string name="user">ctoloza499</string>
     <string name="pass">pass123</string>
     <string name="preferencias">datos</string>
+    <string name="cerrar_sesion">Cerrar Sesion</string>
 </resources>

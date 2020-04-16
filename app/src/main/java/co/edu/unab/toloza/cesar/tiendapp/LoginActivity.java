@@ -1,7 +1,6 @@
 package co.edu.unab.toloza.cesar.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -45,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Datos Correctos",Toast.LENGTH_SHORT).show();
                     Intent in = new Intent(LoginActivity.this, ListadoActivity.class);
                     startActivity(in);
+                    finish();
                 }else {
                     Toast.makeText(getApplicationContext(), "Datos Incorrectos", Toast.LENGTH_SHORT).show();
                 }
