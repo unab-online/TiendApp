@@ -4,39 +4,56 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class ListadoActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewProductos;
-    private ArrayList<Producto> productos;
+    private List<Producto> productos;
     private Toolbar toolbar;
     private FloatingActionButton btnFloating;
+    private ProductoDAO productoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
 
+        BaseDatos bd = BaseDatos.obtenerInstancia(this);
+        productoDAO = bd.productoDAO();
+
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
         this.getFakeData();
-        this.asociarProductos();
+        this.asociarElementos();
+
+        SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
+
+        Boolean logueado = misPreferencias.getBoolean("logueado", false);
+        if(!logueado){
+            Intent in = new Intent(ListadoActivity.this, LoginActivity.class);
+            startActivity(in);
+            finish();
+        }
+
+        String usuario = misPreferencias.getString("usuario", "");
+        Toast.makeText(this, "Bienvenido Usuario "+usuario, Toast.LENGTH_LONG).show();
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
         ProductoAdapater proAdpObj = new ProductoAdapater(productos, new ProductoAdapater.onItemClicListener() {
             @Override
             public void onItemClick(Producto producto, int posicion) {
                 Toast.makeText(getApplicationContext(), "tap en: " + producto.getNombre(), Toast.LENGTH_LONG).show();
+                productoDAO.eliminar(producto);
             }
         });
 
@@ -55,21 +72,37 @@ public class ListadoActivity extends AppCompatActivity {
 
     private void getFakeData() {
 
-        if (productos == null) productos = new ArrayList<>();
+        productos = productoDAO.obtenerTodos();
+        if (productos.size()==0) {
 
-        productos.add(new Producto("Jabon johnson & johnson", 6.55, "solo usar despues de estar mojado"));
-        productos.add(new Producto("CD's de musica", 11.99, "la pinto y la coloreo"));
-        productos.add(new Producto("Esclavo color chocolate N°6", 1.1, "desde somalia"));
-        productos.add(new Producto("Brazzers premium por un mes", 21, "2X1 solo para solteros"));
-        productos.add(new Producto("200 usd en rappicreditos", 15, "bono de xhamster"));
-        productos.add(new Producto("Ducha de baño", 8.72, "enchapada en oro golfi"));
+            productoDAO.agregar(new Producto("Jabon johnson & johnson", 6.55, "solo usar despues de estar mojado"));
+            productoDAO.agregar(new Producto("CD's de musica", 11.99, "la pinto y la coloreo"));
+            productoDAO.agregar(new Producto("Esclavo color chocolate N°6", 1.1, "desde somalia"));
+            productoDAO.agregar(new Producto("Brazzers premium por un mes", 21, "2X1 solo para solteros"));
+            productoDAO.agregar(new Producto("200 usd en rappicreditos", 15, "bono de xhamster"));
+            productoDAO.agregar(new Producto("Ducha de baño", 8.72, "enchapada en oro golfi"));
 
+            productos = productoDAO.obtenerTodos();
+
+        }
     }
 
-    private void asociarProductos() {
+    private void asociarElementos() {
 
         recyclerViewProductos = findViewById(R.id.recyclerView_productos);
         btnFloating = findViewById(R.id.btn_floating);
+
+    }
+
+    public void cerrarSesion(View view){
+
+        SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
+        SharedPreferences.Editor miEditor = misPreferencias.edit();
+        miEditor.clear();
+        miEditor.apply();
+        Intent i = new Intent(ListadoActivity.this, LoginActivity.class);
+        startActivity(i);
+        finish();
 
     }
 

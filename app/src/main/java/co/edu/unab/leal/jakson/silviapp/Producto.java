@@ -1,8 +1,14 @@
 package co.edu.unab.leal.jakson.silviapp;
 
 import java.io.Serializable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity (tableName = "Productos")
 public class Producto implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     private String nombre;
     private String descripcion;
@@ -12,6 +18,14 @@ public class Producto implements Serializable {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {

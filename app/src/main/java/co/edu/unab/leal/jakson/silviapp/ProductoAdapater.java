@@ -5,23 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class ProductoAdapater extends RecyclerView.Adapter {
 
-    private ArrayList<Producto> productos;
+    private List<Producto> productos;
     onItemClicListener espichador;
 
-    public ProductoAdapater(ArrayList<Producto> productos, onItemClicListener espichador) {
+    public ProductoAdapater(List<Producto> productos, onItemClicListener espichador) {
         this.productos = productos;
         this.espichador = espichador;
     }
 
-    public ProductoAdapater(ArrayList<Producto> productos) {
+    public ProductoAdapater(List<Producto> productos) {
         this.productos = productos;
     }
 
