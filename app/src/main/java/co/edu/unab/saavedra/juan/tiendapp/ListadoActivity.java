@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +23,7 @@ public class ListadoActivity extends AppCompatActivity {
     private RecyclerView rvProductos;
     private List<Producto> productos;
     private ProductoDAO productoDAO;
+    private ProductoAdapter miAdaptador;
 
     Button btnCerrarSesion;
 
@@ -33,7 +35,7 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
 
-        this.getFakeData();
+        this.getData();
         this.asociarElementos();
 
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
@@ -52,10 +54,13 @@ public class ListadoActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager manager = new GridLayoutManager(getApplication(),2);
 
-        ProductoAdapter miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
+        miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(Producto miproducto, int posicion) {
                 Toast.makeText(getApplicationContext(), "Hice click "+miproducto, Toast.LENGTH_LONG).show();
+                productoDAO.eliminar(miproducto);
+                //ACTUALIZAR LISTA
+                actualizarDatos();
             }
         });
 
@@ -66,7 +71,14 @@ public class ListadoActivity extends AppCompatActivity {
 
     }
 
-    private void getFakeData(){
+    private void actualizarDatos(){
+        getData();
+        miAdaptador.setProductos(productos);
+        //APLICAR CAMBIOS, MIRA SI HAY ALGUNO Y MODIFICA
+        miAdaptador.notifyDataSetChanged();
+    }
+
+    private void getData(){
 
         productos = productoDAO.obtenerTodos();
         if(productos.size()==0){
@@ -115,5 +127,16 @@ public class ListadoActivity extends AppCompatActivity {
         startActivity(i);
         finish();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actualizarDatos();
+    }
+
+    public void nuevoProducto(View vista){
+        Intent i = new Intent(ListadoActivity.this, NuevoProductoActivity.class);
+        startActivity(i);
     }
 }

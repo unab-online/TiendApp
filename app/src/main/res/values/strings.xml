@@ -10,4 +10,8 @@
     <string name="ingresar">Ingresar</string>
     <string name="misDatos">tiendapp</string>
     <string name="CerrarSesion">Cerrar Sesión</string>
+    <string name="AgregarProducto">Agregar Producto</string>
+    <string name="Precio">Precio</string>
+    <string name="Descripcion">Descripción</string>
+    <string name="Nombre">Nombre</string>
 </resources>
