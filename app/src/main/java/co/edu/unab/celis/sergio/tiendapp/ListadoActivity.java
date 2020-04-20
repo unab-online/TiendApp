@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class ListadoActivity extends AppCompatActivity {
     private RecyclerView rvProductos;
     private List<Producto> productos;
     private ProductoDAO productoDAO;
+    private ProductoAdapter miAdaptador;
+    private Button btnNuevo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
 
-        this.getFakeData();
+        this.getData();
         this.asociarElementos();
 
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
@@ -47,17 +50,19 @@ public class ListadoActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
 
-        ProductoAdapter miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
+        miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto miProducto, int posicion) {
-                Producto miroducto = (Producto)(productos.get(posicion));
+                /*Producto miroducto = (Producto)(productos.get(posicion));
 
                 Intent mostrarInformacion = new Intent(getApplication(), InfoActivity.class);
                 mostrarInformacion.putExtra("info", miroducto);
-                startActivity(mostrarInformacion);
-
-                Toast.makeText(getApplicationContext(),"Hice click "+miroducto, Toast.LENGTH_SHORT).show();
+                startActivity(mostrarInformacion);*/
+                Toast.makeText(getApplicationContext(),"Hice click "+miProducto, Toast.LENGTH_SHORT).show();
                 productoDAO.eliminar(miProducto);
+                getData();
+                miAdaptador.setProductos(productos);
+                miAdaptador.notifyDataSetChanged();
             }
         });
 
@@ -80,9 +85,23 @@ public class ListadoActivity extends AppCompatActivity {
         finish();
     }
 
-    private void getFakeData(){
+    @Override
+    protected void onResume(){
+        super.onResume();
+        getData();
+        miAdaptador.setProductos(productos);
+        miAdaptador.notifyDataSetChanged();
+    }
+
+    public void nuevoProducto (View vista){
+        Intent i = new Intent(ListadoActivity.this, AgregarActivity.class);
+        startActivity(i);
+    }
+
+    private void getData(){
 
         productos = productoDAO.obtenerTodos();
+
         if(productos.size()==0){
             productoDAO.agregar(new Producto("PC Asus", 2000));
             productoDAO.agregar(new Producto("Disco Duro", 500));
@@ -96,5 +115,6 @@ public class ListadoActivity extends AppCompatActivity {
 
     private void asociarElementos(){
         rvProductos = findViewById(R.id.rvProductos);
+        btnNuevo = findViewById(R.id.btnNuevo);
     }
 }

@@ -27,4 +27,15 @@
         android:text="@string/btnCerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnNuevo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="5dp"
+        android:onClick="nuevoProducto"
+        android:text="@string/btnNuevo"
+        app:layout_constraintEnd_toStartOf="@+id/btnCerrar"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

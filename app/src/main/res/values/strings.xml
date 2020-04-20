@@ -8,4 +8,10 @@
     <string name="pass">123456</string>
     <string name="misDatos">tiendapp</string>
     <string name="btnCerrarSesion">Cerrar Sesión</string>
+    <string name="btnNuevo">Nuevo</string>
+    <string name="btnAgregarProducto">Agregar</string>
+    <string name="edtNombre">Nombre</string>
+    <string name="edtDesc">Descripcion</string>
+    <string name="edtPrecio">Precio</string>
+    <string name="tvAgregar">Nuevo Producto</string>
 </resources>

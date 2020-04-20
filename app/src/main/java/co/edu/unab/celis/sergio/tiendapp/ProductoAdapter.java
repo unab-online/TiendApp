@@ -21,6 +21,10 @@ public class ProductoAdapter extends RecyclerView.Adapter {
         this.miEscuchador = miEscuchador;
     }
 
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
     class ProductoViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvNombre;
