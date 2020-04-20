@@ -23,6 +23,7 @@ public class ListadoActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FloatingActionButton btnFloating;
     private ProductoDAO productoDAO;
+    private ProductoAdapater proAdpObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class ListadoActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        this.getFakeData();
+        this.cargarDatos();
         this.asociarElementos();
 
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
@@ -51,11 +52,12 @@ public class ListadoActivity extends AppCompatActivity {
         Toast.makeText(this, "Bienvenido Usuario "+usuario, Toast.LENGTH_LONG).show();
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
-        ProductoAdapater proAdpObj = new ProductoAdapater(productos, new ProductoAdapater.onItemClicListener() {
+        proAdpObj = new ProductoAdapater(productos, new ProductoAdapater.onItemClicListener() {
             @Override
             public void onItemClick(Producto producto, int posicion) {
                 Toast.makeText(getApplicationContext(), "tap en: " + producto.getNombre(), Toast.LENGTH_LONG).show();
                 productoDAO.eliminar(producto);
+                onResume();
             }
         });
 
@@ -70,17 +72,17 @@ public class ListadoActivity extends AppCompatActivity {
             }
         });
 
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(getApplicationContext(), "tap ", Toast.LENGTH_SHORT).show();
-                Snackbar.make(view, "tap", Snackbar.LENGTH_SHORT).show();
-            }
-        });
-
     }
 
-    private void getFakeData() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarDatos();
+        proAdpObj.setProductos(productos);
+        proAdpObj.notifyDataSetChanged();
+    }
+
+    private void cargarDatos() {
 
         productos = productoDAO.obtenerTodos();
         if (productos.size()==0) {
@@ -131,8 +133,13 @@ public class ListadoActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
             cerrarSesion();
+            return true;
+        }
+        if (id == R.id.add) {
+            Intent i = new Intent(ListadoActivity.this, AgregarProductoActivity.class);
+            startActivity(i);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -8,6 +8,12 @@
     <string name="textusuario">Escriba su nombre de usuario</string>
     <string name="textpassword">Escriba su contraseña</string>
     <string name="cerrarSesion">Salir</string>
+    <string name="add_nombre">Nombre</string>
+    <string name="add_precio">Precio</string>
+    <string name="add_desc">Descripcion</string>
+    <string name="btn_add">Agregar</string>
+    <string name="btn_back">Volver</string>
+    <string name="add_producto_title">Agregar Nuevo Producto</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

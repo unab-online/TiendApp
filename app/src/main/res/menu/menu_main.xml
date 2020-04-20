@@ -4,8 +4,14 @@
     tools:context="co.edu.unab.leal.jakson.silviapp.ListadoActivity">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/logout"
         android:orderInCategory="100"
         app:showAsAction="never"
         android:title="salir" />
+
+    <item
+        android:id="@+id/add"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="nuevo" />
 </menu>

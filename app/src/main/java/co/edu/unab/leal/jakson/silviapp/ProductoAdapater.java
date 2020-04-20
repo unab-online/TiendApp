@@ -21,6 +21,10 @@ public class ProductoAdapater extends RecyclerView.Adapter {
         this.espichador = espichador;
     }
 
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
     public ProductoAdapater(List<Producto> productos) {
         this.productos = productos;
     }
