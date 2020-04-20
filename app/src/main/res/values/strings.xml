@@ -8,4 +8,11 @@
     <string name="pass">bdb</string>
     <string name="misDatos">tiendapp</string>
     <string name="txt_btn_cerrar">Cerrar Sesión</string>
+    <string name="txt_btn_agregar">Agregar</string>
+    <string name="txt_nuevoProducto">Nuevo Producto</string>
+    <string name="txt_btn_nombreProducto">Nombre producto</string>
+    <string name="txt_btn_precioProducto">Precio producto</string>
+    <string name="txt_btn_descripcionProducto">Descripcion producto</string>
+    <string name="txt_btn_editar">Editar</string>
+    <string name="txt_btn_eliminar">Eliminar</string>
 </resources>

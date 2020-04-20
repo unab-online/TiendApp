@@ -17,7 +17,8 @@ public abstract class BaseDatos extends RoomDatabase {
             instancia = Room.databaseBuilder(
                     contexto.getApplicationContext(),
                     BaseDatos.class,
-                    "tiendapp.db").allowMainThreadQueries().build();
+                    "tiendapp.db"
+            ).allowMainThreadQueries().build();
         }
 
         return instancia;

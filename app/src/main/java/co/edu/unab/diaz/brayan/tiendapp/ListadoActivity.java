@@ -19,6 +19,7 @@ public class ListadoActivity extends AppCompatActivity {
     private RecyclerView rvProductos;
     private List<Producto> productos;
     private ProductoDAO productoDAO;
+    private ProductoAdapter miAdaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
 
-        this.getFakeData();
+        this.getData();
         this.AsociarElementos();
 
         //Persistencia Local
@@ -40,14 +41,23 @@ public class ListadoActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
 
-        ProductoAdapter miAdaptador =  new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
+        miAdaptador =  new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto producto, int position) {
 
-                Intent intentInfo = new Intent(getApplication(), info_product.class);
+                /*Intent intentInfo = new Intent(getApplication(), info_product.class);
                 intentInfo.putExtra("producto", producto);
-                startActivity(intentInfo);
+                startActivity(intentInfo);*/
                 Toast.makeText(getApplicationContext(),"Hice click" + producto, Toast.LENGTH_LONG).show();
+
+                Intent editarIntent = new Intent(ListadoActivity.this, EditarActivity.class);
+                editarIntent.putExtra("producto", producto);
+                startActivity(editarIntent);
+
+                /*productoDAO.borrar(producto);//Borrar producto de la base de datos al hacer click
+                getData();//Actualizar datos de la aplicación
+                miAdaptador.setProductos(productos);//Actualiza la nueva lista de productos
+                miAdaptador.notifyDataSetChanged();//Actualizar vista*/
             }
         });
 
@@ -56,6 +66,20 @@ public class ListadoActivity extends AppCompatActivity {
         rvProductos.setAdapter(miAdaptador);
 
         //rvProductos.setOn
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getData();
+        miAdaptador.setProductos(productos);
+        miAdaptador.notifyDataSetChanged();
+    }
+
+    public void irAgregarProducto(View vista){
+        Intent i =  new Intent(ListadoActivity.this, AgregarActivity.class);
+        startActivity(i);
     }
 
     public void cerrarSesion(View vista){
@@ -73,7 +97,7 @@ public class ListadoActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-    private void getFakeData(){
+    private void getData(){
 
         productos = productoDAO.obtenerTodos();
         if(productos.size()==0){
