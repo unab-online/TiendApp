@@ -24,7 +24,11 @@ public class ProductoAdapter extends RecyclerView.Adapter {
         this.miEscuchador = miEscuchador;
     }
 
-   /* // Creamos un constructor del arraylist.
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    /* // Creamos un constructor del arraylist.
     public ProductoAdapter(ArrayList<Producto> productos, NombreDeInterface miEscuchador) {
         this.productos = productos;
     }*/

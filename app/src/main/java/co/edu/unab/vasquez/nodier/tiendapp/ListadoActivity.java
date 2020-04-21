@@ -19,9 +19,11 @@ import java.util.List;
 public class ListadoActivity extends AppCompatActivity {
 
     private Button btnCerrarSesion;
+    private Button btnAgregar;
     private RecyclerView rvProductos; // elemento para asociar el recicler view
     private List<Producto> productos; // elemento para guardar el elemento
     private ProductoDAO productoDAO;
+    private ProductoAdapter miAdaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
 
-        this.getFakeData();
+        this.getData();
         this.asociarElementos();
 
         //no volver a solicitar login --- 3
@@ -49,17 +51,23 @@ public class ListadoActivity extends AppCompatActivity {
 
         //RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication()); //Para mostrar con Linear
         RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
-        ProductoAdapter miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface(){
+        miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface(){
             @Override
             public void metodoParaelItemClick(Producto miProducto, int posicion) {
-                Toast.makeText(getApplicationContext(),"HiceClick "+miProducto,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Eliminé "+miProducto,Toast.LENGTH_SHORT).show();
+                productoDAO.eliminar(miProducto);
+                //refrescarPantalla();
+                onResume();
             }
         });
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdaptador);
+
+        irAgregarProducto();
+
     }
 
-    private void getFakeData(){
+    private void getData(){
         /*if(productos==null){
             productos = new ArrayList<>();
         }
@@ -86,9 +94,19 @@ public class ListadoActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+        miAdaptador.setProductos(productos);
+        miAdaptador.notifyDataSetChanged(); //cambia visualmente de lo que uno va a ver
+
+    }
+
     private void asociarElementos(){
         rvProductos = findViewById(R.id.rv_productos);
         btnCerrarSesion = findViewById(R.id.btn_cerrarSesion);
+        btnAgregar = findViewById(R.id.btn_agregar);
     }
     //Hay tres formas de
     public void cerrarSesion(View view){
@@ -106,6 +124,24 @@ public class ListadoActivity extends AppCompatActivity {
         Intent i = new Intent(ListadoActivity.this, LoginActivity.class);
         startActivity(i);
         finish();
+    }
+
+   /* public void refrescarPantalla(){
+        getData();
+        miAdaptador.setProductos(productos);
+        miAdaptador.notifyDataSetChanged(); //cambia visualmente de lo que uno va a ver
+    }
+*/
+    public void irAgregarProducto(){
+
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ListadoActivity.this, agregarActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
 }

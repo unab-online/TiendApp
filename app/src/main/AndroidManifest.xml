@@ -8,23 +8,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"        >
+        android:theme="@style/AppTheme">
+        <activity android:name=".agregarActivity"></activity>
         <activity android:name=".LoginActivity">
-            <!--Bloque de codigo que nos permite lanzar una actividad como principal-->
+
+            <!-- Bloque de codigo que nos permite lanzar una actividad como principal -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!--Bloque de codigo que nos permite lanzar una actividad como principal-->
+            <!-- Bloque de codigo que nos permite lanzar una actividad como principal -->
         </activity>
-        <activity android:name=".ListadoActivity">
-        </activity>
+        <activity android:name=".ListadoActivity"></activity>
         <activity android:name=".DetalleActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
-
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
