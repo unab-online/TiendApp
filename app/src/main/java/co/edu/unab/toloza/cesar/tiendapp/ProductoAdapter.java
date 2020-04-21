@@ -18,6 +18,10 @@ public class ProductoAdapter extends RecyclerView.Adapter {
         this.onItemClickListener = onItemClickListener;
     }
 
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
     class ProductoViewHolder extends RecyclerView.ViewHolder{
         TextView txvNombre, txvPrecio;
         public ProductoViewHolder(@NonNull View itemView) {
@@ -72,4 +76,5 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     interface OnItemClickListener{
         void onItemClick(Producto producto, int position);
     }
+
 }

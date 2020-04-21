@@ -8,4 +8,9 @@
     <string name="pass">pass123</string>
     <string name="preferencias">datos</string>
     <string name="cerrar_sesion">Cerrar Sesion</string>
+    <string name="agregar">Agregar Nuevo</string>
+    <string name="nombre">Nombre:</string>
+    <string name="precio">Precio:</string>
+    <string name="descripcion">Descripción</string>
+    <string name="titulo_agregar">Nuevo Producto</string>
 </resources>

@@ -7,14 +7,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import java.util.List;
 
 public class ListadoActivity extends AppCompatActivity {
 
-    RecyclerView rvProductos;
-    List<Producto> productos;
+    private RecyclerView rvProductos;
+    private List<Producto> productos;
     private ProductoDAO productoDAO;
+    private ProductoAdapter miProductoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos db = BaseDatos.obtenerInstancia(this);
         productoDAO = db.productoDAO();
 
-        this.getFakeData();
+        this.getData();
         this.AsociarElementos();
 
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.preferencias), MODE_PRIVATE);
@@ -41,17 +43,26 @@ public class ListadoActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Bienvenido " + user, Toast.LENGTH_LONG ).show();
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
-        ProductoAdapter miProductoAdapter = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
+        miProductoAdapter = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto producto, int position) {
                 Toast.makeText(getApplication(), "Hice click " + producto, Toast.LENGTH_SHORT).show();
                 productoDAO.eliminar(producto);
+                getData();
+                miProductoAdapter.setProductos(productos);
+                miProductoAdapter.notifyDataSetChanged();
             }
         });
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miProductoAdapter);
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+        miProductoAdapter.setProductos(productos);
+        miProductoAdapter.notifyDataSetChanged();
     }
 
     public void  CerrarSesion(View view){
@@ -68,7 +79,12 @@ public class ListadoActivity extends AppCompatActivity {
         finish();
     }
 
-    private void getFakeData(){
+    public void  AgregarNuevo(View view){
+        Intent in = new Intent(ListadoActivity.this, AgregarActivity.class);
+        startActivity(in);
+    }
+
+    private void getData(){
         productos = productoDAO.obtenerTodos();
         if(productos.size() == 0){
             productoDAO.agregar(new Producto("PC Asus", 2000.0));

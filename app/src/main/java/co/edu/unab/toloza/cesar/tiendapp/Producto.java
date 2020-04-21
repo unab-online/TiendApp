@@ -2,6 +2,7 @@ package co.edu.unab.toloza.cesar.tiendapp;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -16,9 +17,16 @@ public class Producto implements Serializable {
     private String descripcion;
     private Double precio;
 
+    @Ignore
     public Producto(String nombre, Double precio) {
         this.nombre = nombre;
         this.descripcion = "";
+        this.precio = precio;
+    }
+
+    public Producto(String nombre, String descripcion, Double precio) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
         this.precio = precio;
     }
 
