@@ -30,10 +30,9 @@ public class AgregarActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Producto nuevoProdcuto = new Producto(
                         edtNombre.getText().toString(),
+                        edtDescripcion.getText().toString(),
                         Double.parseDouble(edtPrecio.getText().toString()));
-                        nuevoProdcuto.setDescripción(edtDescripcion.getText().toString());
                 productoDAO.agregar(nuevoProdcuto);
-
                 finish();
             }
         });

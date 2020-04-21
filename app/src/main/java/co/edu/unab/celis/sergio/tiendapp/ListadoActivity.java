@@ -53,16 +53,16 @@ public class ListadoActivity extends AppCompatActivity {
         miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Producto miProducto, int posicion) {
-                /*Producto miroducto = (Producto)(productos.get(posicion));
 
-                Intent mostrarInformacion = new Intent(getApplication(), InfoActivity.class);
+                Producto miroducto = (Producto)(productos.get(posicion));
+
+                Intent mostrarInformacion = new Intent(getApplication(), EditarActivity.class);
                 mostrarInformacion.putExtra("info", miroducto);
-                startActivity(mostrarInformacion);*/
-                Toast.makeText(getApplicationContext(),"Hice click "+miProducto, Toast.LENGTH_SHORT).show();
-                productoDAO.eliminar(miProducto);
-                getData();
+                startActivity(mostrarInformacion);
+                Toast.makeText(getApplicationContext(),"Hice click " + miProducto, Toast.LENGTH_SHORT).show();
+                /*getData();
                 miAdaptador.setProductos(productos);
-                miAdaptador.notifyDataSetChanged();
+                miAdaptador.notifyDataSetChanged();*/
             }
         });
 
@@ -103,11 +103,11 @@ public class ListadoActivity extends AppCompatActivity {
         productos = productoDAO.obtenerTodos();
 
         if(productos.size()==0){
-            productoDAO.agregar(new Producto("PC Asus", 2000));
-            productoDAO.agregar(new Producto("Disco Duro", 500));
-            productoDAO.agregar(new Producto("Memoria USB", 100));
-            productoDAO.agregar(new Producto("Mouse", 50));
-            productoDAO.agregar(new Producto("Teclado", 80));
+            productoDAO.agregar(new Producto("PC Asus", "Color negro",200));
+            productoDAO.agregar(new Producto("Disco Duro", "2 Teras",50));
+            productoDAO.agregar(new Producto("Memoria USB", "Color azul",100));
+            productoDAO.agregar(new Producto("Mouse", "Inalámbrico",75));
+            productoDAO.agregar(new Producto("Teclado", "Teclado gamer", 80));
 
             productos = productoDAO.obtenerTodos();
         }

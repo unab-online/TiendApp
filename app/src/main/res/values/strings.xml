@@ -14,4 +14,7 @@
     <string name="edtDesc">Descripcion</string>
     <string name="edtPrecio">Precio</string>
     <string name="tvAgregar">Nuevo Producto</string>
+    <string name="tvEditar">Editar Producto</string>
+    <string name="btnEditar">Editar</string>
+    <string name="btnEliminar">Eliminar</string>
 </resources>

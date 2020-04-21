@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Producto pcAsus = new Producto("Pc Asus",15.3);
-        Producto discoDuro = new Producto("Disco Duro",17.2);
-        Producto memoriaUSB = new Producto("Memoria USB",7.8);
-        Producto mouse = new Producto("Mouse",10);
-        Producto teclado = new Producto("Teclado",20.1);
+        Producto pcAsus = new Producto("Pc Asus","15.3",1);
+        Producto discoDuro = new Producto("Disco Duro","17.2",2);
+        Producto memoriaUSB = new Producto("Memoria USB","7.8",3);
+        Producto mouse = new Producto("Mouse","102",4);
+        Producto teclado = new Producto("Teclado","20.1",5);
 
 
         productos = new ArrayList<>();
