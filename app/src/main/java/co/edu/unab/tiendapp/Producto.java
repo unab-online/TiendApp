@@ -2,8 +2,18 @@ package co.edu.unab.tiendapp;
 
 import java.io.Serializable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "productos")
+
+
 public class Producto implements Serializable {
-    private String nombre;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @ColumnInfo(name = "prod_nombre")
+    private String nombre; //colomInfo es para cambiar el nombre de la columna
     private String descripcion;
     private double precio;
 
@@ -12,6 +22,16 @@ public class Producto implements Serializable {
         this.nombre = nombre;
         this.descripcion = "Sin descripción";
         this.precio = precio;
+    }
+
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {

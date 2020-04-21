@@ -7,4 +7,9 @@
     <string name="user1">cparra569</string>
     <string name="pass1">123456</string>
     <string name="misDatos">tiendapp</string>
+    <string name="cerrar">Cerra Sesión</string>
+    <string name="agregar_producto">Nuevo Producto</string>
+    <string name="precio">Precio</string>
+    <string name="nombre">Nombre</string>
+    <string name="descripcion">Descripcion</string>
 </resources>

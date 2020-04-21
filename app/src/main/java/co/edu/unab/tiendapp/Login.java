@@ -23,7 +23,13 @@ Button btnIngresar;
         //Parametros (nombre, seguridad) se recomienda privado
         //No olvidar crear el archivo que guarda los datos, en Strings
         final SharedPreferences misPreferencias= getSharedPreferences(getString(R.string.misDatos),MODE_PRIVATE );
-
+        Boolean logueado= misPreferencias.getBoolean("logueado", false);
+        if(logueado){
+            Intent in= new Intent(Login.this, ListadoActivity.class);
+            startActivity(in);
+            //A continuación se termina la actividad de Login, de modo que al oprimir atrás no se devuelve a Login
+            finish();
+        }
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +46,7 @@ Button btnIngresar;
                     Toast.makeText(getApplicationContext(), "Datos correctos", Toast.LENGTH_LONG).show();
                     Intent in= new Intent(Login.this, ListadoActivity.class);
                     startActivity(in);
+                    finish();
 
                 }
                 else{
