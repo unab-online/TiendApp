@@ -15,7 +15,6 @@ public class EditarActivity extends AppCompatActivity {
     private Button btnEditar;
     private Button btnEliminar;
     private ProductoDAO productoDAO;
-    private ProductoAdapter miAdaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +23,23 @@ public class EditarActivity extends AppCompatActivity {
 
         this.asociarElementos();
 
+        BaseDatos bd = BaseDatos.obtenerInstancia(this);
+        productoDAO = bd.productoDAO();
+
         Bundle datos = getIntent().getExtras();
-        Producto producto = (Producto) datos.getSerializable("info");
+        final Producto producto = (Producto) datos.getSerializable("info");
 
         edtNombre.setText(producto.getNombre());
         edtDescripcion.setText(producto.getDescripción());
         edtPrecio.setText(String.valueOf(producto.getPrecio()));
+
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productoDAO.eliminar(producto);
+                finish();
+            }
+        });
     }
 
     public void asociarElementos(){

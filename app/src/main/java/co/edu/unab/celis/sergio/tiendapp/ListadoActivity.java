@@ -64,6 +64,8 @@ public class ListadoActivity extends AppCompatActivity {
                 miAdaptador.setProductos(productos);
                 miAdaptador.notifyDataSetChanged();*/
             }
+
+
         });
 
         rvProductos.setLayoutManager(manager);
