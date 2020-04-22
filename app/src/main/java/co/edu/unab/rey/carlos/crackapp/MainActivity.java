@@ -5,21 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 
-import co.edu.unab.rey.carlos.crackapp.Producto;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView listViewProductos;
-    // private String productos[] = new String[5];
     private ArrayList<Producto> productos;
 
 
@@ -28,10 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*productos.add("arepa");
-        productos.add("chocolate");
-        productos.add("pan");
-        productos.add("chorizo");*/
+        asociarProductos();
 
         listViewProductos = findViewById(R.id.listViewProducto);
 
@@ -48,14 +41,22 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"apachuraste "+miProducto.getNombre() , Toast.LENGTH_LONG).show();
 
                 Intent miIntension = new Intent(getApplication(),Detalle.class); //esta la intension de ir a la otra actividad, resive la actividad donde está y la clase a donde va
-
                 miIntension.putExtra("productos", productos.get(position));
-
                 startActivity(miIntension); //haga la intension
             }
         });
 
 
                 //Producto miProducto = new Producto("caldo",3000.0);
+    }
+
+    public void asociarProductos(){
+        productos = new ArrayList <Producto> ();
+        productos.add(new Producto ("jabon johnson & johnson", 6.55,"solo usar despues de estar mojado"));
+        productos.add(new Producto("cd's de musica", 11.99, "la pinto y coloreo"));
+        productos.add(new Producto("esclavo color chocolate N°6", 1.1, "desde somalia"));
+        productos.add(new Producto("brazzers premium por un mes", 21, "2X1 solo para solteros"));
+        productos.add(new Producto("200 usd en rappicreditos", 15,"bono de xhamster"));
+        productos.add(new Producto("ducha de baño",8.72, "enchapada en oro golfi"));
     }
 }

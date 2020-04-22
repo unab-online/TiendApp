@@ -20,7 +20,6 @@ public class Detalle extends AppCompatActivity {
         Producto miProducto = (Producto) misDatos.getSerializable("productos");
 
         this.asociarElementos();
-
         textViewNombre.setText(miProducto.getNombre());
         textViewPrecio.setText(""+miProducto.getPrecio());
         textViewDescripcion.setText(miProducto.getDescripcion());

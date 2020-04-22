@@ -1,31 +1,38 @@
 package co.edu.unab.rey.carlos.crackapp;
 
-import android.icu.text.Transliterator;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductoAdapter extends RecyclerView.Adapter {
 
-    ArrayList<Producto> productos;
+    private List<Producto> productos;
     OnItemClickListener miEscuchador;
 
-    public ProductoAdapter(ArrayList<Producto> productos, OnItemClickListener miEscuchador) {
+    public void setProductos(List<Producto> productos){
+        this.productos = productos;
+    }
+
+    public ProductoAdapter(List<Producto> productos, OnItemClickListener miEscuchador) {
         this.productos = productos;
         this.miEscuchador = miEscuchador;
     }
 
-    public ProductoAdapter(ArrayList<Producto> productos) {
+    public ProductoAdapter(List<Producto> productos) {
         this.productos = productos;
     }
+
+
+
 
     class ProductoViewHolder extends RecyclerView.ViewHolder{
 
@@ -39,7 +46,6 @@ public class ProductoAdapter extends RecyclerView.Adapter {
             textView_Precio = itemView.findViewById(R.id.txvPrecio);
             textView_Descripcion = itemView.findViewById(R.id.txvDescripcion);
 
-
         }
 
 
@@ -49,7 +55,6 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View miVista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_producto, parent, false);
-
         return new ProductoViewHolder(miVista);
     }
 
@@ -78,14 +83,15 @@ public class ProductoAdapter extends RecyclerView.Adapter {
             }
         });
 
-
-
     }
+
+
 
     @Override//numero de elementos de la lista
     public int getItemCount() {
         return productos.size();
     }
+
 
     interface OnItemClickListener{
         void onItemClick(Producto miProducto, int posicion);

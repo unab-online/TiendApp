@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">crackApp</string>
     <string name="Titulo">Carta del desayuno</string>
+    <string name="textusuario">Escriba su nombre de usuario</string>
+    <string name="textpassword">Escriba su contraseña</string>
+    <string name="usuario">crey</string>
+    <string name="password">1234</string>
+    <string name="misDatos">TiendaApp</string>
+
+    //FormularioAgregar
+    <string name="btnAgregar">Agregar</string>
+    <string name="nuevoProducto">Nuevo Producto</string>
+    <string name="NombreNuevoProducto">Nombre</string>
+    <string name="PrecioNuevoProducto">Precio</string>
+    <string name="DescripcionNuevoProducto">Descripcion</string>
 </resources>
