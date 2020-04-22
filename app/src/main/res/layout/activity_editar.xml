@@ -10,13 +10,13 @@
         android:id="@+id/edt_nombreEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/txv_tituloEditar" />
 
     <EditText
         android:id="@+id/edt_descripcionEditar"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_descripcionEditar" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txv_tituloEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"

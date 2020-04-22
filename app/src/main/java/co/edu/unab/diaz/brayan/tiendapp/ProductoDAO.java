@@ -29,4 +29,6 @@ public interface ProductoDAO {
     @Query("SELECT * FROM productos WHERE id=:idProducto")
     Producto obtenerPorId(int idProducto);
 
+    @Query("SELECT * FROM productos WHERE nombre=:nombre AND precio=:precio")
+    Producto verificar(String nombre, Double precio);
 }

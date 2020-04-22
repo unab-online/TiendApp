@@ -23,6 +23,8 @@ public class Producto implements Serializable {
         return id;
     }
 
+
+
     public void setId(int id) {
         this.id = id;
     }
@@ -45,5 +47,13 @@ public class Producto implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 }

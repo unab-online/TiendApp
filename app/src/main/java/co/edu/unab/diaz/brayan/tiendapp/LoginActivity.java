@@ -34,8 +34,11 @@ public class LoginActivity extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edtUsuario.getText().toString().equals(getString(R.string.usuario))&&edtPass.getText().toString().equals(getString(R.string.pass))){
-
+                BaseDatos bd = BaseDatos.obtenerInstancia(LoginActivity.this);
+                ProductoDAO productoDAO = bd.productoDAO();
+                Producto miProducto = productoDAO.verificar(edtUsuario.getText().toString(), Double.parseDouble(edtPass.getText().toString()));
+                //if(edtUsuario.getText().toString().equals(getString(R.string.usuario))&&edtPass.getText().toString().equals(getString(R.string.pass))){
+                if(miProducto != null){
                     SharedPreferences.Editor miEditor = misPreferencias.edit();
                     miEditor.putBoolean("logueado", true);
                     miEditor.putString("usuario",edtUsuario.getText().toString());

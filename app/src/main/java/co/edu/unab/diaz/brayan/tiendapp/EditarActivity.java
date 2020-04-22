@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class EditarActivity extends AppCompatActivity {
 
+    private TextView txvTituloEditar;
     private EditText edtNombre, edtPrecio, edtDescripcion;
     private Button btnEditar, btnEliminar;
     private ProductoDAO productoDAO;
@@ -22,23 +24,35 @@ public class EditarActivity extends AppCompatActivity {
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
 
-        final Bundle datos = getIntent().getExtras();
-        final Producto producto = (Producto) datos.getSerializable("producto");
+        final Producto producto = (Producto) getIntent().getSerializableExtra("producto");//Capturar producto enviado desde el listado
 
+        txvTituloEditar.setText(getString(R.string.txt_titulo_editar, producto.getNombre()));
         edtNombre.setText(producto.getNombre());
         edtPrecio.setText(String.valueOf(producto.getPrecio()));
         edtDescripcion.setText(producto.getDescripcion());
 
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                producto.setNombre(edtNombre.getText().toString());
+                producto.setPrecio(Double.parseDouble(edtPrecio.getText().toString()));
+                producto.setDescripcion(edtDescripcion.getText().toString());
+                productoDAO.actualizar(producto);//Actualizar datos del producto en la base de datos
+                finish();
+            }
+        });
+
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productoDAO.borrar(producto);//Borrar producto de la base de datos al hacer click
+                productoDAO.borrar(producto);//Borrar producto de la base de datos
                 finish();
             }
         });
     }
 
     private void asociarElementos(){
+        txvTituloEditar = findViewById(R.id.txv_tituloEditar);
         edtNombre = findViewById(R.id.edt_nombreEditar);
         edtPrecio = findViewById(R.id.edt_precioEditar);
         edtDescripcion = findViewById(R.id.edt_descripcionEditar);
