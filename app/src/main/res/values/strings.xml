@@ -7,4 +7,11 @@
     <string name="usuario">jcardenas642</string>
     <string name="pass">pass123</string>
     <string name="misDatos">tiendapp</string>
+    <string name="txt_cesar">Cerrar Sesión</string>
+    <string name="txt_titulo_agregar">Nuevo Producto</string>
+    <string name="txt_nombre">Nombre:</string>
+    <string name="txt_precio">Precio:</string>
+    <string name="txt_desc">Descripción:</string>
+    <string name="txt_btn_agregar">Agregar Producto</string>
+
 </resources>

@@ -11,18 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductoAdapter extends RecyclerView.Adapter {
 
-    ArrayList<Producto> productos;
+    List<Producto> productos;
     NombreDeInterface miEscuchador;
 
-    public ProductoAdapter(ArrayList<Producto> productos, NombreDeInterface miEscuchador) {
+    public ProductoAdapter(List<Producto> productos, NombreDeInterface miEscuchador) {
         this.productos = productos;
         this.miEscuchador = miEscuchador;
     }
 
-    public ProductoAdapter(ArrayList<Producto> productos) {
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public ProductoAdapter(List<Producto> productos) {
         this.productos = productos;
     }
 
