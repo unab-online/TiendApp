@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -48,7 +47,7 @@ public class ListadoActivity extends AppCompatActivity {
             finish();
         }
 
-        String usuario = misPreferencias.getString("usuario", "");
+        String usuario = misPreferencias.getString("usuario", "vacio");
         Toast.makeText(this, "Bienvenido Usuario "+usuario, Toast.LENGTH_LONG).show();
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
@@ -56,8 +55,12 @@ public class ListadoActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Producto producto, int posicion) {
                 Toast.makeText(getApplicationContext(), "tap en: " + producto.getNombre(), Toast.LENGTH_LONG).show();
-                productoDAO.eliminar(producto);
-                onResume();
+                Intent editarIntent = new Intent(ListadoActivity.this, EditarActivity.class);
+                editarIntent.putExtra("producto", producto);
+                startActivity(editarIntent);
+
+                //productoDAO.eliminar(producto);
+                //onResume();
             }
         });
 

@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".AgregarProductoActivity"></activity>
+        <activity android:name=".EditarActivity"/>
         <activity android:name=".DetalleActivity" />
         <activity android:name=".ListadoActivity" />
         <activity android:name=".LoginActivity">

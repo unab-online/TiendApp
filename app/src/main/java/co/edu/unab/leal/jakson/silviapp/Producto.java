@@ -48,6 +48,10 @@ public class Producto implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
     @Override
     public String toString() {
         return nombre +" "+descripcion+ " = "+ precio + "usd";
