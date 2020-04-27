@@ -2,7 +2,6 @@ package co.edu.unab.vasquez.nodier.tiendapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +44,6 @@ public class agregarActivity extends AppCompatActivity {
         edtNombre = findViewById(R.id.edt_Nombre);
         edtDescripcion = findViewById(R.id.edt_Descripcion);
         edtPrecio = findViewById(R.id.edt_Precio);
-        btnAgregar = findViewById(R.id.btn_Agregar);
+        btnAgregar = findViewById(R.id.btn_Editar);
     }
 }

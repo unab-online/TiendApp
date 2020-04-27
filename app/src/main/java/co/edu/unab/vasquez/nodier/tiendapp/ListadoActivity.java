@@ -55,7 +55,10 @@ public class ListadoActivity extends AppCompatActivity {
             @Override
             public void metodoParaelItemClick(Producto miProducto, int posicion) {
                 Toast.makeText(getApplicationContext(),"Eliminé "+miProducto,Toast.LENGTH_SHORT).show();
-                productoDAO.eliminar(miProducto);
+                Intent i = new Intent(ListadoActivity.this,EditarActivity.class);
+                i.putExtra("producto",miProducto);
+                startActivity(i);
+                //productoDAO.eliminar(miProducto);
                 //refrescarPantalla();
                 onResume();
             }

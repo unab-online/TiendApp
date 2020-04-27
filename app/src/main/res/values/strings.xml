@@ -12,4 +12,7 @@
     <string name="misDatos">Mis Datos</string>
     <string name="cerrarSesion">Salir</string>
     <string name="agregar">Agregar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="editar">Editar</string>
+    <string name="txt_titulo_editar">Editar producto %1$s con precio %2$f</string>
 </resources>

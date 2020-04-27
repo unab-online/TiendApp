@@ -57,6 +57,14 @@ public class Producto implements Serializable {
         return id;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
     @Override
     public String toString() {
         return nombre +" ("+precio+")";

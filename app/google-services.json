@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "886073178499",
+    "firebase_url": "https://tiendapp-97a4b.firebaseio.com",
+    "project_id": "tiendapp-97a4b",
+    "storage_bucket": "tiendapp-97a4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886073178499:android:9220fd97b828db1dd05eb6",
+        "android_client_info": {
+          "package_name": "co.edu.unab.vasquez.nodier.tiendapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886073178499-08kag6cl6ssh024omv29jds6flgnjupi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.edu.unab.vasquez.nodier.tiendapp",
+            "certificate_hash": "e87340f4ed21c708ca1b1f3f6174a9f096d59963"
+          }
+        },
+        {
+          "client_id": "886073178499-mqf27t5on6ra25pmgee2lnr90gdpsmun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGnOM3YLiJRAA6ia9nbwTEdu6qCbf4WJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886073178499-mqf27t5on6ra25pmgee2lnr90gdpsmun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
