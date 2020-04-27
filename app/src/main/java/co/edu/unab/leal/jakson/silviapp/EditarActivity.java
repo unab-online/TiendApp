@@ -6,7 +6,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditarActivity extends AppCompatActivity {
 
@@ -14,6 +19,7 @@ public class EditarActivity extends AppCompatActivity {
     private EditText edtNombre, edtPrecio, edtDescripcion;
     private Button btnEditar, btnEliminar;
     private ProductoDAO productoDAO;
+    private FirebaseFirestore freefire = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +28,9 @@ public class EditarActivity extends AppCompatActivity {
 
         asociarElementos();
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
-        productoDAO = bd.productoDAO();
+        //productoDAO = bd.productoDAO();
+
+
 
         final Producto producto = (Producto) getIntent().getSerializableExtra("producto");//Capturar producto enviado desde el listado
 
@@ -34,19 +42,33 @@ public class EditarActivity extends AppCompatActivity {
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 producto.setNombre(edtNombre.getText().toString());
                 producto.setPrecio(Double.parseDouble(edtPrecio.getText().toString()));
                 producto.setDescripcion(edtDescripcion.getText().toString());
-                productoDAO.actualizar(producto);//Actualizar datos del producto en la base de datos
-                finish();
+                //productoDAO.actualizar(producto);//Actualizar datos del producto en la base de datos
+                freefire.collection("productos").document(producto.getId()).set(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                    }
+                });
+
             }
         });
 
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productoDAO.eliminar(producto);//Borrar producto de la base de datos
-                finish();
+                //productoDAO.eliminar(producto);//Borrar producto de la base de datos
+
+                freefire.collection("productos").document(producto.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                    }
+                });
+
             }
         });
     }

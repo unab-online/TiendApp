@@ -1,5 +1,6 @@
 package co.edu.unab.leal.jakson.silviapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AgregarProductoActivity extends AppCompatActivity {
 
@@ -34,9 +40,17 @@ public class AgregarProductoActivity extends AppCompatActivity {
                 auxPrecio = Double.valueOf(auxStrP);
 
                 Producto nuevoProducto = new Producto(editTextNombre.getText().toString(), auxPrecio, editTextDesc.getText().toString());
-                productoDAO.agregar(nuevoProducto);
+                //productoDAO.agregar(nuevoProducto);
 
-                onResume();
+                FirebaseFirestore freefire = FirebaseFirestore.getInstance();
+                freefire.collection("productos").add(nuevoProducto).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        finish();
+                        //poner onjetos de onResume()
+                    }
+                });
+                //onResume();
 
                 editTextNombre.setText(null);
                 editTextDesc.setText(null);

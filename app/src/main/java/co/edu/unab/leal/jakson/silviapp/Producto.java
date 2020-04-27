@@ -1,18 +1,33 @@
 package co.edu.unab.leal.jakson.silviapp;
 
 import java.io.Serializable;
+
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity (tableName = "Productos")
 public class Producto implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
 
     private String nombre;
     private String descripcion;
     private double precio;
+
+    public Producto(){
+
+    }
+    @Ignore
+    public Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.descripcion = "";
+        this.id = "";
+    }
 
     public Producto(String nombre, double precio, String descripcion) {
         this.nombre = nombre;
@@ -20,11 +35,11 @@ public class Producto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

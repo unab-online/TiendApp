@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "490036609072",
+    "firebase_url": "https://silviapp-c2c00.firebaseio.com",
+    "project_id": "silviapp-c2c00",
+    "storage_bucket": "silviapp-c2c00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490036609072:android:1807ebfcb7417e47206df5",
+        "android_client_info": {
+          "package_name": "co.edu.unab.leal.jakson.silviapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490036609072-mjd1c9f49hk3d34mh3efjb49ofu5dp5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCicPx5fJT9Cmjt9vsKP2vcoT78AMeRNtM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490036609072-mjd1c9f49hk3d34mh3efjb49ofu5dp5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,7 @@
 package co.edu.unab.leal.jakson.silviapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,8 +13,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListadoActivity extends AppCompatActivity {
@@ -32,10 +44,59 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
 
+        FirebaseFirestore freefire = FirebaseFirestore.getInstance();
+        freefire.collection("productos").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                productos = new ArrayList<>();
+                if (queryDocumentSnapshots != null) {
+                    for (QueryDocumentSnapshot doc: queryDocumentSnapshots) {
+                        Producto objProducto = doc.toObject(Producto.class);
+                        objProducto.setId(doc.getId());
+                        productos.add(objProducto);
+                    }
+                }
+                if (proAdpObj!=null){
+                    proAdpObj.setProductos(productos);
+                    proAdpObj.notifyDataSetChanged();
+                }
+            }
+        });
+        freefire.collection("productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    productos = new ArrayList<>();
+                    for (QueryDocumentSnapshot doc: task.getResult()) {
+                        Producto objProducto = doc.toObject(Producto.class);
+                        objProducto.setId(doc.getId());
+                        productos.add(objProducto);
+                    }
+                    RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
+                    proAdpObj = new ProductoAdapater(productos, new ProductoAdapater.onItemClicListener() {
+                        @Override
+                        public void onItemClick(Producto producto, int posicion) {
+                            Toast.makeText(getApplicationContext(), "tap en: " + producto.getNombre(), Toast.LENGTH_LONG).show();
+                            Intent editarIntent = new Intent(ListadoActivity.this, EditarActivity.class);
+                            editarIntent.putExtra("producto", producto);
+                            startActivity(editarIntent);
+
+                            //productoDAO.eliminar(producto);
+                            //onResume();
+                        }
+                    });
+
+                    recyclerViewProductos.setLayoutManager(manager);
+                    recyclerViewProductos.setAdapter(proAdpObj);
+
+                }
+            }
+        }); //traer toda la tabla
+
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        this.cargarDatos();
+        //this.cargarDatos();
         this.asociarElementos();
 
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
@@ -50,22 +111,7 @@ public class ListadoActivity extends AppCompatActivity {
         String usuario = misPreferencias.getString("usuario", "vacio");
         Toast.makeText(this, "Bienvenido Usuario "+usuario, Toast.LENGTH_LONG).show();
 
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
-        proAdpObj = new ProductoAdapater(productos, new ProductoAdapater.onItemClicListener() {
-            @Override
-            public void onItemClick(Producto producto, int posicion) {
-                Toast.makeText(getApplicationContext(), "tap en: " + producto.getNombre(), Toast.LENGTH_LONG).show();
-                Intent editarIntent = new Intent(ListadoActivity.this, EditarActivity.class);
-                editarIntent.putExtra("producto", producto);
-                startActivity(editarIntent);
 
-                //productoDAO.eliminar(producto);
-                //onResume();
-            }
-        });
-
-        recyclerViewProductos.setLayoutManager(manager);
-        recyclerViewProductos.setAdapter(proAdpObj);
 
         btnFloating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +126,9 @@ public class ListadoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        cargarDatos();
-        proAdpObj.setProductos(productos);
-        proAdpObj.notifyDataSetChanged();
+        //cargarDatos();
+        //proAdpObj.setProductos(productos);
+        //proAdpObj.notifyDataSetChanged();
     }
 
     private void cargarDatos() {
