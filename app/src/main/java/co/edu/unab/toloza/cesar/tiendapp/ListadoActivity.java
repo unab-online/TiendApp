@@ -47,10 +47,13 @@ public class ListadoActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Producto producto, int position) {
                 Toast.makeText(getApplication(), "Hice click " + producto, Toast.LENGTH_SHORT).show();
-                productoDAO.eliminar(producto);
+                Intent intent = new Intent(ListadoActivity.this, EditarActivity.class);
+                intent.putExtra("producto", producto);
+                startActivity(intent);
+                /*productoDAO.eliminar(producto);
                 getData();
                 miProductoAdapter.setProductos(productos);
-                miProductoAdapter.notifyDataSetChanged();
+                miProductoAdapter.notifyDataSetChanged();*/
             }
         });
         rvProductos.setLayoutManager(manager);

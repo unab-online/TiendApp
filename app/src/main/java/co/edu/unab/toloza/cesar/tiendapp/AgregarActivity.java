@@ -36,9 +36,9 @@ public class AgregarActivity extends AppCompatActivity {
     }
 
     private void asociarElementos(){
-        nombreProducto = findViewById(R.id.editText_nombre);
-        precioProducto = findViewById(R.id.editText_precio);
-        descripcionProducto = findViewById(R.id.editText_desc);
+        nombreProducto = findViewById(R.id.editText_editar_nombre);
+        precioProducto = findViewById(R.id.editText_editar_precio);
+        descripcionProducto = findViewById(R.id.editText_editar_desc);
         btnAgregar = findViewById(R.id.button_agregar_nuevo);
     }
 }

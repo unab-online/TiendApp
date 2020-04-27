@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "619893268684",
+    "firebase_url": "https://tiendapp-e32a2.firebaseio.com",
+    "project_id": "tiendapp-e32a2",
+    "storage_bucket": "tiendapp-e32a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619893268684:android:3745d9bcec9b2262556269",
+        "android_client_info": {
+          "package_name": "co.edu.unab.toloza.cesar.tiendapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619893268684-ne3ginjves8lvp0ag5lc1ao0mmib195a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXP9B1CEh3HsHLo4yIG_BdF_GJAmwCagI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619893268684-ne3ginjves8lvp0ag5lc1ao0mmib195a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
