@@ -1,5 +1,6 @@
 package co.edu.unab.toloza.cesar.tiendapp;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -10,8 +11,9 @@ import java.io.Serializable;
 @Entity(tableName = "productos")
 public class Producto implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
     @ColumnInfo(name = "nombre")
     private String nombre;
     private String descripcion;
@@ -30,11 +32,15 @@ public class Producto implements Serializable {
         this.precio = precio;
     }
 
-    public void setId(int id) {
+    @Ignore
+    public Producto() {
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

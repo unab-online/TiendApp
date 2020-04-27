@@ -1,5 +1,7 @@
 package co.edu.unab.toloza.cesar.tiendapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +11,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApiNotAvailableException;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListadoActivity extends AppCompatActivity {
@@ -26,7 +39,60 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos db = BaseDatos.obtenerInstancia(this);
         productoDAO = db.productoDAO();
 
-        this.getData();
+        FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+
+        firestoreDB.collection("productos").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                productos = new ArrayList<>();
+                if(queryDocumentSnapshots != null){
+                    for (QueryDocumentSnapshot document: queryDocumentSnapshots){
+                        Producto producto = document.toObject(Producto.class);
+                        producto.setId(document.getId());
+                        productos.add(producto);
+                    }
+                }
+                if(miProductoAdapter != null){
+                    miProductoAdapter.setProductos(productos);
+                    miProductoAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+
+        firestoreDB.collection("productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    productos = new ArrayList<>();
+                    for (QueryDocumentSnapshot document: task.getResult()){
+                        Producto producto = document.toObject(Producto.class);
+                        producto.setId(document.getId());
+                        productos.add(producto);
+                    }
+
+                    RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
+                    miProductoAdapter = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(Producto producto, int position) {
+                            Toast.makeText(getApplication(), "Hice click " + producto, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ListadoActivity.this, EditarActivity.class);
+                            intent.putExtra("producto", producto);
+                            startActivity(intent);
+                            /*productoDAO.eliminar(producto);
+                            getData();
+                            miProductoAdapter.setProductos(productos);
+                            miProductoAdapter.notifyDataSetChanged();*/
+                        }
+                    });
+                    rvProductos.setLayoutManager(manager);
+                    rvProductos.setAdapter(miProductoAdapter);
+
+                }
+            }
+        });
+
+        //this.getData();
         this.AsociarElementos();
 
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.preferencias), MODE_PRIVATE);
@@ -42,30 +108,15 @@ public class ListadoActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Bienvenido " + user, Toast.LENGTH_LONG ).show();
 
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
-        miProductoAdapter = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Producto producto, int position) {
-                Toast.makeText(getApplication(), "Hice click " + producto, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ListadoActivity.this, EditarActivity.class);
-                intent.putExtra("producto", producto);
-                startActivity(intent);
-                /*productoDAO.eliminar(producto);
-                getData();
-                miProductoAdapter.setProductos(productos);
-                miProductoAdapter.notifyDataSetChanged();*/
-            }
-        });
-        rvProductos.setLayoutManager(manager);
-        rvProductos.setAdapter(miProductoAdapter);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getData();
-        miProductoAdapter.setProductos(productos);
-        miProductoAdapter.notifyDataSetChanged();
+        //getData();
+        //miProductoAdapter.setProductos(productos);
+        //miProductoAdapter.notifyDataSetChanged();
     }
 
     public void  CerrarSesion(View view){

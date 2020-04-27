@@ -1,11 +1,17 @@
 package co.edu.unab.toloza.cesar.tiendapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AgregarActivity extends AppCompatActivity {
 
@@ -29,8 +35,15 @@ public class AgregarActivity extends AppCompatActivity {
                 String nombre = nombreProducto.getText().toString();
                 String descripcion = descripcionProducto.getText().toString();
                 double precio = Double.valueOf(precioProducto.getText().toString());
-                productoDAO.agregar(new Producto(nombre, descripcion, precio));
-                finish();
+                //productoDAO.agregar(new Producto(nombre, descripcion, precio));
+                Producto nuevoProducto = new Producto(nombre, descripcion, precio);
+                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+                firestoreDB.collection("productos").add(nuevoProducto).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        finish();
+                    }
+                });
             }
         });
     }

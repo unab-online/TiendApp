@@ -1,5 +1,6 @@
 package co.edu.unab.toloza.cesar.tiendapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditarActivity extends AppCompatActivity {
 
@@ -36,16 +41,29 @@ public class EditarActivity extends AppCompatActivity {
                 producto.setNombre(nombre.getText().toString());
                 producto.setPrecio(Double.valueOf(precio.getText().toString()));
                 producto.setDescripcion(descripcion.getText().toString());
-                productoDAO.actualizar(producto);
-                finish();
+                //productoDAO.actualizar(producto);
+                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+                firestoreDB.collection("productos").document(producto.getId()).set(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                    }
+                });
+
             }
         });
 
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productoDAO.eliminar(producto);
-                finish();
+                //productoDAO.eliminar(producto);
+                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+                firestoreDB.collection("productos").document(producto.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                    }
+                });
             }
         });
     }
