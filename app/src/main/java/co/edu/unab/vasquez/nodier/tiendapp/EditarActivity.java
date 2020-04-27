@@ -1,5 +1,6 @@
 package co.edu.unab.vasquez.nodier.tiendapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditarActivity extends AppCompatActivity {
 
@@ -38,16 +43,33 @@ public class EditarActivity extends AppCompatActivity {
                 miProducto.setNombre(edtNombre.getText().toString());
                 miProducto.setDescripcion(edtDescripcion.getText().toString());
                 miProducto.setPrecio(Double.parseDouble(edtPrecio.getText().toString()));
-                productoDAO.actualizar(miProducto);
-                finish();
+//                productoDAO.actualizar(miProducto);
+                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+                firestoreDB.collection("productos").document(miProducto.getId()).
+                        set(miProducto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                    }
+                });
             }
         });
 
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productoDAO.eliminar(miProducto);
-                finish();
+                //productoDAO.eliminar(miProducto);
+
+                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+                firestoreDB.collection("productos").document(miProducto.getId()).delete().
+                        addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                    }
+                });
+
+
             }
         });
 

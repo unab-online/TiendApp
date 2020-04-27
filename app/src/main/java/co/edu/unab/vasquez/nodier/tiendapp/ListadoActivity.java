@@ -1,5 +1,7 @@
 package co.edu.unab.vasquez.nodier.tiendapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +14,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +44,75 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
 
-        this.getData();
+        //***************************FIRESTORE***************************//
+        FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+        //No puedo hacer esto se puede hacer al momento de mostrar los elementos de esa tabla (coleccion)-
+        /**List<Producto> productos = firestoreDB.collection("productos").get();*/
+        //Toca hacer esto
+        //Segunda opción.. con un escuchador
+
+         firestoreDB.collection("productos").addSnapshotListener(new EventListener<QuerySnapshot>() {
+             @Override
+             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                 productos = new ArrayList<>();
+                 if (queryDocumentSnapshots != null) {
+                     for (QueryDocumentSnapshot documento : queryDocumentSnapshots){
+                         Producto miProducto = documento.toObject(Producto.class);
+                         miProducto.setId(documento.getId());
+                         productos.add(miProducto);
+                     }
+                 }
+                 //Puedo hacer esto
+                 if (miAdaptador != null){
+                     miAdaptador.setProductos(productos);
+                     miAdaptador.notifyDataSetChanged();
+                 }
+             }
+         });
+
+        //Primera opción
+        firestoreDB.collection("productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            //El onCompleteListener nos devuelve una tarea con la información que se está utilizando
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    //no se puede un Lst.
+                    /**productos = new List<Producto>() {}*/
+                    //Pero si esto
+                    productos = new ArrayList<>();
+                    //Recorremos la respuesta
+                    //el Task nos devuelve un listado de los doumentos de esa colección
+                    for (QueryDocumentSnapshot documento: task.getResult()){
+                        //Los datos que llegan en ql query conviertalos y teniendo en cuenta los
+                        // atributos definidos en la clase Productos... y guardelos en la variable.
+                        Producto miProducto = documento.toObject(Producto.class);
+                        miProducto.setId(documento.getId());
+
+                        productos.add(miProducto);
+                    }
+
+                    RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
+                    miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface(){
+                        @Override
+                        public void metodoParaelItemClick(Producto miProducto, int posicion) {
+                            Toast.makeText(getApplicationContext(),"Eliminé "+miProducto,Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(ListadoActivity.this,EditarActivity.class);
+                            i.putExtra("producto",miProducto);
+                            startActivity(i);
+                            //productoDAO.eliminar(miProducto);
+                            //refrescarPantalla();
+                            //onResume();
+                        }
+                    });
+                    rvProductos.setLayoutManager(manager);
+                    rvProductos.setAdapter(miAdaptador);
+
+
+                }
+            }
+        });
+
+        //this.getData();
         this.asociarElementos();
 
         //no volver a solicitar login --- 3
@@ -50,7 +129,7 @@ public class ListadoActivity extends AppCompatActivity {
         Toast.makeText(this,"Bienvenido: "+ usuario,Toast.LENGTH_LONG).show();
 
         //RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication()); //Para mostrar con Linear
-        RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
+       /* RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
         miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface(){
             @Override
             public void metodoParaelItemClick(Producto miProducto, int posicion) {
@@ -64,7 +143,7 @@ public class ListadoActivity extends AppCompatActivity {
             }
         });
         rvProductos.setLayoutManager(manager);
-        rvProductos.setAdapter(miAdaptador);
+        rvProductos.setAdapter(miAdaptador);*/
 
         irAgregarProducto();
 
@@ -97,14 +176,14 @@ public class ListadoActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
-        getData();
+        //getData();
         miAdaptador.setProductos(productos);
         miAdaptador.notifyDataSetChanged(); //cambia visualmente de lo que uno va a ver
 
-    }
+    }*/
 
     private void asociarElementos(){
         rvProductos = findViewById(R.id.rv_productos);

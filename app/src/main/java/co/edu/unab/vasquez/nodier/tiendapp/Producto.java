@@ -1,5 +1,6 @@
 package co.edu.unab.vasquez.nodier.tiendapp;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -11,19 +12,24 @@ import java.io.Serializable;
 @Entity (tableName = "Productos")
 public class Producto implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
     //si quiero cambiar el nombre así:
     //@ColumnInfo(name = "prod_nombre")
     private String nombre;
     private String descripcion;
     private Double precio;
 
+    public Producto() {
+    }
+
     @Ignore
     public Producto(String nombre, Double precio) {
         this.nombre = nombre;
         this.descripcion = "";
         this.precio = precio;
+        this.id ="";
 
     }
 
@@ -49,12 +55,12 @@ public class Producto implements Serializable {
         return precio;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getId() {
+        return id;
     }
 
-    public int getId() {
-        return id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setNombre(String nombre) {
