@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "886215191803",
+    "firebase_url": "https://tiendapp-ca35a.firebaseio.com",
+    "project_id": "tiendapp-ca35a",
+    "storage_bucket": "tiendapp-ca35a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886215191803:android:4739c0c1bc106119cf545e",
+        "android_client_info": {
+          "package_name": "co.edu.unab.saavedra.juan.tiendapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886215191803-ovlc8882hpdrkocj5e05hdo3n1crlndi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBasbxwO_pDAG8iVz4Y0PUV_qT7_NyqDWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886215191803-ovlc8882hpdrkocj5e05hdo3n1crlndi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

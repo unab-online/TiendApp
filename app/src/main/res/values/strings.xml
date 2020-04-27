@@ -14,4 +14,7 @@
     <string name="Precio">Precio</string>
     <string name="Descripcion">Descripción</string>
     <string name="Nombre">Nombre</string>
+    <string name="Editar_Producto">Editar Producto</string>
+    <string name="Borrar_Producto">Borrar Producto</string>
+    <string name="Titulo_Editar">Editar Producto: %1$s</string>
 </resources>

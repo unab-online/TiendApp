@@ -1,5 +1,6 @@
 package co.edu.unab.saavedra.juan.tiendapp;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -7,11 +8,14 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
+
 @Entity(tableName = "productos")
 public class Producto implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
 
     @ColumnInfo(name = "nombre")
     private String nombre;
@@ -22,13 +26,18 @@ public class Producto implements Serializable {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = "";
+        this.id="";
     }
 
-    public void setId(int id) {
+    public Producto(){
+
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -46,6 +55,14 @@ public class Producto implements Serializable {
 
     public double getPrecio() {
         return precio;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package co.edu.unab.saavedra.juan.tiendapp;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +45,57 @@ public class ListadoActivity extends AppCompatActivity {
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
 
-        this.getData();
+        FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+
+        firestoreDB.collection("productos").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                productos = new ArrayList<>();
+                if(queryDocumentSnapshots!=null) {
+                    for (QueryDocumentSnapshot documento : queryDocumentSnapshots) {
+                        Producto miProducto = documento.toObject(Producto.class);
+                        miProducto.setId(documento.getId());
+                        productos.add(miProducto);
+                    }
+                }
+                if(miAdaptador!=null){
+                    miAdaptador.setProductos(productos);
+                    miAdaptador.notifyDataSetChanged();
+                }
+            }
+        });
+
+        firestoreDB.collection("productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    productos = new ArrayList<>();
+                    for(QueryDocumentSnapshot documento : task.getResult()){
+                        Producto miProducto = documento.toObject(Producto.class);
+                        miProducto.setId(documento.getId());
+                        productos.add(miProducto);
+                    }
+
+                    RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
+
+                    miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
+                        @Override
+                        public void OnItemClick(Producto miproducto, int posicion) {
+                            Toast.makeText(getApplicationContext(), "Hice click "+miproducto, Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(ListadoActivity.this, EditarActivity.class);
+                            i.putExtra("producto", miproducto);
+                            startActivity(i);
+                        }
+                    });
+
+
+                    rvProductos.setLayoutManager(manager);
+                    rvProductos.setAdapter(miAdaptador);
+                }
+            }
+        });
+
+        //this.getData();
         this.asociarElementos();
 
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
@@ -51,23 +111,6 @@ public class ListadoActivity extends AppCompatActivity {
         String usuario = misPreferencias.getString("usuario", "");
 
         Toast.makeText(this, "Bienvenido "+usuario, Toast.LENGTH_LONG).show();
-
-        RecyclerView.LayoutManager manager = new GridLayoutManager(getApplication(),2);
-
-        miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
-            @Override
-            public void OnItemClick(Producto miproducto, int posicion) {
-                Toast.makeText(getApplicationContext(), "Hice click "+miproducto, Toast.LENGTH_LONG).show();
-                productoDAO.eliminar(miproducto);
-                //ACTUALIZAR LISTA
-                actualizarDatos();
-            }
-        });
-
-
-        rvProductos.setLayoutManager(manager);
-        rvProductos.setAdapter(miAdaptador);
-
 
     }
 
@@ -127,12 +170,6 @@ public class ListadoActivity extends AppCompatActivity {
         startActivity(i);
         finish();
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        actualizarDatos();
     }
 
     public void nuevoProducto(View vista){
