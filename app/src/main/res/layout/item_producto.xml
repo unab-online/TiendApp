@@ -6,7 +6,7 @@
     android:layout_height="80dp"
     android:layout_margin="5dp"
     android:layout_weight="1"
-    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardBackgroundColor="#FFFFFF"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp"
     app:contentPadding="5dp">
@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TextView"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/txv_precio"
@@ -33,6 +34,7 @@
             android:layout_weight="1"
             android:text="TextView"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="#3F51B5"
+            android:textSize="18sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -47,9 +47,10 @@ public class EditarActivity extends AppCompatActivity {
                 miProducto.setDescripcion(edtDescripcionEditar.getText().toString());
                 //productoDAO.actualizar(miProducto);
                 FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-                firestoreDB.collection("productos").document(miProducto.getId()).set(miProducto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                ProductoRepository productoRepository = new ProductoRepository(EditarActivity.this);
+                productoRepository.editarFirestore(miProducto, new CallBackFirestore<Producto>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void correcto(Producto respuesta) {
                         finish();
                     }
                 });

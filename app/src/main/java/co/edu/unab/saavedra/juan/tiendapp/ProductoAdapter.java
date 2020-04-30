@@ -40,6 +40,7 @@ public class ProductoAdapter extends RecyclerView.Adapter {
 
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+        this.notifyDataSetChanged();
     }
 
     @NonNull
