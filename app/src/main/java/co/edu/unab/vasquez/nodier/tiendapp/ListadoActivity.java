@@ -35,23 +35,63 @@ public class ListadoActivity extends AppCompatActivity {
     private List<Producto> productos; // elemento para guardar el elemento
     private ProductoDAO productoDAO;
     private ProductoAdapter miAdaptador;
+    private ProductoRepository productoRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
 
-        BaseDatos bd = BaseDatos.obtenerInstancia(this);
-        productoDAO = bd.productoDAO();
+
+        this.asociarElementos();
+
+        //no volver a solicitar login --- 3
+        SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
+        Boolean logueado = misPreferencias.getBoolean("logueado", false);
+
+        if(!logueado){
+            Intent in = new Intent(ListadoActivity.this, LoginActivity.class);
+            startActivity(in);
+            finish(); //Si le da atrás en la app... no va a poder mostrar esta actividad.
+        }
+
+        productoRepository = new ProductoRepository(this);
+
+        productos = new ArrayList<>();
+
+        miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface() {
+            @Override
+            public void metodoParaelItemClick(Producto miProducto, int posicion) {
+                Toast.makeText(getApplicationContext(),"Eliminé "+miProducto,Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ListadoActivity.this,EditarActivity.class);
+                i.putExtra("producto",miProducto);
+                startActivity(i);
+            }
+        });
+
+        RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
+        rvProductos.setLayoutManager(manager);
+        rvProductos.setAdapter(miAdaptador);
+        rvProductos.setHasFixedSize(true);
+        getDataFirestore();
+
+        productoRepository.obtenerTodosFirestore(new CallBackFirestore<List<Producto>>() {
+            @Override
+            public void correcto(List<Producto> respuesta) {
+
+            }
+        });
+
+
 
         //***************************FIRESTORE***************************//
-        FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+        //FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         //No puedo hacer esto se puede hacer al momento de mostrar los elementos de esa tabla (coleccion)-
         /**List<Producto> productos = firestoreDB.collection("productos").get();*/
         //Toca hacer esto
         //Segunda opción.. con un escuchador
 
-         firestoreDB.collection("productos").addSnapshotListener(new EventListener<QuerySnapshot>() {
+         /*firestoreDB.collection("productos").addSnapshotListener(new EventListener<QuerySnapshot>() {
              @Override
              public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                  productos = new ArrayList<>();
@@ -75,21 +115,6 @@ public class ListadoActivity extends AppCompatActivity {
             //El onCompleteListener nos devuelve una tarea con la información que se está utilizando
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    //no se puede un Lst.
-                    /**productos = new List<Producto>() {}*/
-                    //Pero si esto
-                    productos = new ArrayList<>();
-                    //Recorremos la respuesta
-                    //el Task nos devuelve un listado de los doumentos de esa colección
-                    for (QueryDocumentSnapshot documento: task.getResult()){
-                        //Los datos que llegan en ql query conviertalos y teniendo en cuenta los
-                        // atributos definidos en la clase Productos... y guardelos en la variable.
-                        Producto miProducto = documento.toObject(Producto.class);
-                        miProducto.setId(documento.getId());
-
-                        productos.add(miProducto);
-                    }
 
                     RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
                     miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface(){
@@ -106,28 +131,14 @@ public class ListadoActivity extends AppCompatActivity {
                     });
                     rvProductos.setLayoutManager(manager);
                     rvProductos.setAdapter(miAdaptador);
-
-
-                }
             }
         });
 
-        //this.getData();
-        this.asociarElementos();
 
-        //no volver a solicitar login --- 3
-        SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
-        Boolean logueado = misPreferencias.getBoolean("logueado", false);
-
-        if(!logueado){
-            Intent in = new Intent(ListadoActivity.this, LoginActivity.class);
-            startActivity(in);
-            finish(); //Si le da atrás en la app... no va a poder mostrar esta actividad.
-        }
 
         String usuario = misPreferencias.getString("usuario","");
         Toast.makeText(this,"Bienvenido: "+ usuario,Toast.LENGTH_LONG).show();
-
+*/
         //RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication()); //Para mostrar con Linear
        /* RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
         miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface(){
@@ -148,9 +159,9 @@ public class ListadoActivity extends AppCompatActivity {
         irAgregarProducto();
 
     }
-
-    private void getData(){
-        /*if(productos==null){
+/*
+    private void getDataROOM(){
+        *//*if(productos==null){
             productos = new ArrayList<>();
         }
         productos.add(new Producto("Pc Asus",50000.0));
@@ -161,7 +172,7 @@ public class ListadoActivity extends AppCompatActivity {
 
         for (int i = 0;i< productos.size(); i++){
             productos.get(i).setDescripcion("Descripción "+(i+1));
-        }*/
+        }*//*
 
         productos = productoDAO.obtenerTodos();
         if(productos.size()==0){ //si no hay nada
@@ -174,16 +185,26 @@ public class ListadoActivity extends AppCompatActivity {
 
             productos = productoDAO.obtenerTodos();
         }
+    }*/
+
+    private void getDataFirestore(){
+        productoRepository.obtenerTodosFirestore(new CallBackFirestore<List<Producto>>() {
+            @Override
+            public void correcto(List<Producto> respuesta) {
+                miAdaptador.setProductos(respuesta);
+                miAdaptador.notifyDataSetChanged();
+            }
+        });
     }
 
-    /*@Override
+    @Override
     protected void onResume() {
         super.onResume();
-        //getData();
+        getDataFirestore();
         miAdaptador.setProductos(productos);
         miAdaptador.notifyDataSetChanged(); //cambia visualmente de lo que uno va a ver
 
-    }*/
+    }
 
     private void asociarElementos(){
         rvProductos = findViewById(R.id.rv_productos);

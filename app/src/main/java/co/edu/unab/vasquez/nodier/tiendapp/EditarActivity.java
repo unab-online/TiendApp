@@ -18,6 +18,7 @@ public class EditarActivity extends AppCompatActivity {
     private EditText edtNombre, edtDescripcion, edtPrecio;
     private TextView txvEditar;
     private Button btnEditar, btnEliminar;
+    private  ProductoRepository productoRepository;
 
     ProductoDAO productoDAO;
 
@@ -28,7 +29,6 @@ public class EditarActivity extends AppCompatActivity {
 
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
         productoDAO = bd.productoDAO();
-
 
         asociarElementos();
         final Producto miProducto = (Producto) getIntent().getSerializableExtra("producto");
@@ -44,11 +44,12 @@ public class EditarActivity extends AppCompatActivity {
                 miProducto.setDescripcion(edtDescripcion.getText().toString());
                 miProducto.setPrecio(Double.parseDouble(edtPrecio.getText().toString()));
 //                productoDAO.actualizar(miProducto);
-                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-                firestoreDB.collection("productos").document(miProducto.getId()).
-                        set(miProducto).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+                productoRepository = new ProductoRepository(EditarActivity.this);
+                productoRepository.editarFirestore(miProducto, new CallBackFirestore<Producto>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void correcto(Producto respuesta) {
                         finish();
                     }
                 });
@@ -58,25 +59,18 @@ public class EditarActivity extends AppCompatActivity {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //productoDAO.eliminar(miProducto);
-
-                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-                firestoreDB.collection("productos").document(miProducto.getId()).delete().
-                        addOnCompleteListener(new OnCompleteListener<Void>() {
+                productoRepository = new ProductoRepository(EditarActivity.this);
+                productoRepository.eliminarFirestore(miProducto, new CallBackFirestore<Producto>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void correcto(Producto respuesta) {
                         finish();
                     }
                 });
-
-
             }
         });
-
     }
 
     public void asociarElementos(){
-
         txvEditar = findViewById(R.id.txv_Editar);
         edtNombre = findViewById(R.id.edt_Nombre);
         edtDescripcion = findViewById(R.id.edt_Descripcion);

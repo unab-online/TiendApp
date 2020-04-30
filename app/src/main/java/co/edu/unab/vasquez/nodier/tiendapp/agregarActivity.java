@@ -18,7 +18,9 @@ public class agregarActivity extends AppCompatActivity {
 
     private TextView edtNombre, edtDescripcion, edtPrecio;
     private Button btnAgregar;
-    ProductoDAO productoDAO;
+    private ProductoDAO productoDAO;
+    private ProductoRepository productoRepository;
+    //private Producto miProducto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,31 +29,49 @@ public class agregarActivity extends AppCompatActivity {
         asociarElementos();
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
 
+
        productoDAO = bd.productoDAO();
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //ROOM
                 Producto nuevoProducto = new Producto(
                         edtNombre.getText().toString(),
                         Double.parseDouble(edtPrecio.getText().toString())
                 );
                 nuevoProducto.setDescripcion(edtDescripcion.getText().toString());
-                //productoDAO.agregar(nuevoProducto);
 
-                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
+                //productoDAO.agregar(nuevoProducto);
+                //FIREBASE
+                /*FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
                 firestoreDB.collection("productos").add(nuevoProducto).
                         addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         finish();
                     }
+                });*/
+
+                productoRepository = new ProductoRepository(agregarActivity.this);
+                productoRepository.agregarFirestore(nuevoProducto, new CallBackFirestore<Producto>() {
+                    @Override
+                    public void correcto(Producto respuesta) {
+                        finish();
+                        Toast.makeText(agregarActivity.this, "Agregado con Exito", Toast.LENGTH_SHORT).show();
+                    }
                 });
 
 
-                Toast.makeText(agregarActivity.this, "Agregado", Toast.LENGTH_SHORT).show();
+
+
+
                 
             }
+
+
+
         });
 
     }
