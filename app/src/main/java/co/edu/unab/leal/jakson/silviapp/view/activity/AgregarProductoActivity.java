@@ -1,9 +1,8 @@
-package co.edu.unab.leal.jakson.silviapp;
+package co.edu.unab.leal.jakson.silviapp.view.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +12,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import co.edu.unab.leal.jakson.silviapp.model.entity.Producto;
+import co.edu.unab.leal.jakson.silviapp.model.db.local.ProductoDAO;
+import co.edu.unab.leal.jakson.silviapp.R;
+import co.edu.unab.leal.jakson.silviapp.model.db.local.BaseDatos;
 
 public class AgregarProductoActivity extends AppCompatActivity {
 

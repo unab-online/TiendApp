@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".AgregarProductoActivity"></activity>
-        <activity android:name=".EditarActivity"/>
+        <activity android:name=".view.activity.AgregarProductoActivity"></activity>
+        <activity android:name=".view.activity.EditarActivity"/>
         <activity android:name=".DetalleActivity" />
-        <activity android:name=".ListadoActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".view.activity.ListadoActivity" />
+        <activity android:name=".view.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

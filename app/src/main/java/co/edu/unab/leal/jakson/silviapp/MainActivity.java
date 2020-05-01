@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import co.edu.unab.leal.jakson.silviapp.model.entity.Producto;
+
 public class MainActivity extends AppCompatActivity {
 
     private ListView listViewProductos;

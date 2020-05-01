@@ -1,4 +1,4 @@
-package co.edu.unab.leal.jakson.silviapp;
+package co.edu.unab.leal.jakson.silviapp.view.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,25 +7,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 import java.util.List;
 
-public class ProductoAdapater extends RecyclerView.Adapter {
+import co.edu.unab.leal.jakson.silviapp.model.entity.Producto;
+import co.edu.unab.leal.jakson.silviapp.R;
+
+public class ProductoAdapter extends RecyclerView.Adapter {
 
     private List<Producto> productos;
-    onItemClicListener espichador;
+    onItemClickListener espichador;
 
-    public ProductoAdapater(List<Producto> productos, onItemClicListener espichador) {
+    public ProductoAdapter(List<Producto> productos, onItemClickListener espichador) {
         this.productos = productos;
         this.espichador = espichador;
     }
 
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+        this.notifyDataSetChanged();
     }
 
-    public ProductoAdapater(List<Producto> productos) {
+    public ProductoAdapter(List<Producto> productos) {
         this.productos = productos;
     }
 
@@ -50,9 +52,7 @@ public class ProductoAdapater extends RecyclerView.Adapter {
         holderBind.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 espichador.onItemClick(prodBind, position);
-
             }
         });
 
@@ -72,7 +72,7 @@ public class ProductoAdapater extends RecyclerView.Adapter {
         return productos.size();
     }
 
-    interface onItemClicListener {
+    public interface onItemClickListener {
 
         void onItemClick(Producto producto, int posicion);
 

@@ -1,9 +1,11 @@
 package co.edu.unab.leal.jakson.silviapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 import android.os.Bundle;
 import android.widget.TextView;
+
+import co.edu.unab.leal.jakson.silviapp.model.entity.Producto;
 
 public class DetalleActivity extends AppCompatActivity {
 

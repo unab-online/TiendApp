@@ -1,4 +1,4 @@
-package co.edu.unab.leal.jakson.silviapp;
+package co.edu.unab.leal.jakson.silviapp.model.db.local;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,6 +7,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
+import co.edu.unab.leal.jakson.silviapp.model.entity.Producto;
 
 //Aquí definimos todas las consultas que queremos hacer
 @Dao

@@ -1,4 +1,4 @@
-package co.edu.unab.leal.jakson.silviapp;
+package co.edu.unab.leal.jakson.silviapp.model.entity;
 
 import java.io.Serializable;
 

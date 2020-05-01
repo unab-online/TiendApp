@@ -1,4 +1,4 @@
-package co.edu.unab.leal.jakson.silviapp;
+package co.edu.unab.leal.jakson.silviapp.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import co.edu.unab.leal.jakson.silviapp.model.entity.Producto;
+import co.edu.unab.leal.jakson.silviapp.R;
+import co.edu.unab.leal.jakson.silviapp.model.db.local.BaseDatos;
+import co.edu.unab.leal.jakson.silviapp.model.db.local.ProductoDAO;
 
 public class EditarActivity extends AppCompatActivity {
 
@@ -28,9 +33,6 @@ public class EditarActivity extends AppCompatActivity {
 
         asociarElementos();
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
-        //productoDAO = bd.productoDAO();
-
-
 
         final Producto producto = (Producto) getIntent().getSerializableExtra("producto");//Capturar producto enviado desde el listado
 
@@ -46,7 +48,6 @@ public class EditarActivity extends AppCompatActivity {
                 producto.setNombre(edtNombre.getText().toString());
                 producto.setPrecio(Double.parseDouble(edtPrecio.getText().toString()));
                 producto.setDescripcion(edtDescripcion.getText().toString());
-                //productoDAO.actualizar(producto);//Actualizar datos del producto en la base de datos
                 freefire.collection("productos").document(producto.getId()).set(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -60,7 +61,6 @@ public class EditarActivity extends AppCompatActivity {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //productoDAO.eliminar(producto);//Borrar producto de la base de datos
 
                 freefire.collection("productos").document(producto.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
