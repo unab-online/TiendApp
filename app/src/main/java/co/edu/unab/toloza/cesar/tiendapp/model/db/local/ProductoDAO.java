@@ -1,4 +1,4 @@
-package co.edu.unab.toloza.cesar.tiendapp;
+package co.edu.unab.toloza.cesar.tiendapp.model.db.local;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 import java.util.List;
+
+import co.edu.unab.toloza.cesar.tiendapp.model.entity.Producto;
 
 @Dao
 public interface ProductoDAO {

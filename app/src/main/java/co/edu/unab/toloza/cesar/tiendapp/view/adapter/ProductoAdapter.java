@@ -1,4 +1,4 @@
-package co.edu.unab.toloza.cesar.tiendapp;
+package co.edu.unab.toloza.cesar.tiendapp.view.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+
+import co.edu.unab.toloza.cesar.tiendapp.model.entity.Producto;
+import co.edu.unab.toloza.cesar.tiendapp.R;
 
 public class ProductoAdapter extends RecyclerView.Adapter {
 
@@ -20,6 +23,7 @@ public class ProductoAdapter extends RecyclerView.Adapter {
 
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+        this.notifyDataSetChanged();
     }
 
     class ProductoViewHolder extends RecyclerView.ViewHolder{
@@ -73,7 +77,7 @@ public class ProductoAdapter extends RecyclerView.Adapter {
         return productos.size();
     }
 
-    interface OnItemClickListener{
+    public interface OnItemClickListener{
         void onItemClick(Producto producto, int position);
     }
 

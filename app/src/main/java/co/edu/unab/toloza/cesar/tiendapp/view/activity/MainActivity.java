@@ -1,4 +1,4 @@
-package co.edu.unab.toloza.cesar.tiendapp;
+package co.edu.unab.toloza.cesar.tiendapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import co.edu.unab.toloza.cesar.tiendapp.model.entity.Producto;
+import co.edu.unab.toloza.cesar.tiendapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

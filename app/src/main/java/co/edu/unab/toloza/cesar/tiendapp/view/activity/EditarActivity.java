@@ -1,35 +1,32 @@
-package co.edu.unab.toloza.cesar.tiendapp;
+package co.edu.unab.toloza.cesar.tiendapp.view.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
+import co.edu.unab.toloza.cesar.tiendapp.model.db.network.CallBackFirestore;
+import co.edu.unab.toloza.cesar.tiendapp.model.entity.Producto;
+import co.edu.unab.toloza.cesar.tiendapp.model.repository.ProductoRepository;
+import co.edu.unab.toloza.cesar.tiendapp.R;
 
 public class EditarActivity extends AppCompatActivity {
 
     private TextView titulo;
     private EditText nombre, precio, descripcion;
     private Button btnEditar, btnEliminar;
-    private ProductoDAO productoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar);
 
-        BaseDatos db = BaseDatos.obtenerInstancia(this);
-        productoDAO = db.productoDAO();
-
         asociarElementos();
+
         final Producto producto = (Producto) getIntent().getSerializableExtra("producto");
+
         titulo.setText(getString(R.string.titulo_editar, producto.getNombre()));
         nombre.setText(producto.getNombre());
         precio.setText(String.valueOf(producto.getPrecio()));
@@ -42,10 +39,10 @@ public class EditarActivity extends AppCompatActivity {
                 producto.setPrecio(Double.valueOf(precio.getText().toString()));
                 producto.setDescripcion(descripcion.getText().toString());
                 //productoDAO.actualizar(producto);
-                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-                firestoreDB.collection("productos").document(producto.getId()).set(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                ProductoRepository productoRepository = new ProductoRepository(EditarActivity.this);
+                productoRepository.editarFirestore(producto, new CallBackFirestore<Producto>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void correcto(Producto respuesta) {
                         finish();
                     }
                 });
@@ -57,10 +54,10 @@ public class EditarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //productoDAO.eliminar(producto);
-                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-                firestoreDB.collection("productos").document(producto.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                ProductoRepository productoRepository = new ProductoRepository(EditarActivity.this);
+                productoRepository.eliminarFirestore(producto, new CallBackFirestore<Producto>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void correcto(Producto respuesta) {
                         finish();
                     }
                 });

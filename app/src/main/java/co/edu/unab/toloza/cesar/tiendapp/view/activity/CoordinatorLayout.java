@@ -1,8 +1,10 @@
-package co.edu.unab.toloza.cesar.tiendapp;
+package co.edu.unab.toloza.cesar.tiendapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import co.edu.unab.toloza.cesar.tiendapp.R;
 
 public class CoordinatorLayout extends AppCompatActivity {
 

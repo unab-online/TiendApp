@@ -1,8 +1,11 @@
-package co.edu.unab.toloza.cesar.tiendapp;
+package co.edu.unab.toloza.cesar.tiendapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import co.edu.unab.toloza.cesar.tiendapp.model.entity.Producto;
+import co.edu.unab.toloza.cesar.tiendapp.R;
 
 public class DetalleActivity extends AppCompatActivity {
 

@@ -1,31 +1,25 @@
-package co.edu.unab.toloza.cesar.tiendapp;
+package co.edu.unab.toloza.cesar.tiendapp.view.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import co.edu.unab.toloza.cesar.tiendapp.model.db.network.CallBackFirestore;
+import co.edu.unab.toloza.cesar.tiendapp.model.entity.Producto;
+import co.edu.unab.toloza.cesar.tiendapp.model.repository.ProductoRepository;
+import co.edu.unab.toloza.cesar.tiendapp.R;
 
 public class AgregarActivity extends AppCompatActivity {
 
     private EditText nombreProducto, precioProducto, descripcionProducto;
     private Button btnAgregar;
-    private ProductoDAO productoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar);
-
-        BaseDatos db = BaseDatos.obtenerInstancia(this);
-        productoDAO = db.productoDAO();
 
         asociarElementos();
 
@@ -37,10 +31,10 @@ public class AgregarActivity extends AppCompatActivity {
                 double precio = Double.valueOf(precioProducto.getText().toString());
                 //productoDAO.agregar(new Producto(nombre, descripcion, precio));
                 Producto nuevoProducto = new Producto(nombre, descripcion, precio);
-                FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
-                firestoreDB.collection("productos").add(nuevoProducto).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                ProductoRepository productoRepository = new ProductoRepository(getApplicationContext());
+                productoRepository.agregarFirestore(nuevoProducto, new CallBackFirestore<Producto>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                    public void correcto(Producto respuesta) {
                         finish();
                     }
                 });

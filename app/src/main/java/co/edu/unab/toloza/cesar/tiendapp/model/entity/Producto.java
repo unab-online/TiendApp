@@ -1,4 +1,4 @@
-package co.edu.unab.toloza.cesar.tiendapp;
+package co.edu.unab.toloza.cesar.tiendapp.model.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
