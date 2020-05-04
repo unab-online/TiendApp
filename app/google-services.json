@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "677448505265",
+    "firebase_url": "https://tiendapp-adb71.firebaseio.com",
+    "project_id": "tiendapp-adb71",
+    "storage_bucket": "tiendapp-adb71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677448505265:android:ef6d13059bc2a5eb0b8f90",
+        "android_client_info": {
+          "package_name": "co.edu.unab.rey.carlos.crackapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677448505265-ealhs5adopl3kqnurm7c70vi2ajrv7cp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.edu.unab.rey.carlos.crackapp",
+            "certificate_hash": "8ddb44d70ce2b380d20649020b105e2f42ff5df5"
+          }
+        },
+        {
+          "client_id": "677448505265-peme6e1qu79i7pl87u2jns1mj4ms0dj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSgymubp9k0sOYUW9J-4dpZWdEkEIChZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677448505265-peme6e1qu79i7pl87u2jns1mj4ms0dj8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,10 +7,12 @@
     <string name="password">1234</string>
     <string name="misDatos">TiendaApp</string>
 
-    //FormularioAgregar
+
     <string name="btnAgregar">Agregar</string>
     <string name="nuevoProducto">Nuevo Producto</string>
     <string name="NombreNuevoProducto">Nombre</string>
     <string name="PrecioNuevoProducto">Precio</string>
     <string name="DescripcionNuevoProducto">Descripcion</string>
+    <string name="txt_titulo_editar">Editar producto : %1$s ></string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
 </resources>

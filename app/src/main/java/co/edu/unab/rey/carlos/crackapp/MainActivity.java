@@ -26,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
         asociarProductos();
 
+        for (int i=0;i<productos.size();i++){
+            productos.get(i).setDescripcion("Desc "+i+1);
+        }
+
         listViewProductos = findViewById(R.id.listViewProducto);
 
         ArrayAdapter miAdaptador = new ArrayAdapter<Producto>(getApplicationContext(),R.layout.item_producto, productos);

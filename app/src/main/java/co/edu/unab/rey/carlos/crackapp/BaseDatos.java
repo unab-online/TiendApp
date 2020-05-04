@@ -7,7 +7,7 @@ import androidx.room.Query;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Producto.class},version = 1, exportSchema = false)
+@Database(entities = {Producto.class},version = 2, exportSchema = false)
 public abstract class BaseDatos extends RoomDatabase {
 
     abstract ProductoDAO productoDAO();

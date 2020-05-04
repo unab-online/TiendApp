@@ -20,6 +20,7 @@ public class ProductoAdapter extends RecyclerView.Adapter {
 
     public void setProductos(List<Producto> productos){
         this.productos = productos;
+        this.notifyDataSetChanged();
     }
 
     public ProductoAdapter(List<Producto> productos, OnItemClickListener miEscuchador) {
@@ -96,5 +97,6 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     interface OnItemClickListener{
         void onItemClick(Producto miProducto, int posicion);
     }
+
 
 }

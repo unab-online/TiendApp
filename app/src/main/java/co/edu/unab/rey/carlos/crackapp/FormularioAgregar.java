@@ -1,5 +1,6 @@
 package co.edu.unab.rey.carlos.crackapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
@@ -7,6 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FormularioAgregar extends AppCompatActivity {
 
@@ -34,7 +40,15 @@ public class FormularioAgregar extends AppCompatActivity {
                 Producto nuevoProducto = new Producto(edtNombre.getText().toString(),
                         Double.parseDouble(edtPrecio.getText().toString()),
                         edtDescripcion.getText().toString());
-                productoDAO.agregar(nuevoProducto);
+                //productoDAO.agregar(nuevoProducto);
+
+                FirebaseFirestore firestoreDb = FirebaseFirestore.getInstance();
+                firestoreDb.collection("productos").add(nuevoProducto).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        finish();
+                    }
+                });
 
                 finish();
 

@@ -1,5 +1,6 @@
 package co.edu.unab.rey.carlos.crackapp;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -10,17 +11,23 @@ import java.io.Serializable;
 @Entity (tableName = "productos")
 public class Producto implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+    @PrimaryKey
+    @NonNull
+    public String id;
     @ColumnInfo (name = "nombre")
     private String nombre;
     private String descripcion;
     private Double precio;
 
+    @Ignore
     public Producto(String nombre, double precio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.id = "";
+    }
+
+    public Producto() {
     }
 
     @Override
@@ -29,11 +36,14 @@ public class Producto implements Serializable {
     }
 
     @Ignore
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-
+    @NonNull
+    public String getId() {
+        return id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -49,6 +59,15 @@ public class Producto implements Serializable {
 
     public Double getPrecio() {
         return precio;
+    }
+
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 
 

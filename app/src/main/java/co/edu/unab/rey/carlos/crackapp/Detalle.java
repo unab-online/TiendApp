@@ -23,6 +23,8 @@ public class Detalle extends AppCompatActivity {
         textViewNombre.setText(miProducto.getNombre());
         textViewPrecio.setText(""+miProducto.getPrecio());
         textViewDescripcion.setText(miProducto.getDescripcion());
+
+        setTitle("Detalle "+miProducto.getNombre());
     }
 private void asociarElementos(){
         textViewNombre = findViewById(R.id.textViewNombre);

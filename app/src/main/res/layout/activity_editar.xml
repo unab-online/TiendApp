@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FormularioAgregar">
+    tools:context=".Editar">
 
     <TextView
         android:id="@+id/txv_titulo_editar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="@string/nuevoProducto" />
+        android:text="@string/txt_titulo_editar" />
 
     <EditText
         android:id="@+id/edt_nombre_nuevo_producto"
@@ -40,9 +40,24 @@
         android:hint="@string/DescripcionNuevoProducto"
         android:inputType="textMultiLine" />
 
-    <Button
-        android:id="@+id/btn_agregar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btnAgregar" />
+        android:layout_height="330dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_eliminar"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/btn_agregar"
+            android:layout_width="179dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnAgregar" />
+
+    </LinearLayout>
 </LinearLayout>
+
