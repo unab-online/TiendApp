@@ -1,18 +1,18 @@
-package co.edu.unab.vasquez.nodier.tiendapp;
+package co.edu.unab.vasquez.nodier.tiendapp.view.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import co.edu.unab.vasquez.nodier.tiendapp.R;
+import co.edu.unab.vasquez.nodier.tiendapp.model.entity.Producto;
 
 public class ProductoAdapter extends RecyclerView.Adapter {
 
@@ -75,8 +75,6 @@ public class ProductoAdapter extends RecyclerView.Adapter {
                  Log.d("Prueba-click","Hice click en "+miProducto);
              }
          });
-
-
     }
 
     @Override
@@ -84,7 +82,7 @@ public class ProductoAdapter extends RecyclerView.Adapter {
         return productos.size(); // devolvemos la cantidad de elementos que tenemos guardados.
     }
 
-    interface NombreDeInterface{
+    public interface NombreDeInterface{
         //Le podemos pasar os parámetros que queramos
         void metodoParaelItemClick(Producto miProducto, int posicion);
     }

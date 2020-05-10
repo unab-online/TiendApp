@@ -1,4 +1,4 @@
-package co.edu.unab.vasquez.nodier.tiendapp;
+package co.edu.unab.vasquez.nodier.tiendapp.model.bd.network;
 
 import java.util.List;
 

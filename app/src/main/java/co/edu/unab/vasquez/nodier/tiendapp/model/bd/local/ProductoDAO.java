@@ -1,4 +1,4 @@
-package co.edu.unab.vasquez.nodier.tiendapp;
+package co.edu.unab.vasquez.nodier.tiendapp.model.bd.local;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,6 +7,9 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
+import co.edu.unab.vasquez.nodier.tiendapp.model.entity.Producto;
+
 //Aquí definimos todas las consultas que queremos hacer
 @Dao
 public interface ProductoDAO {

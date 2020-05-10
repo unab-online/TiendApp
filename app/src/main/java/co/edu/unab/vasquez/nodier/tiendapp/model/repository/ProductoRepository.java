@@ -1,21 +1,22 @@
-package co.edu.unab.vasquez.nodier.tiendapp;
+package co.edu.unab.vasquez.nodier.tiendapp.model.repository;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.local.BaseDatos;
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.network.CallBackFirestore;
+import co.edu.unab.vasquez.nodier.tiendapp.model.entity.Producto;
 
 public class ProductoRepository {
 
@@ -29,17 +30,17 @@ public class ProductoRepository {
 
     // Si quiero tener el metodo que devuelva todos los productos
 
-    public List<Producto> obtenerTodosRoom() {
+    /*public List<Producto> obtenerTodosRoom() {
         ProductoDAO productoDAO = bdROOM.productoDAO();
         return productoDAO.obtenerTodos();
     }
-
+*/
     public void obtenerTodosFirestore(final CallBackFirestore<List<Producto>> callBackFirestore) {
         bdFirestore.collection("productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    //no se puede un Lst.
+                    //no se puede un Lst.Nodi
                     /**productos = new List<Producto>() {}*/
                     //Pero si esto
                     List<Producto> productos = new ArrayList<>();

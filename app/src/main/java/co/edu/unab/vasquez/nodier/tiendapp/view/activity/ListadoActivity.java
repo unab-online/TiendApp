@@ -1,31 +1,32 @@
-package co.edu.unab.vasquez.nodier.tiendapp;
+package co.edu.unab.vasquez.nodier.tiendapp.view.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.retrofit.ProductoAPI;
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.retrofit.TiendAppService;
+import co.edu.unab.vasquez.nodier.tiendapp.view.adapter.ProductoAdapter;
+import co.edu.unab.vasquez.nodier.tiendapp.R;
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.network.CallBackFirestore;
+import co.edu.unab.vasquez.nodier.tiendapp.model.entity.Producto;
+import co.edu.unab.vasquez.nodier.tiendapp.model.repository.ProductoRepository;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ListadoActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class ListadoActivity extends AppCompatActivity {
     private Button btnAgregar;
     private RecyclerView rvProductos; // elemento para asociar el recicler view
     private List<Producto> productos; // elemento para guardar el elemento
-    private ProductoDAO productoDAO;
+    //private ProductoDAO productoDAO;
     private ProductoAdapter miAdaptador;
     private ProductoRepository productoRepository;
 
@@ -49,39 +50,35 @@ public class ListadoActivity extends AppCompatActivity {
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
         Boolean logueado = misPreferencias.getBoolean("logueado", false);
 
-        if(!logueado){
+        if (!logueado) {
             Intent in = new Intent(ListadoActivity.this, LoginActivity.class);
             startActivity(in);
             finish(); //Si le da atrás en la app... no va a poder mostrar esta actividad.
         }
 
         productoRepository = new ProductoRepository(this);
-
         productos = new ArrayList<>();
-
         miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface() {
             @Override
             public void metodoParaelItemClick(Producto miProducto, int posicion) {
-                Toast.makeText(getApplicationContext(),"Eliminé "+miProducto,Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(ListadoActivity.this,EditarActivity.class);
-                i.putExtra("producto",miProducto);
+                //Toast.makeText(getApplicationContext(), "Eliminé " + miProducto, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ListadoActivity.this, EditarActivity.class);
+                i.putExtra("producto", miProducto);
                 startActivity(i);
             }
         });
-
-        RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
+        /*RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 2); //Mostrar como grilla
         rvProductos.setLayoutManager(manager);
         rvProductos.setAdapter(miAdaptador);
-        rvProductos.setHasFixedSize(true);
-        getDataFirestore();
+        rvProductos.setHasFixedSize(true);*/
+        //getDataFirestore();
 
-        productoRepository.obtenerTodosFirestore(new CallBackFirestore<List<Producto>>() {
+        /*productoRepository.obtenerTodosFirestore(new CallBackFirestore<List<Producto>>() {
             @Override
             public void correcto(List<Producto> respuesta) {
 
             }
-        });
-
+        });*/
 
 
         //***************************FIRESTORE***************************//
@@ -158,6 +155,74 @@ public class ListadoActivity extends AppCompatActivity {
 
         irAgregarProducto();
 
+        Retrofit retrofit = TiendAppService.obtenerInstancia();
+        //Este es como el DAO de ROOM
+        ProductoAPI productoAPI = retrofit.create(ProductoAPI.class);
+        //Opcion 1
+       /* productoAPI.obtenerTodos().enqueue(new Callback<Map>() {
+            @Override
+            public void onResponse(Call<Map> call, Response<Map> response) {
+                //Log.d("API",response.body().toString());
+                if (response.body() != null) {
+                    for (Object datos : response.body().values()) {
+                        Map mapa = (Map) datos;
+                        Producto miProducto = new Producto();
+                        miProducto.setNombre((String) mapa.get("nombre"));
+                        miProducto.setPrecio((Double) mapa.get("precio"));
+                        miProducto.setDescripcion((String) mapa.get("descripcion"));
+                        miProducto.setId((String) mapa.get("id"));
+                        productos.add(miProducto);
+                    }
+
+                    miAdaptador.setProductos(productos);
+                    RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 2); //Mostrar como grilla
+                    rvProductos.setLayoutManager(manager);
+                    rvProductos.setAdapter(miAdaptador);
+                    rvProductos.setHasFixedSize(true);
+
+
+                    Toast.makeText(ListadoActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map> call, Throwable t) {
+
+            }
+        });*/
+
+
+        //rvProductos.setAdapter(miAdaptador);
+        //miAdaptador.notifyDataSetChanged();
+
+        //Opcion 2
+        productoAPI.obtenerTodos().enqueue(new Callback<Map<String, Producto>>() {
+            @Override
+            public void onResponse(Call<Map<String, Producto>> call, Response<Map<String, Producto>> response) {
+                //Log.d("API",response.body().toString());
+                if (response.body()!=null){
+                    for (Producto miProducto : response.body().values()){
+
+                        productos.add(miProducto);
+                    }
+
+                    miAdaptador.setProductos(productos);
+                    RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 2); //Mostrar como grilla
+                    rvProductos.setLayoutManager(manager);
+                    rvProductos.setAdapter(miAdaptador);
+                    rvProductos.setHasFixedSize(true);
+
+                    Toast.makeText(ListadoActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, Producto>> call, Throwable t) {
+
+            }
+
+        });
+
     }
 /*
     private void getDataROOM(){
@@ -187,32 +252,33 @@ public class ListadoActivity extends AppCompatActivity {
         }
     }*/
 
-    private void getDataFirestore(){
-        productoRepository.obtenerTodosFirestore(new CallBackFirestore<List<Producto>>() {
+    private void getDataFirestore() {
+        /*productoRepository.obtenerTodosFirestore(new CallBackFirestore<List<Producto>>() {
             @Override
             public void correcto(List<Producto> respuesta) {
                 miAdaptador.setProductos(respuesta);
                 miAdaptador.notifyDataSetChanged();
             }
-        });
+        });*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getDataFirestore();
+        //getDataFirestore();
         miAdaptador.setProductos(productos);
         miAdaptador.notifyDataSetChanged(); //cambia visualmente de lo que uno va a ver
-
+        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
     }
 
-    private void asociarElementos(){
+    private void asociarElementos() {
         rvProductos = findViewById(R.id.rv_productos);
         btnCerrarSesion = findViewById(R.id.btn_cerrarSesion);
         btnAgregar = findViewById(R.id.btn_agregar);
     }
+
     //Hay tres formas de
-    public void cerrarSesion(View view){
+    public void cerrarSesion(View view) {
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.misDatos), MODE_PRIVATE);
         SharedPreferences.Editor miEditor = misPreferencias.edit();
         //forma 1
@@ -229,13 +295,13 @@ public class ListadoActivity extends AppCompatActivity {
         finish();
     }
 
-   /* public void refrescarPantalla(){
-        getData();
-        miAdaptador.setProductos(productos);
-        miAdaptador.notifyDataSetChanged(); //cambia visualmente de lo que uno va a ver
-    }
-*/
-    public void irAgregarProducto(){
+    /* public void refrescarPantalla(){
+         getData();
+         miAdaptador.setProductos(productos);
+         miAdaptador.notifyDataSetChanged(); //cambia visualmente de lo que uno va a ver
+     }
+ */
+    public void irAgregarProducto() {
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override

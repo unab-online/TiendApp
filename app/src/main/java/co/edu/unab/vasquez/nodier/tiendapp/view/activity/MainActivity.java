@@ -1,4 +1,4 @@
-package co.edu.unab.vasquez.nodier.tiendapp;
+package co.edu.unab.vasquez.nodier.tiendapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import co.edu.unab.vasquez.nodier.tiendapp.R;
+import co.edu.unab.vasquez.nodier.tiendapp.model.entity.Producto;
 
 public class MainActivity extends AppCompatActivity {
 

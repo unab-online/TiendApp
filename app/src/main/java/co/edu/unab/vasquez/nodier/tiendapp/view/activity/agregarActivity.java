@@ -1,18 +1,28 @@
-package co.edu.unab.vasquez.nodier.tiendapp;
+package co.edu.unab.vasquez.nodier.tiendapp.view.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.Map;
+
+import co.edu.unab.vasquez.nodier.tiendapp.R;
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.local.BaseDatos;
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.local.ProductoDAO;
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.network.CallBackFirestore;
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.retrofit.ProductoAPI;
+import co.edu.unab.vasquez.nodier.tiendapp.model.bd.retrofit.TiendAppService;
+import co.edu.unab.vasquez.nodier.tiendapp.model.entity.Producto;
+import co.edu.unab.vasquez.nodier.tiendapp.model.repository.ProductoRepository;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class agregarActivity extends AppCompatActivity {
 
@@ -37,8 +47,9 @@ public class agregarActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //ROOM
-                Producto nuevoProducto = new Producto(
+                final Producto nuevoProducto = new Producto(
                         edtNombre.getText().toString(),
+                        edtDescripcion.getText().toString(),
                         Double.parseDouble(edtPrecio.getText().toString())
                 );
                 nuevoProducto.setDescripcion(edtDescripcion.getText().toString());
@@ -54,16 +65,43 @@ public class agregarActivity extends AppCompatActivity {
                     }
                 });*/
 
-                productoRepository = new ProductoRepository(agregarActivity.this);
+                /*productoRepository = new ProductoRepository(agregarActivity.this);
                 productoRepository.agregarFirestore(nuevoProducto, new CallBackFirestore<Producto>() {
                     @Override
                     public void correcto(Producto respuesta) {
                         finish();
                         Toast.makeText(agregarActivity.this, "Agregado con Exito", Toast.LENGTH_SHORT).show();
                     }
+                });*/
+
+                Retrofit retrofit = TiendAppService.obtenerInstancia();
+                final ProductoAPI productoAPI = retrofit.create(ProductoAPI.class);
+
+                productoAPI.agregar(nuevoProducto).enqueue(new Callback<Map>() {
+                    @Override
+                    public void onResponse(Call<Map> call, Response<Map> response) {
+                        assert response.body() != null;
+                        Log.d("API","Agregado "+response.body().toString());
+                        String id = (String) response.body().get("name");
+                        nuevoProducto.setId(id);
+                        productoAPI.editar(id,nuevoProducto).enqueue(new Callback<Map>() {
+                            @Override
+                            public void onResponse(Call<Map> call, Response<Map> response) {
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Map> call, Throwable t) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Call<Map> call, Throwable t) {
+                        Log.d("API","Agregado "+t.getMessage());
+                    }
                 });
-
-
 
 
 

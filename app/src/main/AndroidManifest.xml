@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditarActivity"></activity>
-        <activity android:name=".agregarActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".view.activity.EditarActivity"></activity>
+        <activity android:name=".view.activity.agregarActivity" />
+        <activity android:name=".view.activity.LoginActivity">
 
             <!-- Bloque de codigo que nos permite lanzar una actividad como principal -->
             <intent-filter>
@@ -21,9 +21,9 @@
             </intent-filter>
             <!-- Bloque de codigo que nos permite lanzar una actividad como principal -->
         </activity>
-        <activity android:name=".ListadoActivity" />
-        <activity android:name=".DetalleActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".view.activity.ListadoActivity" />
+        <activity android:name=".view.activity.DetalleActivity" />
+        <activity android:name=".view.activity.MainActivity" />
     </application>
 
 </manifest>
