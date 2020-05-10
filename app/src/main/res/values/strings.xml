@@ -9,6 +9,7 @@
 
 
     <string name="btnAgregar">Agregar</string>
+    <string name="btnEliminar">Eliminar</string>
     <string name="nuevoProducto">Nuevo Producto</string>
     <string name="NombreNuevoProducto">Nombre</string>
     <string name="PrecioNuevoProducto">Precio</string>

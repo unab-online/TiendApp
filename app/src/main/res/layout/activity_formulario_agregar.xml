@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FormularioAgregar">
+    tools:context=".view.activity.FormularioAgregar">
 
     <TextView
         android:id="@+id/txv_titulo_editar"

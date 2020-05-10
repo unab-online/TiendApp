@@ -1,10 +1,12 @@
-package co.edu.unab.rey.carlos.crackapp;
+package co.edu.unab.rey.carlos.crackapp.model.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
@@ -15,6 +17,7 @@ public class Producto implements Serializable {
     @NonNull
     public String id;
     @ColumnInfo (name = "nombre")
+    @SerializedName("name")
     private String nombre;
     private String descripcion;
     private Double precio;

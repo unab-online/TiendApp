@@ -1,4 +1,4 @@
-package co.edu.unab.rey.carlos.crackapp;
+package co.edu.unab.rey.carlos.crackapp.model.repository;
 
 import android.content.Context;
 
@@ -16,6 +16,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.unab.rey.carlos.crackapp.model.entity.Producto;
+import co.edu.unab.rey.carlos.crackapp.model.bd.local.ProductoDAO;
+import co.edu.unab.rey.carlos.crackapp.model.bd.local.BaseDatos;
+import co.edu.unab.rey.carlos.crackapp.model.bd.network.CallBackFirestore;
+
 //de acá se saca la información,
 public class ProductoRepository {
 
@@ -32,7 +37,7 @@ public class ProductoRepository {
         return productoDAO.obtenerTodos();
     }
 
-    public void obtenerTodosFireStore(final CallBackFirestore <List<Producto>> callBackFirestore){
+    public void obtenerTodosFireStore(final CallBackFirestore<List<Producto>> callBackFirestore){
         dbFireStore.collection("productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -66,13 +71,11 @@ public class ProductoRepository {
                         miProducto.setId(documento.getId());
                         productos.add(miProducto);
 
-
                     }
                 }
                 callBackFirestore.correcto(productos);
             }
         });
-
     }
 
     public void editarFirestore(final Producto miProducto, final CallBackFirestore<Producto> callBackFirestore){
@@ -84,7 +87,6 @@ public class ProductoRepository {
                 }
             }
         });
-
     }
 
     public void eliminarFirestore(final Producto miProducto, final CallBackFirestore<Producto> callBackFirestore){

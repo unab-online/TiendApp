@@ -1,7 +1,6 @@
-package co.edu.unab.rey.carlos.crackapp;
+package co.edu.unab.rey.carlos.crackapp.view.adapter;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import co.edu.unab.rey.carlos.crackapp.model.entity.Producto;
+import co.edu.unab.rey.carlos.crackapp.R;
 
 public class ProductoAdapter extends RecyclerView.Adapter {
 
@@ -94,7 +95,7 @@ public class ProductoAdapter extends RecyclerView.Adapter {
     }
 
 
-    interface OnItemClickListener{
+    public interface OnItemClickListener{
         void onItemClick(Producto miProducto, int posicion);
     }
 

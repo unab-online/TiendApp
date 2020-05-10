@@ -1,9 +1,11 @@
-package co.edu.unab.rey.carlos.crackapp;
+package co.edu.unab.rey.carlos.crackapp.model.entity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+
+import co.edu.unab.rey.carlos.crackapp.R;
 
 public class Detalle extends AppCompatActivity {
 

@@ -1,31 +1,33 @@
-package co.edu.unab.rey.carlos.crackapp;
+package co.edu.unab.rey.carlos.crackapp.view.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import javax.annotation.Nullable;
+import co.edu.unab.rey.carlos.crackapp.model.bd.network.ProductoAPI;
+import co.edu.unab.rey.carlos.crackapp.model.bd.network.TiendAppService;
+import co.edu.unab.rey.carlos.crackapp.model.entity.Editar;
+import co.edu.unab.rey.carlos.crackapp.model.entity.Producto;
+import co.edu.unab.rey.carlos.crackapp.view.adapter.ProductoAdapter;
+import co.edu.unab.rey.carlos.crackapp.model.repository.ProductoRepository;
+import co.edu.unab.rey.carlos.crackapp.R;
+import co.edu.unab.rey.carlos.crackapp.model.bd.network.CallBackFirestore;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ListadoActivity extends AppCompatActivity {
 
@@ -66,6 +68,41 @@ public class ListadoActivity extends AppCompatActivity {
         String usuario = misPreferencias.getString("usuario", "nonname");
         Toast.makeText(this, "Bienvenido "+usuario, Toast.LENGTH_LONG).show();
 
+        Retrofit retrofit = TiendAppService.obtenerInstancias();
+
+        //permite concetar al api o servicio
+        ProductoAPI productoAPI = retrofit.create(ProductoAPI.class);
+
+        productoAPI.obtenerTodos().enqueue(new Callback<Map<Object, Object>>() {
+            @Override
+            public void onResponse(Call<Map <Object, Object>> call, Response<Map<Object, Object>> response) {
+                if (response.body()!=null){
+                    for (Map.Entry datos: response.body().entrySet()){
+                        String id = (String) datos.getKey();
+
+                        Map mapa = (Map) datos.getValue();
+                        Producto miProducto = new Producto();
+                        miProducto.setNombre((String) mapa.get("nombre"));
+                        miProducto.setPrecio((Double) mapa.get("precio"));
+                        miProducto.setDescripcion((String) mapa.get("descripcion"));
+                        miProducto.setId(id)    ;
+                        productos.add(miProducto);
+                    }
+                    miAdaptador.setProductos(productos);
+                    Log.d("API", response.body().toString());
+                    Toast.makeText(ListadoActivity.this,response.body().toString(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+
+
+            @Override
+            public void onFailure(Call<Map<Object, Object>> call, Throwable t) {
+                Log.d("API","Eror"+t.getMessage());
+            }
+        });
+
         agregarProducto();
 
 
@@ -76,11 +113,6 @@ public class ListadoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getData();
-    }
-
-    public void irAgregarProductos(View vista){
-        Intent in = new Intent (ListadoActivity.this, Editar.class);
-        startActivity(in);
     }
 
     public void cerrarSesion(View vista){

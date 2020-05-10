@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Editar"></activity>
-        <activity android:name=".FormularioAgregar" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".model.entity.Editar"></activity>
+        <activity android:name=".view.activity.FormularioAgregar" />
+        <activity android:name=".view.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListadoActivity" />
-        <activity android:name=".Detalle" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".view.activity.ListadoActivity" />
+        <activity android:name=".model.entity.Detalle" />
+        <activity android:name=".view.activity.MainActivity" />
     </application>
 
 </manifest>

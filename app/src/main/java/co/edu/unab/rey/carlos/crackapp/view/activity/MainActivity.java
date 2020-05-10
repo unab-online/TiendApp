@@ -1,4 +1,4 @@
-package co.edu.unab.rey.carlos.crackapp;
+package co.edu.unab.rey.carlos.crackapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+
+import co.edu.unab.rey.carlos.crackapp.model.entity.Detalle;
+import co.edu.unab.rey.carlos.crackapp.model.entity.Producto;
+import co.edu.unab.rey.carlos.crackapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 Producto miProducto = (Producto) parent.getItemAtPosition(position);
                 Toast.makeText(getApplicationContext(),"apachuraste "+miProducto.getNombre() , Toast.LENGTH_LONG).show();
 
-                Intent miIntension = new Intent(getApplication(),Detalle.class); //esta la intension de ir a la otra actividad, resive la actividad donde está y la clase a donde va
+                Intent miIntension = new Intent(getApplication(), Detalle.class); //esta la intension de ir a la otra actividad, resive la actividad donde está y la clase a donde va
                 miIntension.putExtra("productos", productos.get(position));
                 startActivity(miIntension); //haga la intension
             }

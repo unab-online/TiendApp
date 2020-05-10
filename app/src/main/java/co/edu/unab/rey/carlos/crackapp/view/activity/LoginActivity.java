@@ -1,4 +1,4 @@
-package co.edu.unab.rey.carlos.crackapp;
+package co.edu.unab.rey.carlos.crackapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import co.edu.unab.rey.carlos.crackapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 

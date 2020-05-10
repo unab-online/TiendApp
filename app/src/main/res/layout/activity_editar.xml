@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Editar">
+    tools:context=".model.entity.Editar">
 
     <TextView
         android:id="@+id/txv_titulo_editar"
@@ -50,7 +50,7 @@
             android:layout_width="127dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/btnEliminar" />
 
         <Button
             android:id="@+id/btn_agregar"
