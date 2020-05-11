@@ -80,7 +80,124 @@ public class ListadoActivity extends AppCompatActivity {
             }
         });*/
 
+        firestore();
 
+        /*String usuario = misPreferencias.getString("usuario","");
+        Toast.makeText(this,"Bienvenido: "+ usuario,Toast.LENGTH_LONG).show();
+
+        //RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication()); //Para mostrar con Linear
+       /* RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
+        miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface(){
+            @Override
+            public void metodoParaelItemClick(Producto miProducto, int posicion) {
+                Toast.makeText(getApplicationContext(),"Eliminé "+miProducto,Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ListadoActivity.this,EditarActivity.class);
+                i.putExtra("producto",miProducto);
+                startActivity(i);
+                //productoDAO.eliminar(miProducto);
+                //refrescarPantalla();
+                onResume();
+            }
+        });
+        rvProductos.setLayoutManager(manager);
+        rvProductos.setAdapter(miAdaptador);*/
+
+        irAgregarProducto();
+        retrofit();
+    }
+/*
+    private void getDataROOM(){
+        *//*if(productos==null){
+            productos = new ArrayList<>();
+        }
+        productos.add(new Producto("Pc Asus",50000.0));
+        productos.add (new Producto("Disco Duro",200000.0));
+        productos.add (new Producto("Memoria USB", 20000.0));
+        productos.add (new Producto("Mouse", 15000.0));
+        productos.add (new Producto("teclado", 25000.0));
+
+        for (int i = 0;i< productos.size(); i++){
+            productos.get(i).setDescripcion("Descripción "+(i+1));
+        }*//*
+
+        productos = productoDAO.obtenerTodos();
+        if(productos.size()==0){ //si no hay nada
+
+            productoDAO.agregar(new Producto("Pc Asus",50000.0));
+            productoDAO.agregar(new Producto("Disco Duro",200000.0));
+            productoDAO.agregar(new Producto("Memoria USB", 20000.0));
+            productoDAO.agregar(new Producto("Mouse", 15000.0));
+            productoDAO.agregar(new Producto("teclado", 25000.0));
+
+            productos = productoDAO.obtenerTodos();
+        }
+    }*/
+
+    public void retrofit(){
+        Retrofit retrofit = TiendAppService.obtenerInstancia();
+        //Este es como el DAO de ROOM
+        ProductoAPI productoAPI = retrofit.create(ProductoAPI.class);
+        //Opcion 1
+       /* productoAPI.obtenerTodos().enqueue(new Callback<Map>() {
+            @Override
+            public void onResponse(Call<Map> call, Response<Map> response) {
+                //Log.d("API",response.body().toString());
+                if (response.body() != null) {
+                    for (Object datos : response.body().values()) {
+                        Map mapa = (Map) datos;
+                        Producto miProducto = new Producto();
+                        miProducto.setNombre((String) mapa.get("nombre"));
+                        miProducto.setPrecio((Double) mapa.get("precio"));
+                        miProducto.setDescripcion((String) mapa.get("descripcion"));
+                        miProducto.setId((String) mapa.get("id"));
+                        productos.add(miProducto);
+                    }
+                    miAdaptador.setProductos(productos);
+                    RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 2); //Mostrar como grilla
+                    rvProductos.setLayoutManager(manager);
+                    rvProductos.setAdapter(miAdaptador);
+                    rvProductos.setHasFixedSize(true);
+                    Toast.makeText(ListadoActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map> call, Throwable t) {
+            }
+        });*/
+
+
+        //rvProductos.setAdapter(miAdaptador);
+        //miAdaptador.notifyDataSetChanged();
+
+        //Opcion 2
+        productoAPI.obtenerTodos().enqueue(new Callback<Map<String, Producto>>() {
+            @Override
+            public void onResponse(Call<Map<String, Producto>> call, Response<Map<String, Producto>> response) {
+
+                if (response.body()!=null){
+                    for (Producto miProducto : response.body().values()){
+                        productos.add(miProducto);
+                    }
+                    miAdaptador.setProductos(productos);
+                    RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 2); //Mostrar como grilla
+                    rvProductos.setLayoutManager(manager);
+                    rvProductos.setAdapter(miAdaptador);
+                    rvProductos.setHasFixedSize(true);
+                    //Toast.makeText(ListadoActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                    Log.d("API",response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, Producto>> call, Throwable t) {
+
+            }
+
+        });
+    }
+
+    public void firestore(){
         //***************************FIRESTORE***************************//
         //FirebaseFirestore firestoreDB = FirebaseFirestore.getInstance();
         //No puedo hacer esto se puede hacer al momento de mostrar los elementos de esa tabla (coleccion)-
@@ -130,127 +247,7 @@ public class ListadoActivity extends AppCompatActivity {
                     rvProductos.setAdapter(miAdaptador);
             }
         });
-
-
-
-        String usuario = misPreferencias.getString("usuario","");
-        Toast.makeText(this,"Bienvenido: "+ usuario,Toast.LENGTH_LONG).show();
-*/
-        //RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication()); //Para mostrar con Linear
-       /* RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(),2); //Mostrar como grilla
-        miAdaptador = new ProductoAdapter(productos, new ProductoAdapter.NombreDeInterface(){
-            @Override
-            public void metodoParaelItemClick(Producto miProducto, int posicion) {
-                Toast.makeText(getApplicationContext(),"Eliminé "+miProducto,Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(ListadoActivity.this,EditarActivity.class);
-                i.putExtra("producto",miProducto);
-                startActivity(i);
-                //productoDAO.eliminar(miProducto);
-                //refrescarPantalla();
-                onResume();
-            }
-        });
-        rvProductos.setLayoutManager(manager);
-        rvProductos.setAdapter(miAdaptador);*/
-
-        irAgregarProducto();
-
-        Retrofit retrofit = TiendAppService.obtenerInstancia();
-        //Este es como el DAO de ROOM
-        ProductoAPI productoAPI = retrofit.create(ProductoAPI.class);
-        //Opcion 1
-       /* productoAPI.obtenerTodos().enqueue(new Callback<Map>() {
-            @Override
-            public void onResponse(Call<Map> call, Response<Map> response) {
-                //Log.d("API",response.body().toString());
-                if (response.body() != null) {
-                    for (Object datos : response.body().values()) {
-                        Map mapa = (Map) datos;
-                        Producto miProducto = new Producto();
-                        miProducto.setNombre((String) mapa.get("nombre"));
-                        miProducto.setPrecio((Double) mapa.get("precio"));
-                        miProducto.setDescripcion((String) mapa.get("descripcion"));
-                        miProducto.setId((String) mapa.get("id"));
-                        productos.add(miProducto);
-                    }
-
-                    miAdaptador.setProductos(productos);
-                    RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 2); //Mostrar como grilla
-                    rvProductos.setLayoutManager(manager);
-                    rvProductos.setAdapter(miAdaptador);
-                    rvProductos.setHasFixedSize(true);
-
-
-                    Toast.makeText(ListadoActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Map> call, Throwable t) {
-
-            }
-        });*/
-
-
-        //rvProductos.setAdapter(miAdaptador);
-        //miAdaptador.notifyDataSetChanged();
-
-        //Opcion 2
-        productoAPI.obtenerTodos().enqueue(new Callback<Map<String, Producto>>() {
-            @Override
-            public void onResponse(Call<Map<String, Producto>> call, Response<Map<String, Producto>> response) {
-                //Log.d("API",response.body().toString());
-                if (response.body()!=null){
-                    for (Producto miProducto : response.body().values()){
-
-                        productos.add(miProducto);
-                    }
-
-                    miAdaptador.setProductos(productos);
-                    RecyclerView.LayoutManager manager = new GridLayoutManager(getApplicationContext(), 2); //Mostrar como grilla
-                    rvProductos.setLayoutManager(manager);
-                    rvProductos.setAdapter(miAdaptador);
-                    rvProductos.setHasFixedSize(true);
-
-                    Toast.makeText(ListadoActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Map<String, Producto>> call, Throwable t) {
-
-            }
-
-        });
-
     }
-/*
-    private void getDataROOM(){
-        *//*if(productos==null){
-            productos = new ArrayList<>();
-        }
-        productos.add(new Producto("Pc Asus",50000.0));
-        productos.add (new Producto("Disco Duro",200000.0));
-        productos.add (new Producto("Memoria USB", 20000.0));
-        productos.add (new Producto("Mouse", 15000.0));
-        productos.add (new Producto("teclado", 25000.0));
-
-        for (int i = 0;i< productos.size(); i++){
-            productos.get(i).setDescripcion("Descripción "+(i+1));
-        }*//*
-
-        productos = productoDAO.obtenerTodos();
-        if(productos.size()==0){ //si no hay nada
-
-            productoDAO.agregar(new Producto("Pc Asus",50000.0));
-            productoDAO.agregar(new Producto("Disco Duro",200000.0));
-            productoDAO.agregar(new Producto("Memoria USB", 20000.0));
-            productoDAO.agregar(new Producto("Mouse", 15000.0));
-            productoDAO.agregar(new Producto("teclado", 25000.0));
-
-            productos = productoDAO.obtenerTodos();
-        }
-    }*/
 
     private void getDataFirestore() {
         /*productoRepository.obtenerTodosFirestore(new CallBackFirestore<List<Producto>>() {

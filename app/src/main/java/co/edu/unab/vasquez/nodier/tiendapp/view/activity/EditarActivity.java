@@ -31,8 +31,12 @@ public class EditarActivity extends AppCompatActivity {
     private TextView txvEditar;
     private Button btnEditar, btnEliminar;
     private ProductoRepository productoRepository;
+    Producto miProducto;
 
     ProductoDAO productoDAO;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +47,23 @@ public class EditarActivity extends AppCompatActivity {
         productoDAO = bd.productoDAO();
 
         asociarElementos();
+
         final Producto miProducto = (Producto) getIntent().getSerializableExtra("producto");
         txvEditar.setText(getString(R.string.txt_titulo_editar,miProducto.getNombre(),miProducto.getPrecio()));
         edtNombre.setText(miProducto.getNombre());
         edtDescripcion.setText(miProducto.getDescripcion());
         edtPrecio.setText(String.valueOf(miProducto.getPrecio()));
+        editar(miProducto);
+        eliminar();
 
+    }
+
+    public void editar(final Producto miProducto){
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 //miProducto.setId(miProducto.getId());
                 miProducto.setNombre(edtNombre.getText().toString());
                 miProducto.setDescripcion(edtDescripcion.getText().toString());
@@ -72,19 +84,23 @@ public class EditarActivity extends AppCompatActivity {
                     public void onResponse(Call<Map> call, Response<Map> response) {
                         if (response.body() != null){
                             Log.d("API",response.body().toString());
+                            Toast.makeText(EditarActivity.this, "msg: "+response.body().toString(), Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Map> call, Throwable t) {
-                        Log.d("API","Error: "+t.getMessage());
+                        Log.e("API","Error: "+t.getMessage());
                     }
                 });
 
             }
         });
+    }
 
+    public void eliminar(){
+        final Producto miProducto = (Producto) getIntent().getSerializableExtra("producto");
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,18 +121,13 @@ public class EditarActivity extends AppCompatActivity {
                         if (response.body() != null) {
                             Log.d("API","Eliminar"+response.body().toString());
                         }
-
                         finish();
-
-
                     }
-
                     @Override
                     public void onFailure(Call<Map> call, Throwable t) {
                         Log.d("API","Eliminar"+t.getMessage());
                     }
                 });
-
             }
         });
     }

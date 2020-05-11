@@ -39,13 +39,16 @@ public class agregarActivity extends AppCompatActivity {
         asociarElementos();
         BaseDatos bd = BaseDatos.obtenerInstancia(this);
 
-
        productoDAO = bd.productoDAO();
 
+       agregar();
+
+    }
+
+    public void agregar(){
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //ROOM
                 final Producto nuevoProducto = new Producto(
                         edtNombre.getText().toString(),
@@ -89,29 +92,22 @@ public class agregarActivity extends AppCompatActivity {
                             public void onResponse(Call<Map> call, Response<Map> response) {
                                 finish();
                             }
-
                             @Override
                             public void onFailure(Call<Map> call, Throwable t) {
 
                             }
                         });
                     }
-
                     @Override
                     public void onFailure(Call<Map> call, Throwable t) {
                         Log.d("API","Agregado "+t.getMessage());
                     }
                 });
-
-
-
-                
             }
 
 
 
         });
-
     }
 
     public void asociarElementos(){
