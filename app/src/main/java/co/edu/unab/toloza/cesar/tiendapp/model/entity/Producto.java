@@ -30,6 +30,7 @@ public class Producto implements Serializable {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.id = "";
     }
 
     @Ignore

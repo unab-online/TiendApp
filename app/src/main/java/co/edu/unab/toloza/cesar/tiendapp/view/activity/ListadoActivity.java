@@ -6,17 +6,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import co.edu.unab.toloza.cesar.tiendapp.model.db.network.CallBackFirestore;
+import co.edu.unab.toloza.cesar.tiendapp.model.db.network.ProductoAPI;
+import co.edu.unab.toloza.cesar.tiendapp.model.db.network.TiendAppService;
 import co.edu.unab.toloza.cesar.tiendapp.model.entity.Producto;
 import co.edu.unab.toloza.cesar.tiendapp.view.adapter.ProductoAdapter;
 import co.edu.unab.toloza.cesar.tiendapp.model.repository.ProductoRepository;
 import co.edu.unab.toloza.cesar.tiendapp.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ListadoActivity extends AppCompatActivity {
 
@@ -46,14 +54,11 @@ public class ListadoActivity extends AppCompatActivity {
 
         productos = new ArrayList<>();
 
-        miAdapter = new ProductoAdapter(productos, new ProductoAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Producto producto, int position) {
-                Toast.makeText(getApplication(), "Hice click " + producto, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ListadoActivity.this, EditarActivity.class);
-                intent.putExtra("producto", producto);
-                startActivity(intent);
-            }
+        miAdapter = new ProductoAdapter(productos, (producto, position) -> {
+            Toast.makeText(getApplication(), "Hice click " + producto, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ListadoActivity.this, EditarActivity.class);
+            intent.putExtra("producto", producto);
+            startActivity(intent);
         });
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplication());
@@ -63,15 +68,17 @@ public class ListadoActivity extends AppCompatActivity {
 
         this.getData();
 
-        productoRepository.escucharTodosFirestore(new CallBackFirestore<List<Producto>>() {
+        /*productoRepository.escucharTodosFirestore(new CallBackFirestore<List<Producto>>() {
             @Override
             public void correcto(List<Producto> respuesta) {
                 miAdapter.setProductos(respuesta);
             }
-        });
+        });*/
 
         String user = misPreferencias.getString("user", "");
         Toast.makeText(getApplicationContext(), "Bienvenido " + user, Toast.LENGTH_LONG ).show();
+
+
     }
 
     @Override
@@ -110,12 +117,10 @@ public class ListadoActivity extends AppCompatActivity {
 
             productos = productoDAO.obtenerTodos();
         }*/
-        productoRepository.obtenerTodosFirestore(new CallBackFirestore<List<Producto>>() {
-            @Override
-            public void correcto(List<Producto> respuesta) {
-                miAdapter.setProductos(respuesta);
-            }
-        });
+        //productoRepository.obtenerTodosFirestore(respuesta -> miAdapter.setProductos(respuesta));
+
+        productoRepository.obtenerTodosProductoAPI(respuesta -> miAdapter.setProductos(respuesta));
+
     }
     private void AsociarElementos(){
         rvProductos = findViewById(R.id.rv_productos);
