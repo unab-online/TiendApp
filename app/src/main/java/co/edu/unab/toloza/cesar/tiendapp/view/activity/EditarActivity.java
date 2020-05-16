@@ -24,7 +24,7 @@ public class EditarActivity extends AppCompatActivity {
     private TextView titulo;
     private EditText nombre, precio, descripcion;
     private Button btnEditar, btnEliminar;
-    ProductoRepository productoRepository;
+    private ProductoRepository productoRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +65,4 @@ public class EditarActivity extends AppCompatActivity {
         btnEditar = findViewById(R.id.button_editar);
         btnEliminar = findViewById(R.id.button_borrar);
     }
-
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegacio_principal"
+    app:startDestination="@id/navegacionProductos">
+
+    <fragment
+        android:id="@+id/navegacionProductos"
+        android:name="co.edu.unab.toloza.cesar.tiendapp.view.fragment.ListadoProductosFragment"
+        android:label="fragment_listado_productos"
+        tools:layout="@layout/fragment_listado_productos" >
+        <action
+            android:id="@+id/action_navegacionProductos_to_agregarProductoFragment"
+            app:destination="@id/agregarProductoFragment" />
+        <action
+            android:id="@+id/action_navegacionProductos_to_editarProductoFragment"
+            app:destination="@id/editarProductoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agregarProductoFragment"
+        android:name="co.edu.unab.toloza.cesar.tiendapp.view.fragment.AgregarProductoFragment"
+        android:label="fragment_agregar_producto"
+        tools:layout="@layout/fragment_agregar_producto" >
+        <action
+            android:id="@+id/action_agregarProductoFragment_to_navegacionProductos"
+            app:destination="@id/navegacionProductos"
+            app:popUpTo="@id/navegacio_principal"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="prueba"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="co.edu.unab.toloza.cesar.tiendapp.view.fragment.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/usuariosFragment"
+        android:name="co.edu.unab.toloza.cesar.tiendapp.view.fragment.UsuariosFragment"
+        android:label="fragment_usuarios"
+        tools:layout="@layout/fragment_usuarios" />
+    <fragment
+        android:id="@+id/editarProductoFragment"
+        android:name="co.edu.unab.toloza.cesar.tiendapp.view.fragment.EditarProductoFragment"
+        android:label="fragment_editar_producto"
+        tools:layout="@layout/fragment_editar_producto" >
+        <action
+            android:id="@+id/action_editarProductoFragment_to_navegacionProductos"
+            app:destination="@id/navegacionProductos"
+            app:popUpTo="@id/navegacio_principal"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="producto"
+            app:argType="co.edu.unab.toloza.cesar.tiendapp.model.entity.Producto" />
+    </fragment>
+</navigation>

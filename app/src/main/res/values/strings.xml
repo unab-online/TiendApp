@@ -16,4 +16,7 @@
     <string name="btn_editar">Editar Producto</string>
     <string name="btn_eliminar">Eliminar Producto</string>
     <string name="titulo_editar">Editar Producto: %1$s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

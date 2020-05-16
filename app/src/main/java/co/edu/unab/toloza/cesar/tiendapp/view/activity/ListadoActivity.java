@@ -1,6 +1,9 @@
 package co.edu.unab.toloza.cesar.tiendapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
@@ -8,7 +11,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +35,22 @@ import retrofit2.Retrofit;
 
 public class ListadoActivity extends AppCompatActivity {
 
-    private RecyclerView rvProductos;
+    /*private RecyclerView rvProductos;
     private List<Producto> productos;
     private ProductoRepository productoRepository;
-    private ProductoAdapter miAdapter;
+    private ProductoAdapter miAdapter;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
 
-        this.AsociarElementos();
+        //this.AsociarElementos();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navegacion);
+        NavController navController = Navigation.findNavController(this, R.id.contenedor_fragment);
+
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.preferencias), MODE_PRIVATE);
 
@@ -50,7 +62,7 @@ public class ListadoActivity extends AppCompatActivity {
             finish();
         }
 
-        productoRepository = new ProductoRepository(this);
+        /*productoRepository = new ProductoRepository(this);
 
         productos = new ArrayList<>();
 
@@ -66,7 +78,7 @@ public class ListadoActivity extends AppCompatActivity {
         rvProductos.setAdapter(miAdapter);
         rvProductos.setHasFixedSize(true);
 
-        this.getData();
+        this.getData();*/
 
         /*productoRepository.escucharTodosFirestore(new CallBackFirestore<List<Producto>>() {
             @Override
@@ -84,10 +96,10 @@ public class ListadoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getData();
+        //getData();
     }
 
-    public void  CerrarSesion(View view){
+    /*public void  CerrarSesion(View view){
         SharedPreferences misPreferencias = getSharedPreferences(getString(R.string.preferencias), MODE_PRIVATE);
         SharedPreferences.Editor miEditor = misPreferencias.edit();
         //miEditor.putBoolean("logueado", false);
@@ -116,13 +128,13 @@ public class ListadoActivity extends AppCompatActivity {
             productoDAO.agregar(new Producto("Teclado", 80.0));
 
             productos = productoDAO.obtenerTodos();
-        }*/
+        }
         //productoRepository.obtenerTodosFirestore(respuesta -> miAdapter.setProductos(respuesta));
 
-        productoRepository.obtenerTodosProductoAPI(respuesta -> miAdapter.setProductos(respuesta));
+        //productoRepository.obtenerTodosProductoAPI(respuesta -> miAdapter.setProductos(respuesta));
 
     }
     private void AsociarElementos(){
-        rvProductos = findViewById(R.id.rv_productos);
-    }
+        //rvProductos = findViewById(R.id.rv_productos);
+    }*/
 }
